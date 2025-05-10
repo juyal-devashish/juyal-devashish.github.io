@@ -584,7 +584,7 @@ export function isConvImageType(filepath: string) {
 export async function downloadFile(
 	url: URL,
 	optimize_img: boolean = true,
-	isFavicon: boolean = false,
+	isFavicon: boolean = true,
 ) {
 	optimize_img = optimize_img ? OPTIMIZE_IMAGES : optimize_img;
 	let res!: AxiosResponse;
