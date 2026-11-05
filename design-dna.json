@@ -1,0 +1,243 @@
+{
+  "meta": {
+    "name": "Soft Graphite Minimal — Devashish Juyal portfolio",
+    "description": "Neumorphic surfaces layered with frosted glass, in a near-monochrome graphite palette. Extracted from a described style (no image reference), so no measured palette; generated with the design-dna skill (Phase 2 from description, Phase 3 generate).",
+    "source_references": [
+      "User brief 2026-11-04: neumorphism + glass hybrid, light/dark toggle, minimalistic palette, recruiter-first, agent-graph hero console",
+      "Revision 2026-11-04: user asked for super minimalistic; removed hero console, metrics, chips, case studies, orbs"
+    ],
+    "created_at": "2026-11-04"
+  },
+  "design_system": {
+    "color": {
+      "palette_type": "monochromatic with a single functional signal color",
+      "primary": {
+        "hex": "#23262D",
+        "role": "ink: headings, primary button fill, active states"
+      },
+      "secondary": {
+        "hex": "#5A616D",
+        "role": "secondary text, icons, meta labels"
+      },
+      "accent": {
+        "hex": "#2F9E6A",
+        "role": "signal only: 'open to work' dot, live pulses in the agent console, success copy feedback. Never decorative."
+      },
+      "neutral": {
+        "scale": [
+          "#FFFFFF",
+          "#F1F3F6",
+          "#E6E9EE",
+          "#D3D8E0",
+          "#A9B0BC",
+          "#7A828F",
+          "#5A616D",
+          "#3A3F48",
+          "#23262D",
+          "#1B1E23",
+          "#15171B"
+        ],
+        "usage": "Light theme: #E6E9EE is the clay surface, #FFFFFF / #C3C9D3 are the neumorphic highlight / shade, #23262D is foreground. Dark theme inverts: #1E2126 surface, #272B31 highlight, #15171B shade, #E8EAED foreground."
+      },
+      "semantic": {
+        "success": "#2F9E6A",
+        "warning": "#B7791F",
+        "error": "#C2453D",
+        "info": "#5A616D"
+      },
+      "surface": {
+        "background": "#E6E9EE",
+        "card": "#E6E9EE (extruded by shadow, same hue as background)",
+        "elevated": "rgba(255,255,255,0.45) frosted glass over drifting graphite orbs"
+      },
+      "contrast_strategy": "Neumorphism blends surfaces, so legibility comes from ink-on-clay text contrast (>= 9:1) rather than surface contrast. Interactive elements get an additional 1px hairline so they read without shadows (WCAG non-text 3:1)."
+    },
+    "typography": {
+      "font_families": {
+        "heading": "'Inter Tight', system-ui, sans-serif",
+        "body": "'Inter', system-ui, sans-serif",
+        "mono": "'JetBrains Mono', ui-monospace, monospace"
+      },
+      "type_scale": {
+        "display": {
+          "size": "clamp(2.5rem, 5.2vw, 4.25rem)",
+          "weight": 600,
+          "line_height": 1.04,
+          "tracking": "-0.035em"
+        },
+        "heading_1": {
+          "size": "clamp(1.9rem, 3.4vw, 2.6rem)",
+          "weight": 600,
+          "line_height": 1.1,
+          "tracking": "-0.03em"
+        },
+        "heading_2": {
+          "size": "1.35rem",
+          "weight": 600,
+          "line_height": 1.25,
+          "tracking": "-0.02em"
+        },
+        "heading_3": {
+          "size": "1.05rem",
+          "weight": 600,
+          "line_height": 1.35,
+          "tracking": "-0.01em"
+        },
+        "body": {
+          "size": "1rem",
+          "weight": 400,
+          "line_height": 1.65,
+          "tracking": "0"
+        },
+        "small": {
+          "size": "0.875rem",
+          "weight": 400,
+          "line_height": 1.55,
+          "tracking": "0"
+        },
+        "caption": {
+          "size": "0.75rem",
+          "weight": 500,
+          "line_height": 1.4,
+          "tracking": "0.08em uppercase (mono)"
+        }
+      },
+      "scale_ratio": 1.25,
+      "pairing_logic": "Tight grotesk for headings, neutral grotesk for reading, mono for metadata, dates, and console output."
+    },
+    "spacing": {
+      "base_unit": "4px",
+      "scale": [
+        "4px",
+        "8px",
+        "12px",
+        "16px",
+        "24px",
+        "32px",
+        "48px",
+        "72px",
+        "112px"
+      ],
+      "density": "very airy",
+      "section_rhythm": "104px between sections desktop, 80px mobile"
+    },
+    "layout": {
+      "grid": "single column",
+      "max_width": "680px",
+      "gutter": "24px desktop / 20px mobile",
+      "alignment": "left-aligned, list rows with right-aligned mono dates"
+    },
+    "shape": {
+      "border_radius": {
+        "small": "12px",
+        "medium": "20px",
+        "large": "28px",
+        "full": "999px"
+      },
+      "borders": "1px hairline rgba(255,255,255,0.6) top-left on glass; 1px rgba(35,38,45,0.06) on controls",
+      "dividers": "none; separation by depth"
+    },
+    "elevation": {
+      "approach": "dual-shadow neumorphism (light top-left, shade bottom-right) for clay; backdrop blur for glass",
+      "levels": {
+        "low": "4px 4px 10px var(--shade), -4px -4px 10px var(--light)",
+        "medium": "8px 8px 20px var(--shade), -8px -8px 20px var(--light)",
+        "inset": "inset 3px 3px 7px var(--shade), inset -3px -3px 7px var(--light)"
+      }
+    },
+    "motion": {
+      "philosophy": "tactile: elements press in on click, rise slightly on hover; nothing bounces",
+      "easing": "cubic-bezier(.2,.7,.2,1)",
+      "duration_scale": {
+        "micro": "140ms",
+        "normal": "260ms",
+        "macro": "600ms"
+      }
+    },
+    "components": {
+      "button_style": "Clay pills (low extrusion) that press to inset on :active; 44px round icon buttons.",
+      "card_style": "No cards. Content sits in flat rows; linked rows sink to an inset well on hover.",
+      "navigation_pattern": "Small floating glass pill: three links and an inset theme toggle.",
+      "inputs": "Tag filters are plain mono text; the active tag is inset."
+    }
+  },
+  "design_style": {
+    "aesthetic": {
+      "mood": "calm, precise, tactile",
+      "personality": "quietly confident engineer",
+      "genre": "minimal product portfolio"
+    },
+    "visual_language": {
+      "whitespace_usage": "dominant",
+      "contrast_level": "low surface contrast, high text contrast",
+      "ornamentation": "none; depth appears only on interaction and on a few controls"
+    },
+    "composition": {
+      "hierarchy_method": "size + weight + depth (extruded = actionable, inset = data)",
+      "balance_type": "asymmetric hero, symmetric grids below"
+    },
+    "imagery": {
+      "photography": "single portrait in an inset frame",
+      "graphic_elements": "agent-graph diagram, soft blurred orbs",
+      "iconography": "1.5px stroke inline SVG"
+    },
+    "interaction_feel": {
+      "hover_behavior": "rows sink inset; arrows nudge",
+      "click_behavior": "press to inset",
+      "microinteraction_density": "low"
+    },
+    "brand_voice_in_ui": {
+      "tone": "confident, plain, warm",
+      "examples": [
+        "Applied AI engineer. Data Scientist at Tech Observer.",
+        "More on GitHub"
+      ]
+    }
+  },
+  "visual_effects": {
+    "overview": {
+      "effect_intensity": "minimal",
+      "performance_tier": "lightweight",
+      "fallback_strategy": "no animation beyond 220ms transitions; prefers-reduced-motion disables them"
+    },
+    "glassmorphism": {
+      "enabled": true,
+      "type": "glass",
+      "blur_radius": "18px",
+      "transparency": 0.6,
+      "scope": "nav pill only"
+    },
+    "neumorphism": {
+      "enabled": true,
+      "type": "neumorphic-light + neumorphic-dark (theme toggle)"
+    },
+    "background_effects": {
+      "enabled": false
+    },
+    "svg_animations": {
+      "enabled": false
+    },
+    "scroll_effects": {
+      "enabled": false
+    },
+    "particle_systems": {
+      "enabled": false
+    },
+    "3d_elements": {
+      "enabled": false
+    },
+    "shader_effects": {
+      "enabled": false
+    },
+    "cursor_effects": {
+      "enabled": false
+    },
+    "text_effects": {
+      "enabled": false
+    },
+    "canvas_drawings": {
+      "enabled": false
+    },
+    "composite_notes": "Neumorphism is reserved for the avatar, buttons, theme toggle and hover states, so the page reads as flat type on soft clay."
+  }
+}
