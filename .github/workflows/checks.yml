@@ -1,0 +1,66 @@
+name: Site checks
+
+# Runs on every push and pull request. GitHub Pages still publishes main on
+# its own; a red run here means "look before you share", not "the site is down".
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Reading notes page is up to date with its data
+        run: |
+          node tools/build-papers.js
+          git diff --exit-code papers.html || (echo "Run node tools/build-papers.js and commit papers.html" && exit 1)
+
+      - name: Install test tools
+        run: |
+          npm install --no-save --no-package-lock playwright@1.64.1 axe-core@4.14.1
+          npx playwright install --with-deps chromium
+
+      - name: Accessibility, tap targets and screenshots at 12 sizes
+        run: |
+          python3 -m http.server 8000 --bind 127.0.0.1 >/dev/null 2>&1 &
+          sleep 2
+          node tools/check.js http://127.0.0.1:8000 screenshots
+
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots
+          path: screenshots/
+          retention-days: 14
+
+      - name: Check links
+        uses: lycheeverse/lychee-action@v2
+        with:
+          # LinkedIn and SSRN block automated requests; lychee skips mailto links by default.
+          args: >-
+            --no-progress --max-retries 2 --accept 200,206,429
+            --exclude linkedin.com --exclude ssrn.com
+            index.html papers.html 404.html
+          fail: true
+
+      - name: Lighthouse (accessibility score at least 0.95; settings in lighthouserc.json)
+        run: npx --yes @lhci/cli@0.16.1 autorun
+
+      - name: Upload Lighthouse reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse
+          path: .lighthouseci/
+          retention-days: 14
