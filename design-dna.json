@@ -1,12 +1,13 @@
 {
   "meta": {
-    "name": "Golden Hour — Devashish Juyal portfolio",
-    "description": "Warm paper, ink navy and one terracotta accent, with a blue-hour dark mode. Serif headings over a neutral sans. Soft neumorphic depth is kept on the avatar, buttons and nav, retinted for the warm surfaces.",
+    "name": "Sky and horizon — Devashish Juyal portfolio",
+    "description": "Colours sampled from the owner's hero photo: sky navy, cloud grey-lavender and horizon orange. Plain nav bar, no neumorphism or glass. Accent = clickable. One featured project at double size with real product screens.",
     "source_references": [
       "User brief 2026-11-04: neumorphism + glass hybrid, light/dark toggle, minimalistic palette, recruiter-first, agent-graph hero console",
       "Revision 2026-11-04: user asked for super minimalistic; removed hero console, metrics, chips, case studies, orbs",
       "Revision 2026-11-16: step 2 of the move toward an expressive, personal portfolio (inspired by dharmashah.com structure, not its palette or fonts). Palette echoes the golden-hour light in the photography section.",
-      "Revision 2026-11-16b: closer to dharmashah.com structure for a product-minded audience (site still says \"AI engineer\"): full-screen photo hero from the owner's own sunrise shot, centred big section titles, experience as an outcome table, Fun stuff section with a drifting photo strip on a deep navy band."
+      "Revision 2026-11-16b: closer to dharmashah.com structure for a product-minded audience (site still says \"AI engineer\"): full-screen photo hero from the owner's own sunrise shot, centred big section titles, experience as an outcome table, Fun stuff section with a drifting photo strip on a deep navy band.",
+      "Revision 2026-11-16c: implemented a design critique: removed template tells (glass pill nav, shadowed circles, mono kickers), photo-derived palette, shorter hero with proof strip, Work above Projects, labelled expandable project rows with screenshots and metrics, captioned dawn-to-night photo strip with lightbox, closing note and footer in the navy band, static reading notes with search."
     ],
     "created_at": "2026-11-04"
   },
@@ -14,32 +15,30 @@
     "color": {
       "palette_type": "warm neutrals with a single accent",
       "primary": {
-        "hex": "#1D2230",
-        "role": "ink: headings and body text (13.9:1 on paper)"
+        "hex": "#0E1F45",
+        "role": "ink, from the sky (14.6:1 on #F5F3EF)"
       },
       "secondary": {
-        "hex": "#4A4F5E",
-        "role": "secondary text and icons (7.1:1)"
+        "hex": "#3B435C",
+        "role": "secondary text (8.8:1)"
       },
       "accent": {
-        "hex": "#A9471F",
-        "dark_hex": "#E8875A",
-        "role": "the only accent: open-to-work dot, hovered arrows and links. 5.1:1 light, 6.7:1 dark, so it is safe as text too."
+        "hex": "#A8441A",
+        "dark_hex": "#F59A5C",
+        "role": "links and controls only (5.4:1 light, 8.2:1 dark); #F59A5C is the horizon orange from the hero photo"
       },
       "neutral": {
         "scale": [
-          "#FFFCF6",
-          "#F4EFE7",
-          "#D8CFC1",
-          "#9A948B",
-          "#5E6170",
-          "#4A4F5E",
-          "#1D2230",
-          "#1F242E",
-          "#161A22",
-          "#0D1015"
+          "#F5F3EF",
+          "#ECE9E3",
+          "#545B72",
+          "#3B435C",
+          "#0E1F45",
+          "#13204A",
+          "#0C1631",
+          "#07102A"
         ],
-        "usage": "Light: #F4EFE7 paper surface, #FFFCF6 / #D8CFC1 neumorphic highlight / shade, #1D2230 ink, #5E6170 tertiary (5.4:1). Dark (blue hour): #161A22 surface, #1F242E / #0D1015 highlight / shade, #F2ECE2 ink, #BDB6AB secondary, #9A948B tertiary (5.8:1)."
+        "usage": "Light: #F5F3EF page, #ECE9E3 hover surface. Dark: #0C1631 page, #13204A hover surface, #F3EEE6 ink, #A2A5B8 tertiary (7.3:1). Navy band #0E1F45 (#07102A in dark)."
       },
       "semantic": {
         "success": "#A9471F (open-to-work dot uses the accent)",
@@ -48,18 +47,16 @@
         "info": "#5A616D"
       },
       "surface": {
-        "background": "#F4EFE7 light, #161A22 dark",
-        "card": "same as background, extruded by shadow",
-        "elevated": "rgba(244,239,231,0.65) frosted glass, nav pill only",
-        "band": "#12224A deep navy band behind the photo strip, fixed in both themes"
+        "background": "#F5F3EF light, #0C1631 dark",
+        "band": "#0E1F45 navy band for the closing note, photo strip and footer"
       },
       "contrast_strategy": "Every text token is at least 4.5:1 on its background in both themes (checked with the WCAG formula); figures are in the comment at the top of style.css."
     },
     "typography": {
       "font_families": {
-        "heading": "'Newsreader', Georgia, serif (500 roman, 400 italic for the role line)",
+        "heading": "'Newsreader', Georgia, serif — 500; italic only for the role line",
         "body": "'Inter', system-ui, sans-serif",
-        "mono": "'JetBrains Mono', ui-monospace, monospace"
+        "mono": "'JetBrains Mono' — dates and metrics only, tabular figures"
       },
       "type_scale": {
         "display": {
@@ -107,7 +104,7 @@
         }
       },
       "scale_ratio": 1.25,
-      "pairing_logic": "Serif for the name, role line and big section titles; neutral sans for reading and row titles; mono for dates, counters and paper-note labels."
+      "pairing_logic": "Serif headings, all left-aligned without trailing full stops; Inter at 16px body, 14px secondary, 12px labels; mono only for dates and metrics."
     },
     "spacing": {
       "base_unit": "4px",
@@ -126,28 +123,21 @@
       "section_rhythm": "104px between sections desktop, 80px mobile"
     },
     "layout": {
-      "grid": "single column, 760px; hero and photo band are full-bleed",
-      "max_width": "760px",
-      "gutter": "24px desktop / 20px mobile",
-      "alignment": "left-aligned body, centred section titles"
+      "grid": "single column 760px (880px above 1600px); hero, proof strip and navy band full-bleed",
+      "max_width": "760px / 880px",
+      "alignment": "everything shares one left edge, headings included"
     },
     "shape": {
       "border_radius": {
-        "small": "12px",
-        "medium": "20px",
-        "large": "28px",
-        "full": "999px"
+        "small": "6px",
+        "medium": "10-12px",
+        "pill": "999px for the one primary button"
       },
-      "borders": "1px hairline rgba(255,255,255,0.6) top-left on glass; 1px rgba(35,38,45,0.06) on controls",
-      "dividers": "none; separation by depth"
+      "borders": "hairlines only around images and badges",
+      "dividers": "none inside sections; spacing groups items"
     },
     "elevation": {
-      "approach": "dual-shadow neumorphism (light top-left, shade bottom-right) for clay; backdrop blur for glass",
-      "levels": {
-        "low": "4px 4px 10px var(--shade), -4px -4px 10px var(--light)",
-        "medium": "8px 8px 20px var(--shade), -8px -8px 20px var(--light)",
-        "inset": "inset 3px 3px 7px var(--shade), inset -3px -3px 7px var(--light)"
-      }
+      "approach": "flat; no shadows"
     },
     "motion": {
       "philosophy": "tactile: elements press in on click, rise slightly on hover; nothing bounces",
@@ -159,11 +149,11 @@
       }
     },
     "components": {
-      "button_style": "Clay pills (low extrusion) that press to inset on :active; 44px round icon buttons.",
-      "card_style": "No cards. Content sits in flat rows; linked rows sink to an inset well on hover.",
-      "navigation_pattern": "Small floating glass pill: Projects, Experience, Fun stuff, Papers and an inset theme toggle.",
+      "button_style": "One solid cream pill (Email me); everything else is an underlined text link.",
+      "card_style": "Project rows: thumbnail, year · domain, badge, title, summary, live/code links, a right-aligned metric and a labelled Details button (aria-expanded) that unfolds Problem / What I built / Result beside a screenshot. The first project is featured at double size with its screen.",
+      "navigation_pattern": "Plain bar: name, Work, Projects, Fun stuff, Reading notes, and a text Day / Night switch. Light text over the hero photo, solid page-coloured bar after it.",
       "inputs": "Tag filters are plain mono text; the active tag is inset.",
-      "hero": "Full-screen photo (sunrise over clouds) with a left-to-right scrim (top-to-bottom on phones) and a fade into the page. Fixed cream text, solid cream Email button, outlined LinkedIn/GitHub, italic underlined section links. Every text box measured at >= 4.5:1 over the photo.",
+      "hero": "About 62% of the viewport (500-760px) so proof shows on a 1366x768 first screen. Day photo (sky above clouds) or night photo (NYC) by theme, with measured scrims, a portrait, name, role, employer line, pitch, Email me and quiet LinkedIn/GitHub links, and a caption with place and month.",
       "experience": "Current employer as a heading with a two-column what/result table; earlier roles, education and recognition as hairline-ruled rows."
     }
   },
@@ -183,7 +173,7 @@
       "balance_type": "asymmetric hero, symmetric grids below"
     },
     "imagery": {
-      "photography": "full-screen hero photo; a strip of 25 photos 280px tall drifting left on a navy band, pausable, static and scrollable under reduced motion",
+      "photography": "hero day and night photos; a captioned strip of 25 photos ordered dawn to night that drifts, can be dragged, swiped or arrowed, stops on request or under reduced motion, and opens a larger view",
       "graphic_elements": "agent-graph diagram, soft blurred orbs",
       "iconography": "1.5px stroke inline SVG"
     },
@@ -207,15 +197,10 @@
       "fallback_strategy": "no animation beyond 220ms transitions; prefers-reduced-motion disables them"
     },
     "glassmorphism": {
-      "enabled": true,
-      "type": "glass",
-      "blur_radius": "18px",
-      "transparency": 0.6,
-      "scope": "nav pill only"
+      "enabled": false
     },
     "neumorphism": {
-      "enabled": true,
-      "type": "neumorphic-light + neumorphic-dark (theme toggle)"
+      "enabled": false
     },
     "background_effects": {
       "enabled": false
@@ -244,6 +229,6 @@
     "canvas_drawings": {
       "enabled": false
     },
-    "composite_notes": "Neumorphism is reserved for the avatar, buttons, theme toggle and hover states, so the page reads as flat type on soft clay."
+    "composite_notes": "The only motion is the drifting photo strip and a 180ms unfold on project details."
   }
 }
