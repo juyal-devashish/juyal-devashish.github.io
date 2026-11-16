@@ -383,7 +383,7 @@ const papers = [
         excerpt: 'Extends DeepSeek-V3 with sparse attention patterns that enable efficient long-context processing, reducing KV cache memory and compute without proportional quality losses.',
         tags: ['llm'],
         pinned: false,
-        link: 'https://www.ele-yufo.com/wp-content/uploads/2025/10/DeepSeek_V3_2-1.pdf',
+        link: 'https://github.com/deepseek-ai/DeepSeek-V3.2-Exp/blob/main/DeepSeek_V3_2.pdf',
         qa: []
     },
     {

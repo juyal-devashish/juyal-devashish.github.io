@@ -34,7 +34,7 @@ const items = ordered.map(p => {
   const search = [p.title, p.authors, p.excerpt, p.tags.join(' ')].join(' ').toLowerCase();
   return `      <article class="paper${p.pinned ? ' pinned' : ''}" id="${id}" data-tags="${esc(p.tags.join(' '))}" data-search="${esc(search)}">
         <div class="paper-head">
-          <h3>${esc(p.title)}</h3>
+          <h2>${esc(p.title)}</h2>
           <p class="sub">${p.pinned ? 'Pinned · ' : ''}${esc(p.authors)}</p>
           <p class="take">${esc(firstSentence(p.excerpt))}</p>
           <button class="p-toggle" type="button" aria-expanded="false" aria-controls="${id}-notes">Notes</button>

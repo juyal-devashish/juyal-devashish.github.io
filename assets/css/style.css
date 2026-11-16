@@ -65,15 +65,16 @@ img { max-width: 100%; }
 /* ---------- nav: a plain bar. Over the hero it's light text on the photo; past it, a solid strip. ---------- */
 .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 50; transition: background var(--t), box-shadow var(--t); }
 .nav-inner { display: flex; align-items: center; gap: var(--s3); max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); height: 60px; }
-.nav-name { font: 500 1.0625rem/1 var(--font-head); margin-right: auto; }
+.nav-name { display: inline-flex; align-items: center; min-height: 44px; font: 500 1.0625rem/1 var(--font-head); margin-right: auto; }
 .nav nav { display: flex; gap: var(--s3); }
 .nav nav a, .mode { display: inline-flex; align-items: center; min-height: 44px; font-size: .875rem; font-weight: 500; white-space: nowrap; }
 .nav nav a:hover { text-decoration: underline; text-underline-offset: 4px; }
 .nav .short { display: none; }
 .mode { color: inherit; }
-.mode span { opacity: .55; }
-[data-mode="light"] .mode-day, [data-mode="dark"] .mode-night { opacity: 1; text-decoration: underline; text-underline-offset: 4px; }
-.mode .mode-sep { opacity: .55; text-decoration: none; }
+/* The inactive half of Day / Night is dimmer but still 4.5:1 or better. */
+.mode span { color: var(--ink-3); }
+.nav.on-photo .mode span { color: rgba(255, 248, 238, .8); }
+[data-mode="light"] .nav .mode .mode-day, [data-mode="dark"] .nav .mode .mode-night { color: inherit; text-decoration: underline; text-underline-offset: 4px; }
 .nav.on-photo { color: #FFF8EE; }
 .nav.on-photo .nav-name { opacity: 0; pointer-events: none; }
 .nav:not(.on-photo) { background: var(--bg); box-shadow: 0 1px 0 var(--hair); color: var(--ink); }
@@ -222,7 +223,7 @@ section + section { margin-top: var(--s6); }
 .search::placeholder { color: var(--ink-3); }
 .tags { display: flex; gap: 6px; margin-top: var(--s2); overflow-x: auto; scrollbar-width: none; padding-bottom: 4px; }
 .tags::-webkit-scrollbar { display: none; }
-.tags button { flex: none; min-height: 36px; padding: 0 12px; border: 1px solid var(--hair); border-radius: 999px; font-size: .8125rem; font-weight: 500; color: var(--ink-2); }
+.tags button { flex: none; min-height: 44px; padding: 0 12px; border: 1px solid var(--hair); border-radius: 999px; font-size: .8125rem; font-weight: 500; color: var(--ink-2); }
 .tags button .n { font-family: var(--font-mono); font-variant-numeric: tabular-nums; color: var(--ink-3); margin-left: 4px; }
 .tags button[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--bg); }
 .tags button[aria-pressed="true"] .n { color: var(--bg); opacity: .75; }
@@ -230,7 +231,7 @@ section + section { margin-top: var(--s6); }
 .paper[hidden] { display: none; }
 .paper.pinned { border-left: 3px solid var(--ink); padding-left: var(--s2); margin-left: calc(-1 * var(--s2) - 3px); }
 .paper-head { width: 100%; text-align: left; display: grid; grid-template-columns: 1fr auto; gap: 2px var(--s2); }
-.paper-head h3 { font-size: 1.2rem; line-height: 1.3; }
+.paper-head h2 { font-size: 1.2rem; line-height: 1.3; }
 .paper-head .sub { grid-column: 1; font-size: .875rem; color: var(--ink-3); }
 .paper-head .take { grid-column: 1; margin-top: 4px; color: var(--ink-2); }
 .paper-head .p-toggle { grid-row: 1 / span 2; grid-column: 2; align-self: start; }
