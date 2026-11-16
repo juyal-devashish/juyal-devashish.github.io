@@ -56,7 +56,7 @@ img { max-width: 100%; }
 .skip:focus { top: 16px; }
 .wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
 /* Dates and metrics are the only things set in mono, with table figures. */
-.date, .p-metric strong, .proof dd { font-family: var(--font-mono); font-variant-numeric: tabular-nums lining-nums; }
+.date { font-family: var(--font-mono); font-variant-numeric: tabular-nums lining-nums; }
 .date { font-size: .8125rem; color: var(--ink-3); white-space: nowrap; }
 /* Inline links in running text use the accent and an underline. */
 .facts a, .more a, .smaller a, .p-links a, .colophon a { color: var(--accent); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
@@ -120,14 +120,6 @@ section + section { margin-top: var(--s6); }
 .qlink:hover { text-decoration-thickness: 2px; }
 .hero :focus-visible { outline-color: var(--h-fg); }
 
-/* ---------- proof strip ---------- */
-.proof { padding: var(--s4) 0 0; }
-.proof-head { font-size: .875rem; color: var(--ink-3); }
-.proof dl { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s3); margin: var(--s2) 0 0; }
-.proof dd { order: -1; margin: 0; font-size: clamp(1.9rem, 5vw, 2.6rem); line-height: 1.1; color: var(--ink); }
-.proof div { display: flex; flex-direction: column; }
-.proof dt { font-size: .875rem; color: var(--ink-2); }
-
 /* ---------- work ---------- */
 .job-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s2); }
 .job-head h3 { font-size: clamp(1.75rem, 4.6vw, 2.2rem); line-height: 1.1; }
@@ -150,8 +142,6 @@ section + section { margin-top: var(--s6); }
 .p-sum { margin-top: 6px; color: var(--ink-2); }
 .p-links { display: flex; flex-wrap: wrap; gap: 4px var(--s3); margin-top: 10px; font-size: .9375rem; font-weight: 500; }
 .p-links a { display: inline-flex; align-items: center; min-height: 32px; }
-.p-metric { grid-area: metric; text-align: right; font-size: .8125rem; line-height: 1.3; color: var(--ink-3); max-width: 130px; justify-self: end; }
-.p-metric strong { display: block; font-size: 1.5rem; font-weight: 500; color: var(--ink); }
 .p-toggle { grid-area: toggle; align-self: end; justify-self: end; display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 2px; font-size: .875rem; font-weight: 500; color: var(--accent); }
 .p-toggle::after { content: ""; width: 7px; height: 7px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: translateY(-2px) rotate(45deg); transition: transform var(--t) var(--ease); }
 .p-toggle[aria-expanded="true"]::after { transform: translateY(2px) rotate(-135deg); }
@@ -275,18 +265,13 @@ section + section { margin-top: var(--s6); }
   .nav .short { display: inline; }
   .hero { min-height: 560px; }
   .hero::before { background: linear-gradient(180deg, rgba(var(--h-scrim), .66) 0%, rgba(var(--h-scrim), .76) 100%); }
-  .proof dl { grid-template-columns: 1fr 1fr 1fr; gap: var(--s2); }
-  .proof dd { font-size: 1.6rem; }
-  .proof dt { font-size: .8125rem; line-height: 1.35; }
   .job-table > div { grid-template-columns: 1fr; }
   .project, .project.featured { grid-template-columns: 1fr auto; grid-template-areas: "main main" "metric toggle" "more more"; }
   .project.featured { grid-template-areas: "shot shot" "main main" "metric toggle" "more more"; }
   .p-visual { grid-template-columns: 1fr; }
   .p-sketch { display: grid; grid-template-columns: 120px 1fr; gap: var(--s2); align-items: end; }
   .p-thumb { display: none; }
-  .p-metric { text-align: left; justify-self: start; max-width: none; margin-top: var(--s2); }
-  .p-metric strong { display: inline; font-size: 1.15rem; margin-right: 6px; }
-  .p-more-inner { grid-template-columns: 1fr; }
+      .p-more-inner { grid-template-columns: 1fr; }
   .smaller li { grid-template-columns: 1fr auto; }
   .smaller li span:not(.date) { grid-column: 1 / -1; }
   .smaller li .date { grid-column: 2; grid-row: 1; }
