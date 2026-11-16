@@ -29,6 +29,7 @@
   <symbol id="i-linkedin" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></symbol>
   <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></symbol>
   <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
   <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"/></symbol>
   <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
   <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></symbol>
@@ -77,21 +78,75 @@
 
   <section id="projects">
     <h2 class="section-title">Projects</h2>
-    <div class="rows">
-      <a class="row" href="https://github.com/juyal-devashish/Agentic-Adjudication" target="_blank" rel="noopener"><h3>Agentic Adjudication</h3><span class="arrow"><svg class="icon"><use href="#i-arrow"/></svg></span>
-        <p>AI agents prepare clinical-trial adverse events for adjudication. Code checks every agent answer, and people sign.</p></a>
-      <a class="row" href="https://evosdemo.vercel.app" target="_blank" rel="noopener"><h3>AI operator release gate</h3><span class="arrow"><svg class="icon"><use href="#i-arrow"/></svg></span>
-        <p>Release suite and production monitor for an AI scheduling operator. It caught a flawed release in 10 of 10 trials, and demotes a release when production reviews turn bad.</p></a>
-      <a class="row" href="https://eatopia-demo.vercel.app" target="_blank" rel="noopener"><h3>Health-first voice onboarding</h3><span class="arrow"><svg class="icon"><use href="#i-arrow"/></svg></span>
-        <p>A nutrition app's 25-screen onboarding in 7. Apple Health fills the facts, Claude fills the rest from speech, and no health value reaches the model.</p></a>
-      <a class="row" href="https://www.sama4.online/" target="_blank" rel="noopener"><h3>Sama4</h3><span class="arrow"><svg class="icon"><use href="#i-arrow"/></svg></span>
-        <p>News intelligence with semantic search, RAG and a real-time voice interface.</p></a>
+    <div class="cases">
+      <details class="case">
+        <summary><span class="tag">Clinical trials · AI agents</span><h3>Agentic Adjudication</h3><svg class="icon plus" aria-hidden="true"><use href="#i-plus"/></svg>
+          <p>AI agents prepare clinical-trial adverse events for adjudication. Code checks every agent answer, and people sign.</p></summary>
+        <div class="case-body">
+          <dl>
+            <dt>Problem</dt><dd>Before independent physicians can confirm a serious adverse event, someone has to collect the hospital records, black out every patient identifier, check the package and write a neutral narrative. It is mostly done by hand and takes days per case.</dd>
+            <dt>What I built</dt><dd>The intake and quality-check flows in Python: rule-based case creation, de-identification that re-reads its own output from scratch, and Claude agents whose answers only count once code has checked the schema, every quote they cite and their confidence. People sign every step that needs judgement.</dd>
+            <dt>Result</dt><dd>On synthetic data: 41 of 41 identifiers removed from text PDFs, 40 of 40 schema-valid agent answers over 5 live runs, 25 of 25 narratives passing their citation check, at about $0.30 per full run.</dd>
+          </dl>
+          <div class="case-links"><a href="https://github.com/juyal-devashish/Agentic-Adjudication" target="_blank" rel="noopener">Code <svg class="icon"><use href="#i-arrow"/></svg></a></div>
+        </div>
+      </details>
+      <details class="case">
+        <summary><span class="tag">AI quality · Evaluation</span><h3>AI operator release gate</h3><svg class="icon plus" aria-hidden="true"><use href="#i-plus"/></svg>
+          <p>Release suite and production monitor for an AI scheduling operator. It caught a flawed release in 10 of 10 trials, and demotes a release when production reviews turn bad.</p></summary>
+        <div class="case-body">
+          <dl>
+            <dt>Problem</dt><dd>An AI agent that schedules a factory should earn its autonomy step by step and lose it quickly when it starts getting things wrong, instead of running on trust.</dd>
+            <dt>What I built</dt><dd>A release suite of 8 factory scenarios × 10 trials on real Claude calls, a permission ladder from shadow to supervised to limited, and a production monitor whose binomial test demotes the operator automatically. Next.js, Convex and Clerk.</dd>
+            <dt>Result</dt><dd>The suite failed a flawed release on 10 of 10 trials and passed its fix 80 of 80. In a labelled fault-injection replay, the monitor demoted the faulty release and the backend refused its queued action. About $7 of API spend under a hard $18 cap; the factory and reviewer are simulated.</dd>
+          </dl>
+          <div class="case-links"><a href="https://evosdemo.vercel.app" target="_blank" rel="noopener">Live demo <svg class="icon"><use href="#i-arrow"/></svg></a><a href="https://www.loom.com/share/98c262700b4d478b86f9436d93006a86" target="_blank" rel="noopener">Walkthrough <svg class="icon"><use href="#i-arrow"/></svg></a><a href="https://github.com/juyal-devashish/EvosDemo" target="_blank" rel="noopener">Code <svg class="icon"><use href="#i-arrow"/></svg></a></div>
+        </div>
+      </details>
+      <details class="case">
+        <summary><span class="tag">Health · Voice and LLMs</span><h3>Health-first voice onboarding</h3><svg class="icon plus" aria-hidden="true"><use href="#i-plus"/></svg>
+          <p>A nutrition app's 25-screen onboarding in 7. Apple Health fills the facts, Claude fills the rest from speech, and no health value reaches the model.</p></summary>
+        <div class="case-body">
+          <dl>
+            <dt>Problem</dt><dd>A nutrition app's onboarding asks about 25 screens of questions, and asks for Apple Health access only in its third section, after members have typed answers Health already had.</dd>
+            <dt>What I built</dt><dd>The same questions in 7 screens. Plain code turns Health data into answers first. Then three voice prompts, and Claude fills the remaining questions from what the member says, limited to each question's own options. No health value is sent to the model, and gender identity is never inferred.</dd>
+            <dt>Result</dt><dd>25 screens become 7, at least 45 taps become about 14, and up to 22 of 23 answers are filled in for the member to confirm. Synthetic data only.</dd>
+          </dl>
+          <div class="case-links"><a href="https://eatopia-demo.vercel.app" target="_blank" rel="noopener">Live demo <svg class="icon"><use href="#i-arrow"/></svg></a><a href="https://github.com/juyal-devashish/eatopia" target="_blank" rel="noopener">Code <svg class="icon"><use href="#i-arrow"/></svg></a></div>
+        </div>
+      </details>
+      <details class="case">
+        <summary><span class="tag">News · Retrieval</span><h3>Sama4</h3><svg class="icon plus" aria-hidden="true"><use href="#i-plus"/></svg>
+          <p>A news reader that explains the people, places and ideas in a story, right beside the story.</p></summary>
+        <div class="case-body">
+          <dl>
+            <dt>Problem</dt><dd>News assumes you already know the backstory: the people, court cases, acronyms and years of policy behind a single headline. Readers open five tabs or give up.</dd>
+            <dt>What I built</dt><dd>A reader that pulls stories from 10 outlets each night, finds the terms a general reader would stumble on with spaCy plus Claude, and explains each one in the context of that story, grounded in Wikipedia and the article. FastAPI on Railway, Next.js on Vercel, Postgres, Redis and Pinecone.</dd>
+            <dt>Result</dt><dd>Live at sama4.online. CI runs lint, type checks and tests, with backend tests against a real Postgres; every external service has a fake, so the suite runs offline.</dd>
+          </dl>
+          <div class="case-links"><a href="https://www.sama4.online/" target="_blank" rel="noopener">Live app <svg class="icon"><use href="#i-arrow"/></svg></a><a href="https://github.com/juyal-devashish/Sama4" target="_blank" rel="noopener">Code <svg class="icon"><use href="#i-arrow"/></svg></a></div>
+        </div>
+      </details>
+      <details class="case">
+        <summary><span class="tag">Research · Statistics</span><h3>Sequential watermark detection</h3><svg class="icon plus" aria-hidden="true"><use href="#i-plus"/></svg>
+          <p>Anytime-valid tests that spot LLM watermarks in about 50 permutations instead of thousands.</p></summary>
+        <div class="case-body">
+          <dl>
+            <dt>Problem</dt><dd>Checking text for a language-model watermark with a permutation test usually costs a fixed, large number of resamples, however clear the evidence already is.</dd>
+            <dt>What I built</dt><dd>With my group, a sequential Monte Carlo test, using testing by betting, that stops as soon as there is enough evidence. We measured detection power, false positives and resampling cost under token edits.</dd>
+            <dt>Result</dt><dd>A University of Michigan group project (CSE 598), with the report and an interactive exhibit online. Re-running the experiments from the cleaned-up code is still on the list.</dd>
+          </dl>
+          <div class="case-links"><a href="https://juyal-devashish.github.io/LLM-Sequential-Watermarking/" target="_blank" rel="noopener">Exhibit <svg class="icon"><use href="#i-arrow"/></svg></a><a href="https://github.com/juyal-devashish/LLM-Sequential-Watermarking" target="_blank" rel="noopener">Code <svg class="icon"><use href="#i-arrow"/></svg></a></div>
+        </div>
+      </details>
+    </div>
+
+    <h3 class="also-title">Also</h3>
+    <div class="rows also">
       <a class="row" href="https://inlinetutor.com" target="_blank" rel="noopener"><h3>Inline</h3><span class="arrow"><svg class="icon"><use href="#i-arrow"/></svg></span>
         <p>AI writing feedback for students, co-built with the founder.</p></a>
       <a class="row" href="https://github.com/juyal-devashish/umichslm-walkthrough" target="_blank" rel="noopener"><h3>MichiganSLM</h3><span class="arrow"><svg class="icon"><use href="#i-arrow"/></svg></span>
         <p>Architecture and scaling experiments for Michigan's first small language model.</p></a>
-      <a class="row" href="https://github.com/juyal-devashish/LLM-Sequential-Watermarking" target="_blank" rel="noopener"><h3>Sequential watermark detection</h3><span class="arrow"><svg class="icon"><use href="#i-arrow"/></svg></span>
-        <p>Anytime-valid tests that spot LLM watermarks in about 50 permutations instead of thousands.</p></a>
       <a class="row" href="https://github.com/juyal-devashish/ELI500Model-Sequential-Distillation" target="_blank" rel="noopener"><h3>Multi-stage distillation</h3><span class="arrow"><svg class="icon"><use href="#i-arrow"/></svg></span>
         <p>7B → 1.5B → 0.5B with a teacher assistant: 22.8% lower perplexity than direct distillation.</p></a>
     </div>
