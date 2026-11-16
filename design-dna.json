@@ -1,75 +1,77 @@
 {
   "meta": {
-    "name": "Soft Graphite Minimal — Devashish Juyal portfolio",
-    "description": "Neumorphic surfaces layered with frosted glass, in a near-monochrome graphite palette. Extracted from a described style (no image reference), so no measured palette; generated with the design-dna skill (Phase 2 from description, Phase 3 generate).",
+    "name": "Golden Hour — Devashish Juyal portfolio",
+    "description": "Warm paper, ink navy and one terracotta accent, with a blue-hour dark mode. Serif headings over a neutral sans. Soft neumorphic depth is kept on the avatar, buttons and nav, retinted for the warm surfaces.",
     "source_references": [
       "User brief 2026-11-04: neumorphism + glass hybrid, light/dark toggle, minimalistic palette, recruiter-first, agent-graph hero console",
-      "Revision 2026-11-04: user asked for super minimalistic; removed hero console, metrics, chips, case studies, orbs"
+      "Revision 2026-11-04: user asked for super minimalistic; removed hero console, metrics, chips, case studies, orbs",
+      "Revision 2026-11-16: step 2 of the move toward an expressive, personal portfolio (inspired by dharmashah.com structure, not its palette or fonts). Palette echoes the golden-hour light in the photography section."
     ],
     "created_at": "2026-11-04"
   },
   "design_system": {
     "color": {
-      "palette_type": "monochromatic with a single functional signal color",
+      "palette_type": "warm neutrals with a single accent",
       "primary": {
-        "hex": "#23262D",
-        "role": "ink: headings, primary button fill, active states"
+        "hex": "#1D2230",
+        "role": "ink: headings and body text (13.9:1 on paper)"
       },
       "secondary": {
-        "hex": "#5A616D",
-        "role": "secondary text, icons, meta labels"
+        "hex": "#4A4F5E",
+        "role": "secondary text and icons (7.1:1)"
       },
       "accent": {
-        "hex": "#2F9E6A",
-        "role": "signal only: 'open to work' dot, live pulses in the agent console, success copy feedback. Never decorative."
+        "hex": "#A9471F",
+        "dark_hex": "#E8875A",
+        "role": "the only accent: open-to-work dot, hovered arrows and links. 5.1:1 light, 6.7:1 dark, so it is safe as text too."
       },
       "neutral": {
         "scale": [
-          "#FFFFFF",
-          "#F1F3F6",
-          "#E6E9EE",
-          "#D3D8E0",
-          "#A9B0BC",
-          "#606773",
-          "#5A616D",
-          "#3A3F48",
-          "#23262D",
-          "#1B1E23",
-          "#15171B"
+          "#FFFCF6",
+          "#F4EFE7",
+          "#D8CFC1",
+          "#9A948B",
+          "#5E6170",
+          "#4A4F5E",
+          "#1D2230",
+          "#1F242E",
+          "#161A22",
+          "#0D1015"
         ],
-        "usage": "Light theme: #E6E9EE is the clay surface, #FFFFFF / #C3C9D3 are the neumorphic highlight / shade, #23262D is foreground. Dark theme inverts: #1E2126 surface, #272B31 highlight, #15171B shade, #E8EAED foreground."
+        "usage": "Light: #F4EFE7 paper surface, #FFFCF6 / #D8CFC1 neumorphic highlight / shade, #1D2230 ink, #5E6170 tertiary (5.4:1). Dark (blue hour): #161A22 surface, #1F242E / #0D1015 highlight / shade, #F2ECE2 ink, #BDB6AB secondary, #9A948B tertiary (5.8:1)."
       },
       "semantic": {
-        "success": "#2F9E6A",
+        "success": "#A9471F (open-to-work dot uses the accent)",
         "warning": "#B7791F",
         "error": "#C2453D",
         "info": "#5A616D"
       },
       "surface": {
-        "background": "#E6E9EE",
-        "card": "#E6E9EE (extruded by shadow, same hue as background)",
-        "elevated": "rgba(255,255,255,0.45) frosted glass over drifting graphite orbs"
+        "background": "#F4EFE7 light, #161A22 dark",
+        "card": "same as background, extruded by shadow",
+        "elevated": "rgba(244,239,231,0.65) frosted glass, nav pill only"
       },
-      "contrast_strategy": "Neumorphism blends surfaces, so legibility comes from ink-on-clay text contrast (>= 9:1) rather than surface contrast. Interactive elements get an additional 1px hairline so they read without shadows (WCAG non-text 3:1)."
+      "contrast_strategy": "Every text token is at least 4.5:1 on its background in both themes (checked with the WCAG formula); figures are in the comment at the top of style.css."
     },
     "typography": {
       "font_families": {
-        "heading": "'Inter Tight', system-ui, sans-serif",
+        "heading": "'Newsreader', Georgia, serif (500 roman, 400 italic for the role line)",
         "body": "'Inter', system-ui, sans-serif",
         "mono": "'JetBrains Mono', ui-monospace, monospace"
       },
       "type_scale": {
         "display": {
-          "size": "clamp(2.5rem, 5.2vw, 4.25rem)",
-          "weight": 600,
-          "line_height": 1.04,
-          "tracking": "-0.035em"
+          "size": "clamp(2.7rem, 9vw, 4.1rem)",
+          "weight": 500,
+          "line_height": 1.02,
+          "tracking": "-0.015em"
         },
         "heading_1": {
-          "size": "clamp(1.9rem, 3.4vw, 2.6rem)",
-          "weight": 600,
-          "line_height": 1.1,
-          "tracking": "-0.03em"
+          "size": "clamp(2.1rem, 6vw, 2.9rem)",
+          "weight": 500,
+          "line_height": 1.05,
+          "tracking": "-0.012em",
+          "use": "section titles (h2)"
         },
         "heading_2": {
           "size": "1.35rem",
@@ -103,7 +105,7 @@
         }
       },
       "scale_ratio": 1.25,
-      "pairing_logic": "Tight grotesk for headings, neutral grotesk for reading, mono for metadata, dates, and console output."
+      "pairing_logic": "Serif for the name, role line and big section titles; neutral sans for reading and row titles; mono for dates, counters and paper-note labels."
     },
     "spacing": {
       "base_unit": "4px",
@@ -157,15 +159,15 @@
     "components": {
       "button_style": "Clay pills (low extrusion) that press to inset on :active; 44px round icon buttons.",
       "card_style": "No cards. Content sits in flat rows; linked rows sink to an inset well on hover.",
-      "navigation_pattern": "Small floating glass pill: three links and an inset theme toggle.",
+      "navigation_pattern": "Small floating glass pill: four links and an inset theme toggle.",
       "inputs": "Tag filters are plain mono text; the active tag is inset."
     }
   },
   "design_style": {
     "aesthetic": {
-      "mood": "calm, precise, tactile",
-      "personality": "quietly confident engineer",
-      "genre": "minimal product portfolio"
+      "mood": "warm, calm, personal",
+      "personality": "engineer who also photographs",
+      "genre": "personal portfolio"
     },
     "visual_language": {
       "whitespace_usage": "dominant",
@@ -177,7 +179,7 @@
       "balance_type": "asymmetric hero, symmetric grids below"
     },
     "imagery": {
-      "photography": "single portrait in an inset frame",
+      "photography": "portrait in a raised frame; a photography section shows one photo at a time in a 4:5 mount",
       "graphic_elements": "agent-graph diagram, soft blurred orbs",
       "iconography": "1.5px stroke inline SVG"
     },
