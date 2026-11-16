@@ -51,6 +51,7 @@ jobs:
           args: >-
             --no-progress --max-retries 2 --accept 200,206,429
             --exclude linkedin.com --exclude ssrn.com
+            --root-dir ${{ github.workspace }}
             index.html papers.html 404.html
           fail: true
 
