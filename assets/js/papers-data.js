@@ -279,7 +279,7 @@ const papers = [
     {
         date: 'Feb 2024',
         title: 'MobiLlama: Towards Accurate and Lightweight Fully Transparent GPT',
-        authors: 'Thopilan et al., arXiv 2024',
+        authors: 'Thawakar et al., arXiv 2024',
         excerpt: 'A fully transparent 0.5B-parameter LLM designed for on-device deployment, using parameter sharing across all transformer layers to dramatically reduce model size without large quality losses.',
         tags: ['llm'],
         pinned: false,
@@ -368,8 +368,8 @@ const papers = [
     },
     {
         date: 'Jun 2024',
-        title: 'JEST: Joint Example Selection and Training for Efficient Data Selection',
-        authors: 'Mindermann et al., arXiv 2024',
+        title: 'Data Curation via Joint Example Selection Further Accelerates Multimodal Learning (JEST)',
+        authors: 'Evans et al., arXiv 2024',
         excerpt: 'Scores training examples by their joint utility for an entire mini-batch rather than individually, enabling more efficient pretraining convergence with substantially less data.',
         tags: ['llm', 'ml'],
         pinned: false,
