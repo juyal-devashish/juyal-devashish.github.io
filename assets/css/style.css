@@ -101,6 +101,19 @@ a.row:hover .arrow { color: var(--ink); transform: translate(2px, -2px); }
 .more { display: inline-flex; align-items: center; gap: 6px; margin-top: 20px; font-size: .9rem; color: var(--ink-2); }
 .more:hover { color: var(--ink); }
 
+/* ---------- photography ---------- */
+.lede { color: var(--ink-2); max-width: 560px; }
+.photo { margin: 32px 0 0; }
+/* A fixed 4:5 mount so the page doesn't jump between portrait and landscape shots. */
+.photo-frame { aspect-ratio: 4 / 5; max-width: 440px; padding: 10px; border-radius: var(--r-lg); box-shadow: var(--e-med); cursor: pointer; }
+.photo-inner { position: relative; height: 100%; border-radius: 14px; overflow: hidden; background: #15171B; }
+/* A blurred copy of the same photo fills the bars around landscape shots. */
+.photo-blur { position: absolute; inset: -24px; background: center / cover no-repeat; filter: blur(22px) brightness(.7); transition: opacity 180ms var(--ease); }
+.photo-inner img { position: relative; width: 100%; height: 100%; display: block; object-fit: contain; transition: opacity 180ms var(--ease); }
+.photo-inner img.is-fading, .photo-blur.is-fading { opacity: 0; }
+.photo-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; max-width: 440px; margin-top: 20px; }
+.photo-bar .meta { font: 400 .8rem var(--font-mono); color: var(--ink-3); }
+
 /* ---------- footer ---------- */
 footer { margin-top: 120px; padding: 32px 0 48px; }
 .foot { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: .82rem; color: var(--ink-3); }

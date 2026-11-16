@@ -29,6 +29,7 @@
   <symbol id="i-linkedin" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></symbol>
   <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></symbol>
   <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"/></symbol>
   <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
   <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></symbol>
 </svg>
@@ -39,6 +40,7 @@
     <a href="#work">Work</a>
     <a href="#projects">Projects</a>
     <a href="papers.html">Papers</a>
+    <a href="#photos">Photos</a>
     <button class="theme-toggle" id="theme-toggle" aria-label="Switch to dark theme"><svg class="icon i-sun"><use href="#i-sun"/></svg><svg class="icon i-moon"><use href="#i-moon"/></svg></button>
   </nav>
 </header>
@@ -104,6 +106,18 @@
     </div>
   </section>
 
+  <section id="photos">
+    <span class="label">Photography</span>
+    <p class="lede">I love photography: skies, skylines, and whatever the light is doing at either end of the day. Tap the photo for another one.</p>
+    <figure class="photo">
+      <div class="photo-frame" id="photo-frame"><div class="photo-inner"><div class="photo-blur" id="photo-blur" aria-hidden="true" style="background-image:url(assets/img/photos/dsc_0295.jpg)"></div><img id="photo-img" src="assets/img/photos/dsc_0295.jpg" alt="Clouds settling into a valley between green hills." width="1400" height="930" decoding="async"></div></div>
+      <figcaption class="photo-bar">
+        <span class="meta" id="photo-count" aria-live="polite"></span>
+        <button class="btn" id="photo-btn" type="button"><svg class="icon"><use href="#i-refresh"/></svg>Another one</button>
+      </figcaption>
+    </figure>
+  </section>
+
   <section id="education">
     <span class="label">Education</span>
     <div class="rows">
@@ -118,5 +132,6 @@
 </footer>
 
 <script src="assets/js/main.js"></script>
+<script src="assets/js/photos.js"></script>
 </body>
 </html>
