@@ -136,6 +136,13 @@ section + section { margin-top: var(--s6); }
 /* The finished screen beside the paper sketch it started from; both are the same height. */
 .p-visual { grid-area: shot; display: grid; grid-template-columns: 3.1fr 1fr; gap: var(--s2); align-items: start; margin-bottom: var(--s3); }
 .p-visual .p-shot { width: 100%; height: auto; border-radius: 10px; border: 1px solid var(--hair); }
+/* The Sama4 demo loop, with its Play/Pause button in the corner. */
+.p-clip { position: relative; }
+.p-clip video { display: block; background: #F5F7FB; }
+.p-play { position: absolute; left: 10px; bottom: 10px; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: rgba(12, 22, 49, .82); border: 1px solid var(--hair); color: var(--ink); cursor: pointer; }
+.p-play:hover { color: var(--accent); border-color: var(--accent); }
+.p-play::before { content: ""; width: 0; height: 0; margin-left: 3px; border-style: solid; border-width: 7px 0 7px 12px; border-color: transparent transparent transparent currentColor; }
+.p-play.is-playing::before { width: 10px; height: 14px; margin: 0; border: 0; border-left: 3px solid currentColor; border-right: 3px solid currentColor; }
 .p-sketch { margin: 0; }
 .p-sketch img { display: block; width: 100%; height: auto; border-radius: 6px; border: 1px solid var(--hair); }
 .p-sketch figcaption { margin-top: 6px; font-size: .8125rem; line-height: 1.4; color: var(--ink-3); }

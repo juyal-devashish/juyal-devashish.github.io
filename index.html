@@ -76,7 +76,13 @@
 
     <article class="project featured" id="sama4">
       <div class="p-visual">
-        <img class="p-shot" src="assets/img/work/sama4.jpg" alt="The Sama4 reader: a story list, an article with highlighted terms, and a panel explaining one of them." width="1280" height="800" loading="lazy">
+        <div class="p-clip">
+          <video class="p-shot" id="sama4-clip" muted loop playsinline preload="none" width="1280" height="800" poster="assets/img/work/sama4-loop-poster.jpg" aria-label="A 10-second silent demo of the Sama4 reader: selecting the highlighted name Cade Cunningham in a story slides in a panel that explains who that is, in the context of the story.">
+            <source src="assets/video/sama4-loop.mp4" type="video/mp4">
+            <source src="assets/video/sama4-loop.webm" type="video/webm">
+          </video>
+          <button class="p-play" type="button" aria-controls="sama4-clip" hidden><span class="visually-hidden">Play the demo</span></button>
+        </div>
         <figure class="p-sketch">
           <img src="assets/img/work/sama4-sketch.jpg" alt="Hand-drawn sketches of the Samā4 wordmark on grid paper: four versions of the name, each with a small owl perched on the bar over the ā." width="720" height="1400" loading="lazy">
           <figcaption>Where it started: four tries at the wordmark, owl on the ā.</figcaption>
@@ -263,6 +269,7 @@
 
 <script src="assets/js/main.js"></script>
 <script src="assets/js/projects.js"></script>
+<script src="assets/js/clip.js"></script>
 <script src="assets/js/photos.js"></script>
 </body>
 </html>
