@@ -23,7 +23,7 @@
   rows.forEach(function (row) {
     row.addEventListener('click', function (e) {
       // Links, and anything inside the opened notes, keep their own behaviour.
-      if (e.target.closest('a') || (e.target.closest('.p-more') && !e.target.closest('.p-toggle'))) return;
+      if (e.target.closest('a, .p-play') || (e.target.closest('.p-more') && !e.target.closest('.p-toggle'))) return;
       if (window.getSelection && String(window.getSelection())) return; // let people select text
       set(row, !row.classList.contains('open'));
       syncAll();
