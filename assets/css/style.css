@@ -5,7 +5,7 @@
   --bg: #E6E9EE;
   --ink: #23262D;
   --ink-2: #5A616D;
-  --ink-3: #7A828F;
+  --ink-3: #606773; /* 4.7:1 on --bg, AA for small text */
   --light: #FFFFFF;
   --shade: #C3C9D3;
   --hair: rgba(35, 38, 45, 0.08);
