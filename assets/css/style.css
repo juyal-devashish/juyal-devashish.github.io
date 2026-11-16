@@ -95,13 +95,16 @@ section + section { margin-top: var(--s6); }
    tokens, so the hero sets its own text and scrim colours per mode (--h-*). Every text box is
    measured at 4.5:1 or better against the actual pixels, 360px to 2560px, both modes. ---------- */
 .hero { --h-fg: #FFF8EE; --h-fg2: rgba(255, 248, 238, .9); --h-role: #FFD2B0; --h-btn: #FFF8EE; --h-btn-fg: #0E1F45; --h-btn-hover: #FFE2C4; --h-glow: rgba(2, 4, 12, .6); --h-scrim: 2, 4, 12;
-  position: relative; height: 62vh; height: 62svh; min-height: 500px; max-height: 760px; display: flex; align-items: flex-end; overflow: hidden; background: #05070F; color: var(--h-fg); }
+  position: relative; height: 66vh; height: 66svh; min-height: 520px; max-height: 800px; display: flex; align-items: flex-end; overflow: hidden; background: #05070F; color: var(--h-fg); }
 [data-mode="light"] .hero { --h-fg: #0E1F45; --h-fg2: #22304F; --h-role: #6E2A0E; --h-btn: #0E1F45; --h-btn-fg: #FFF8EE; --h-btn-hover: #22356A; --h-glow: rgba(255, 255, 255, .75); --h-scrim: 255, 255, 255; background: #F7F5F2; }
 .hero-bg img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 12%; }
 .hero-day { display: none; }
 [data-mode="light"] .hero-day { display: block; }
 [data-mode="light"] .hero-night { display: none; }
 .hero::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(var(--h-scrim), .75) 0, rgba(var(--h-scrim), 0) 110px), linear-gradient(0deg, rgba(var(--h-scrim), .55) 0%, rgba(var(--h-scrim), 0) 55%), linear-gradient(90deg, rgba(var(--h-scrim), .8) 0%, rgba(var(--h-scrim), .62) 55%, rgba(var(--h-scrim), 0) 92%); }
+/* The artwork dissolves into the page instead of stopping at a hard edge. */
+.hero::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: min(240px, 42%); z-index: 1; pointer-events: none;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, color-mix(in srgb, var(--bg) 35%, transparent) 30%, color-mix(in srgb, var(--bg) 80%, transparent) 65%, var(--bg) 100%); }
 .hero-inner { position: relative; z-index: 2; width: 100%; max-width: var(--max); margin: 0 auto; padding: 96px var(--gutter) var(--s5); text-shadow: 0 1px 14px var(--h-glow); }
 .hero-face { display: block; width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 2px solid var(--h-fg); margin-bottom: var(--s2); }
 .hero h1 { font-size: clamp(2.75rem, 8vw, 4.6rem); line-height: 1; letter-spacing: -.022em; color: var(--h-fg); }
