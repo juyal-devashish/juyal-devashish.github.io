@@ -74,11 +74,13 @@ img { max-width: 100%; }
 /* The inactive half of Day / Night is dimmer but still 4.5:1 or better. */
 .mode span { color: var(--ink-3); }
 .nav.on-photo .mode span { color: rgba(255, 248, 238, .8); }
+[data-mode="light"] .nav.on-photo .mode span { color: #3B435C; }
 [data-mode="light"] .nav .mode .mode-day, [data-mode="dark"] .nav .mode .mode-night { color: inherit; text-decoration: underline; text-underline-offset: 4px; }
 .nav.on-photo { color: #FFF8EE; }
+[data-mode="light"] .nav.on-photo { color: #0E1F45; }
 .nav.on-photo .nav-name { opacity: 0; pointer-events: none; }
 .nav:not(.on-photo) { background: var(--bg); box-shadow: 0 1px 0 var(--hair); color: var(--ink); }
-.nav.on-photo :focus-visible { outline-color: #FFF8EE; }
+.nav.on-photo :focus-visible { outline-color: currentColor; }
 
 /* ---------- layout ---------- */
 main.wrap { padding-top: 120px; }
@@ -88,32 +90,32 @@ section + section { margin-top: var(--s6); }
 .section-title { font-size: clamp(2.25rem, 6vw, 3.1rem); line-height: 1.05; letter-spacing: -.012em; margin-bottom: var(--s4); }
 .sub-title { margin: var(--s5) 0 var(--s2); font: 600 .75rem/1 var(--font-body); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); }
 
-/* ---------- hero: about 62% of the screen, so the work shows on a laptop's first screen ---------- */
-.hero { position: relative; height: 62vh; height: 62svh; min-height: 500px; max-height: 760px; display: flex; align-items: flex-end; overflow: hidden; background: #0E2350; color: #FFF8EE; }
-.hero-bg img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 72%; }
-.hero-night { display: none; }
-[data-mode="dark"] .hero-day { display: none; }
-[data-mode="dark"] .hero-night { display: block; }
-[data-mode="dark"] .hero-night img { object-position: center 100%; }
-/* Scrims, measured: every text box over the photo is at least 4.5:1 from 360px phones to 2560px screens, day and night. */
-.hero::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(0deg, rgba(6, 16, 44, .55) 0%, rgba(6, 16, 44, 0) 62%), linear-gradient(90deg, rgba(6, 16, 44, .6) 0%, rgba(6, 16, 44, .3) 55%, rgba(6, 16, 44, .05) 100%); }
-[data-mode="dark"] .hero::before { background: linear-gradient(0deg, rgba(4, 8, 22, .6) 0%, rgba(4, 8, 22, 0) 62%), linear-gradient(90deg, rgba(4, 8, 22, .8) 0%, rgba(4, 8, 22, .6) 60%, rgba(4, 8, 22, .3) 100%); }
-.hero-inner { position: relative; z-index: 2; width: 100%; max-width: var(--max); margin: 0 auto; padding: 96px var(--gutter) var(--s5); text-shadow: 0 1px 14px rgba(6, 16, 44, .4); }
-.hero-face { display: block; width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255, 248, 238, .85); margin-bottom: var(--s2); }
-.hero h1 { font-size: clamp(2.75rem, 8vw, 4.6rem); line-height: 1; letter-spacing: -.022em; color: #FFF8EE; }
-.hero-role { margin-top: var(--s1); font: italic 400 clamp(1.3rem, 3.2vw, 1.55rem)/1.3 var(--font-head); color: #FFE2C4; }
-.hero-sub { margin-top: 2px; font-size: .9375rem; color: rgba(255, 248, 238, .92); }
-.hero-pitch { margin-top: var(--s2); max-width: 520px; font-size: 1.0625rem; line-height: 1.55; color: #FFF8EE; }
+/* ---------- hero: about 62% of the screen, so the work shows on a laptop's first screen.
+   Night shows the ring artwork; day shows its negative. The image doesn't follow the page
+   tokens, so the hero sets its own text and scrim colours per mode (--h-*). Every text box is
+   measured at 4.5:1 or better against the actual pixels, 360px to 2560px, both modes. ---------- */
+.hero { --h-fg: #FFF8EE; --h-fg2: rgba(255, 248, 238, .9); --h-role: #FFD2B0; --h-btn: #FFF8EE; --h-btn-fg: #0E1F45; --h-btn-hover: #FFE2C4; --h-glow: rgba(2, 4, 12, .6); --h-scrim: 2, 4, 12;
+  position: relative; height: 62vh; height: 62svh; min-height: 500px; max-height: 760px; display: flex; align-items: flex-end; overflow: hidden; background: #05070F; color: var(--h-fg); }
+[data-mode="light"] .hero { --h-fg: #0E1F45; --h-fg2: #22304F; --h-role: #6E2A0E; --h-btn: #0E1F45; --h-btn-fg: #FFF8EE; --h-btn-hover: #22356A; --h-glow: rgba(255, 255, 255, .75); --h-scrim: 255, 255, 255; background: #F7F5F2; }
+.hero-bg img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 12%; }
+.hero-day { display: none; }
+[data-mode="light"] .hero-day { display: block; }
+[data-mode="light"] .hero-night { display: none; }
+.hero::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(var(--h-scrim), .75) 0, rgba(var(--h-scrim), 0) 110px), linear-gradient(0deg, rgba(var(--h-scrim), .55) 0%, rgba(var(--h-scrim), 0) 55%), linear-gradient(90deg, rgba(var(--h-scrim), .8) 0%, rgba(var(--h-scrim), .62) 55%, rgba(var(--h-scrim), 0) 92%); }
+.hero-inner { position: relative; z-index: 2; width: 100%; max-width: var(--max); margin: 0 auto; padding: 96px var(--gutter) var(--s5); text-shadow: 0 1px 14px var(--h-glow); }
+.hero-face { display: block; width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 2px solid var(--h-fg); margin-bottom: var(--s2); }
+.hero h1 { font-size: clamp(2.75rem, 8vw, 4.6rem); line-height: 1; letter-spacing: -.022em; color: var(--h-fg); }
+.hero-role { margin-top: var(--s1); font: italic 400 clamp(1.3rem, 3.2vw, 1.55rem)/1.3 var(--font-head); color: var(--h-role); }
+.hero-sub { margin-top: 2px; font-size: .9375rem; color: var(--h-fg2); }
+.hero-pitch { margin-top: var(--s2); max-width: 520px; font-size: 1.0625rem; line-height: 1.55; color: var(--h-fg); }
 .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s1) var(--s3); margin-top: var(--s3); }
 .hbtn { display: inline-flex; align-items: center; min-height: 46px; padding: 0 22px; border-radius: 999px; background: #FFF8EE; color: #0E1F45; font-size: .9375rem; font-weight: 600; text-shadow: none; transition: background var(--t); }
 .hbtn:hover { background: #FFE2C4; }
-.qlink { display: inline-flex; align-items: center; min-height: 44px; font-size: .9375rem; font-weight: 500; color: #FFF8EE; text-decoration: underline; text-decoration-color: rgba(255, 248, 238, .55); text-underline-offset: 4px; }
-.qlink:hover { text-decoration-color: #FFF8EE; }
-.hero-cap { position: absolute; z-index: 2; right: var(--gutter); bottom: 14px; padding: 3px 10px; border-radius: 999px; background: rgba(6, 16, 44, .62); font-size: .75rem; color: #FFF8EE; }
-.hero-cap .hero-night { display: none; }
-[data-mode="dark"] .hero-cap .hero-day { display: none; }
-[data-mode="dark"] .hero-cap .hero-night { display: inline; }
-.hero :focus-visible { outline-color: #FFF8EE; }
+.hero .hbtn { background: var(--h-btn); color: var(--h-btn-fg); }
+.hero .hbtn:hover { background: var(--h-btn-hover); }
+.qlink { display: inline-flex; align-items: center; min-height: 44px; font-size: .9375rem; font-weight: 500; color: var(--h-fg); text-decoration: underline; text-decoration-color: currentColor; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+.qlink:hover { text-decoration-thickness: 2px; }
+.hero :focus-visible { outline-color: var(--h-fg); }
 
 /* ---------- proof strip ---------- */
 .proof { padding: var(--s4) 0 0; }
@@ -269,9 +271,7 @@ section + section { margin-top: var(--s6); }
   .nav .long { display: none; }
   .nav .short { display: inline; }
   .hero { min-height: 560px; }
-  .hero::before { background: linear-gradient(180deg, rgba(6, 16, 44, .42) 0%, rgba(6, 16, 44, .66) 100%); }
-  [data-mode="dark"] .hero::before { background: linear-gradient(180deg, rgba(4, 8, 22, .62) 0%, rgba(4, 8, 22, .84) 100%); }
-  .hero-cap { left: var(--gutter); right: auto; }
+  .hero::before { background: linear-gradient(180deg, rgba(var(--h-scrim), .66) 0%, rgba(var(--h-scrim), .76) 100%); }
   .proof dl { grid-template-columns: 1fr 1fr 1fr; gap: var(--s2); }
   .proof dd { font-size: 1.6rem; }
   .proof dt { font-size: .8125rem; line-height: 1.35; }

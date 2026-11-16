@@ -7,7 +7,8 @@
       "Revision 2026-11-04: user asked for super minimalistic; removed hero console, metrics, chips, case studies, orbs",
       "Revision 2026-11-16: step 2 of the move toward an expressive, personal portfolio (inspired by dharmashah.com structure, not its palette or fonts). Palette echoes the golden-hour light in the photography section.",
       "Revision 2026-11-16b: closer to dharmashah.com structure for a product-minded audience (site still says \"AI engineer\"): full-screen photo hero from the owner's own sunrise shot, centred big section titles, experience as an outcome table, Fun stuff section with a drifting photo strip on a deep navy band.",
-      "Revision 2026-11-16c: implemented a design critique: removed template tells (glass pill nav, shadowed circles, mono kickers), photo-derived palette, shorter hero with proof strip, Work above Projects, labelled expandable project rows with screenshots and metrics, captioned dawn-to-night photo strip with lightbox, closing note and footer in the navy band, static reading notes with search."
+      "Revision 2026-11-16c: implemented a design critique: removed template tells (glass pill nav, shadowed circles, mono kickers), photo-derived palette, shorter hero with proof strip, Work above Projects, labelled expandable project rows with screenshots and metrics, captioned dawn-to-night photo strip with lightbox, closing note and footer in the navy band, static reading notes with search.",
+      "Revision 2026-11-16d: hero uses the star-trail ring artwork at night (now the default theme) and its colour negative by day; hero colours and scrims are per mode and measured at 4.9:1 or better from 360px to 2560px."
     ],
     "created_at": "2026-11-04"
   },
@@ -153,7 +154,7 @@
       "card_style": "Project rows: thumbnail, year · domain, badge, title, summary, live/code links, a right-aligned metric and a labelled Details button (aria-expanded) that unfolds Problem / What I built / Result beside a screenshot. The first project is featured at double size with its screen.",
       "navigation_pattern": "Plain bar: name, Work, Projects, Fun stuff, Reading notes, and a text Day / Night switch. Light text over the hero photo, solid page-coloured bar after it.",
       "inputs": "Tag filters are plain mono text; the active tag is inset.",
-      "hero": "About 62% of the viewport (500-760px) so proof shows on a 1366x768 first screen. Day photo (sky above clouds) or night photo (NYC) by theme, with measured scrims, a portrait, name, role, employer line, pitch, Email me and quiet LinkedIn/GitHub links, and a caption with place and month.",
+      "hero": "About 62% of the viewport. Night (default): ring artwork, cream text, near-black scrim. Day: the artwork's colour negative, navy text, white scrim. A top scrim keeps the nav legible over the arc. Portrait, name, role, employer line, pitch, Email me and quiet LinkedIn/GitHub links.",
       "experience": "Current employer as a heading with a two-column what/result table; earlier roles, education and recognition as hairline-ruled rows."
     }
   },
