@@ -1,22 +1,20 @@
 /* =========================================================
-   Colours come from my own hero photo: the navy of the sky, the grey-lavender
-   of the cloud sea, and the orange at the horizon. The accent means "you can
-   click this", nothing else. Tokens: design-dna.json
-   Contrast on --bg (light / dark): ink 14.6 / 15.5, ink-2 8.8 / 10.6,
-   ink-3 6.1 / 7.3, accent (links) 5.4 / 8.2.
+   Dark only. Colours come from the night sky: deep navy page, cream ink,
+   and one horizon orange that means "you can click this", nothing else.
+   Tokens: design-dna.json
+   Contrast on --bg: ink 15.5, ink-2 10.6, ink-3 7.3, accent (links) 8.2.
    ========================================================= */
 :root {
-  --bg: #F5F3EF;
-  --surface: #ECE9E3;
-  --ink: #0E1F45;
-  --ink-2: #3B435C;
-  --ink-3: #545B72;
-  --hair: rgba(14, 31, 69, 0.13);
-  --accent: #A8441A;
-  --band: #0E1F45;           /* the navy band at the foot of the page, both themes */
+  --bg: #0C1631;
+  --surface: #13204A;
+  --ink: #F3EEE6;
+  --ink-2: #C6C6D2;
+  --ink-3: #A2A5B8;
+  --hair: rgba(243, 238, 230, 0.14);
+  --accent: #F59A5C;
+  --band: #07102A;           /* the deeper band at the foot of the page */
   --on-band: #FFF8EE;
   --on-band-2: #C9C8CB;
-  --amber: #F59A5C;           /* the horizon, for accents on navy */
 
   --font-head: 'Newsreader', Georgia, 'Times New Roman', serif;
   --font-body: 'Inter', system-ui, -apple-system, sans-serif;
@@ -28,18 +26,7 @@
   --t: 180ms;
   --max: 760px;
   --gutter: 24px;
-  color-scheme: light;
-}
-/* Keep these two dark blocks identical. */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #0C1631; --surface: #13204A; --ink: #F3EEE6; --ink-2: #C6C6D2; --ink-3: #A2A5B8;
-    --hair: rgba(243, 238, 230, 0.14); --accent: #F59A5C; --band: #07102A; color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #0C1631; --surface: #13204A; --ink: #F3EEE6; --ink-2: #C6C6D2; --ink-3: #A2A5B8;
-  --hair: rgba(243, 238, 230, 0.14); --accent: #F59A5C; --band: #07102A; color-scheme: dark;
+  color-scheme: dark;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -67,17 +54,10 @@ img { max-width: 100%; }
 .nav-inner { display: flex; align-items: center; gap: var(--s3); max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); height: 60px; }
 .nav-name { display: inline-flex; align-items: center; min-height: 44px; font: 500 1.0625rem/1 var(--font-head); margin-right: auto; }
 .nav nav { display: flex; gap: var(--s3); }
-.nav nav a, .mode { display: inline-flex; align-items: center; min-height: 44px; font-size: .875rem; font-weight: 500; white-space: nowrap; }
+.nav nav a { display: inline-flex; align-items: center; min-height: 44px; font-size: .875rem; font-weight: 500; white-space: nowrap; }
 .nav nav a:hover { text-decoration: underline; text-underline-offset: 4px; }
 .nav .short { display: none; }
-.mode { color: inherit; }
-/* The inactive half of Day / Night is dimmer but still 4.5:1 or better. */
-.mode span { color: var(--ink-3); }
-.nav.on-photo .mode span { color: rgba(255, 248, 238, .8); }
-[data-mode="light"] .nav.on-photo .mode span { color: #3B435C; }
-[data-mode="light"] .nav .mode .mode-day, [data-mode="dark"] .nav .mode .mode-night { color: inherit; text-decoration: underline; text-underline-offset: 4px; }
 .nav.on-photo { color: #FFF8EE; }
-[data-mode="light"] .nav.on-photo { color: #0E1F45; }
 .nav.on-photo .nav-name { opacity: 0; pointer-events: none; }
 .nav:not(.on-photo) { background: var(--bg); box-shadow: 0 1px 0 var(--hair); color: var(--ink); }
 .nav.on-photo :focus-visible { outline-color: currentColor; }
@@ -91,16 +71,11 @@ section + section { margin-top: var(--s6); }
 .sub-title { margin: var(--s5) 0 var(--s2); font: 600 .75rem/1 var(--font-body); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); }
 
 /* ---------- hero: about 62% of the screen, so the work shows on a laptop's first screen.
-   Night shows the ring artwork; day shows its negative. The image doesn't follow the page
-   tokens, so the hero sets its own text and scrim colours per mode (--h-*). Every text box is
-   measured at 4.5:1 or better against the actual pixels, 360px to 2560px, both modes. ---------- */
+   The ring artwork, with its own text and scrim colours (--h-*). Every text box is measured
+   at 4.5:1 or better against the actual pixels, 360px to 2560px. ---------- */
 .hero { --h-fg: #FFF8EE; --h-fg2: rgba(255, 248, 238, .9); --h-role: #FFD2B0; --h-btn: #FFF8EE; --h-btn-fg: #0E1F45; --h-btn-hover: #FFE2C4; --h-glow: rgba(2, 4, 12, .6); --h-scrim: 2, 4, 12;
   position: relative; height: 66vh; height: 66svh; min-height: 520px; max-height: 800px; display: flex; align-items: flex-end; overflow: hidden; background: #05070F; color: var(--h-fg); }
-[data-mode="light"] .hero { --h-fg: #0E1F45; --h-fg2: #22304F; --h-role: #6E2A0E; --h-btn: #0E1F45; --h-btn-fg: #FFF8EE; --h-btn-hover: #22356A; --h-glow: rgba(255, 255, 255, .75); --h-scrim: 255, 255, 255; background: #F7F5F2; }
 .hero-bg img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 12%; }
-.hero-day { display: none; }
-[data-mode="light"] .hero-day { display: block; }
-[data-mode="light"] .hero-night { display: none; }
 .hero::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(var(--h-scrim), .75) 0, rgba(var(--h-scrim), 0) 110px), linear-gradient(0deg, rgba(var(--h-scrim), .55) 0%, rgba(var(--h-scrim), 0) 55%), linear-gradient(90deg, rgba(var(--h-scrim), .8) 0%, rgba(var(--h-scrim), .62) 55%, rgba(var(--h-scrim), 0) 92%); }
 /* The artwork dissolves into the page instead of stopping at a hard edge. */
 .hero::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: min(240px, 42%); z-index: 1; pointer-events: none;
@@ -283,7 +258,7 @@ section + section { margin-top: var(--s6); }
 }
 @media (max-width: 360px) {
   .nav nav { gap: 12px; }
-  .nav nav a, .mode { font-size: .8125rem; }
+  .nav nav a { font-size: .8125rem; }
 }
 @media print {
   .nav, .hero-bg, .reel, .p-toggle, .expand-all, .lightbox { display: none !important; }

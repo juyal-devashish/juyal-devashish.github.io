@@ -8,7 +8,8 @@
       "Revision 2026-11-16: step 2 of the move toward an expressive, personal portfolio (inspired by dharmashah.com structure, not its palette or fonts). Palette echoes the golden-hour light in the photography section.",
       "Revision 2026-11-16b: closer to dharmashah.com structure for a product-minded audience (site still says \"AI engineer\"): full-screen photo hero from the owner's own sunrise shot, centred big section titles, experience as an outcome table, Fun stuff section with a drifting photo strip on a deep navy band.",
       "Revision 2026-11-16c: implemented a design critique: removed template tells (glass pill nav, shadowed circles, mono kickers), photo-derived palette, shorter hero with proof strip, Work above Projects, labelled expandable project rows with screenshots and metrics, captioned dawn-to-night photo strip with lightbox, closing note and footer in the navy band, static reading notes with search.",
-      "Revision 2026-11-16d: hero uses the star-trail ring artwork at night (now the default theme) and its colour negative by day; hero colours and scrims are per mode and measured at 4.9:1 or better from 360px to 2560px."
+      "Revision 2026-11-16d: hero uses the star-trail ring artwork at night (now the default theme) and its colour negative by day; hero colours and scrims are per mode and measured at 4.9:1 or better from 360px to 2560px.",
+      "Revision 2026-11-17: light theme removed; the site is dark only (no Day / Night switch)."
     ],
     "created_at": "2026-11-04"
   },
@@ -16,30 +17,27 @@
     "color": {
       "palette_type": "warm neutrals with a single accent",
       "primary": {
-        "hex": "#0E1F45",
-        "role": "ink, from the sky (14.6:1 on #F5F3EF)"
+        "hex": "#F3EEE6",
+        "role": "ink (15.5:1 on #0C1631)"
       },
       "secondary": {
-        "hex": "#3B435C",
-        "role": "secondary text (8.8:1)"
+        "hex": "#C6C6D2",
+        "role": "secondary text (10.6:1)"
       },
       "accent": {
-        "hex": "#A8441A",
-        "dark_hex": "#F59A5C",
-        "role": "links and controls only (5.4:1 light, 8.2:1 dark); #F59A5C is the horizon orange from the hero photo"
+        "hex": "#F59A5C",
+        "role": "links and controls only (8.2:1)"
       },
       "neutral": {
         "scale": [
-          "#F5F3EF",
-          "#ECE9E3",
-          "#545B72",
-          "#3B435C",
-          "#0E1F45",
+          "#F3EEE6",
+          "#C6C6D2",
+          "#A2A5B8",
           "#13204A",
           "#0C1631",
           "#07102A"
         ],
-        "usage": "Light: #F5F3EF page, #ECE9E3 hover surface. Dark: #0C1631 page, #13204A hover surface, #F3EEE6 ink, #A2A5B8 tertiary (7.3:1). Navy band #0E1F45 (#07102A in dark)."
+        "usage": "#0C1631 page, #13204A hover surface, #07102A band at the foot of the page."
       },
       "semantic": {
         "success": "#A9471F (open-to-work dot uses the accent)",
@@ -48,8 +46,8 @@
         "info": "#5A616D"
       },
       "surface": {
-        "background": "#F5F3EF light, #0C1631 dark",
-        "band": "#0E1F45 navy band for the closing note, photo strip and footer"
+        "background": "#0C1631",
+        "band": "#07102A"
       },
       "contrast_strategy": "Every text token is at least 4.5:1 on its background in both themes (checked with the WCAG formula); figures are in the comment at the top of style.css."
     },
@@ -152,9 +150,9 @@
     "components": {
       "button_style": "One solid cream pill (Email me); everything else is an underlined text link.",
       "card_style": "Project rows: thumbnail, year · domain, badge, title, summary, live/code links, a right-aligned metric and a labelled Details button (aria-expanded) that unfolds Problem / What I built / Result beside a screenshot. The first project is featured at double size with its screen.",
-      "navigation_pattern": "Plain bar: name, Work, Projects, Fun stuff, Reading notes, and a text Day / Night switch. Light text over the hero photo, solid page-coloured bar after it.",
+      "navigation_pattern": "Plain bar: name, Work, Projects, Fun stuff, Reading notes. Light text over the hero image, solid page-coloured bar after it. No theme switch.",
       "inputs": "Tag filters are plain mono text; the active tag is inset.",
-      "hero": "About 62% of the viewport. Night (default): ring artwork, cream text, near-black scrim. Day: the artwork's colour negative, navy text, white scrim. A top scrim keeps the nav legible over the arc. Portrait, name, role, employer line, pitch, Email me and quiet LinkedIn/GitHub links.",
+      "hero": "About 66% of the viewport, fading into the page. Ring artwork, cream text, near-black scrim with a top band for the nav. Portrait, name, role, employer line, pitch, Email me and quiet LinkedIn/GitHub links.",
       "experience": "Current employer as a heading with a two-column what/result table; earlier roles, education and recognition as hairline-ruled rows."
     }
   },

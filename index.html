@@ -17,7 +17,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
-  <script>var t='dark';try{t=localStorage.getItem('theme')||'dark'}catch(e){}document.documentElement.setAttribute('data-theme',t);document.documentElement.classList.add('js')</script>
+  <script>document.documentElement.classList.add('js')</script>
   <link rel="stylesheet" href="assets/css/style.css">
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"Person","name":"Devashish Juyal","jobTitle":"Data Scientist","worksFor":{"@type":"Organization","name":"Tech Observer"},"alumniOf":[{"@type":"CollegeOrUniversity","name":"University of Michigan"},{"@type":"CollegeOrUniversity","name":"Malaviya National Institute of Technology Jaipur"}],"email":"mailto:djuyal23@gmail.com","url":"https://juyal-devashish.github.io/","sameAs":["https://www.linkedin.com/in/devashish-juyal","https://github.com/juyal-devashish"]}
@@ -35,18 +35,13 @@
       <a href="#fun">Fun stuff</a>
       <a href="papers.html"><span class="long">Reading notes</span><span class="short">Notes</span></a>
     </nav>
-    <button class="mode" id="theme-toggle" type="button" aria-pressed="false"><span class="mode-day">Day</span><span class="mode-sep" aria-hidden="true"> / </span><span class="mode-night">Night</span></button>
   </div>
 </header>
 
 <section class="hero" id="top" aria-labelledby="hero-name">
-  <picture class="hero-bg hero-night">
+  <picture class="hero-bg">
     <source media="(max-width: 700px)" srcset="assets/img/hero/rings-tall.jpg">
     <img src="assets/img/hero/rings-wide.jpg" alt="" width="1800" height="1169" fetchpriority="high">
-  </picture>
-  <picture class="hero-bg hero-day">
-    <source media="(max-width: 700px)" srcset="assets/img/hero/rings-tall-neg.jpg">
-    <img src="assets/img/hero/rings-wide-neg.jpg" alt="" width="1800" height="1169" loading="lazy">
   </picture>
   <div class="hero-inner">
     <img class="hero-face" src="assets/img/devashish-240.jpg" alt="Devashish Juyal" width="60" height="60">
