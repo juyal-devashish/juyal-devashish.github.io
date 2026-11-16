@@ -3,51 +3,399 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Reading Notes — Devashish Juyal</title>
-  <meta name="description" content="Notes on research papers across LLMs, distillation, watermarking and statistics, by Devashish Juyal.">
-  <meta name="theme-color" content="#F4EFE7" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#161A22" media="(prefers-color-scheme: dark)">
+  <title>Reading notes · Devashish Juyal</title>
+  <meta name="description" content="Short notes on research papers about LLMs, distillation, watermarking and statistics, by Devashish Juyal.">
+  <meta name="theme-color" content="#F5F3EF" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0C1631" media="(prefers-color-scheme: dark)">
   <link rel="canonical" href="https://juyal-devashish.github.io/papers.html">
-  <link rel="icon" type="image/png" href="assets/img/Block_M-Hex.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+  <link rel="apple-touch-icon" href="assets/img/favicon-180.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
-  <script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+  <script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}document.documentElement.classList.add('js')</script>
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></symbol>
-  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
-  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
-  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></symbol>
-</svg>
 <a class="skip" href="#main">Skip to content</a>
 
-<header class="nav">
-  <nav class="nav-inner" aria-label="Primary">
-    <a href="index.html">Home</a>
-    <a href="index.html#experience">Experience</a>
-    <a href="papers.html" aria-current="page">Papers</a>
-    <button class="theme-toggle" id="theme-toggle" aria-label="Switch to dark theme"><svg class="icon i-sun"><use href="#i-sun"/></svg><svg class="icon i-moon"><use href="#i-moon"/></svg></button>
-  </nav>
+<header class="nav" id="nav">
+  <div class="nav-inner">
+    <a class="nav-name" href="index.html">Devashish Juyal</a>
+    <nav aria-label="Primary">
+      <a href="index.html#work">Work</a>
+      <a href="index.html#projects">Projects</a>
+      <a href="index.html#fun">Fun stuff</a>
+      <a href="papers.html" aria-current="page"><span class="long">Reading notes</span><span class="short">Notes</span></a>
+    </nav>
+    <button class="mode" id="theme-toggle" type="button" aria-pressed="false"><span class="mode-day">Day</span><span class="mode-sep" aria-hidden="true"> / </span><span class="mode-night">Night</span></button>
+  </div>
 </header>
 
 <main id="main" class="wrap">
   <section class="page-head">
-    <h1>Papers I've read.</h1>
-    <p>Short notes on what each paper does and why it matters. Pinned ones are the ones I keep coming back to.</p>
+    <h1>Reading notes</h1>
+    <p>Short notes on what each paper does and why it matters. The pinned ones are the ones I keep coming back to.</p>
   </section>
-  <div class="tags" id="tags" role="group" aria-label="Filter by topic"></div>
-  <div class="rows" id="papers" aria-live="polite"></div>
+
+  <div class="notes-tools">
+    <label class="visually-hidden" for="search">Search the notes</label>
+    <input class="search" id="search" type="search" placeholder="Search titles, authors and notes" autocomplete="off">
+    <div class="tags" id="tags" role="group" aria-label="Filter by topic">
+        <!-- chips:start -->
+        <button type="button" aria-pressed="true" data-tag="">All<span class="n">36</span></button>
+        <button type="button" aria-pressed="false" data-tag="llm">LLMs<span class="n">34</span></button>
+        <button type="button" aria-pressed="false" data-tag="theory">Theory<span class="n">7</span></button>
+        <button type="button" aria-pressed="false" data-tag="survey">Survey<span class="n">4</span></button>
+        <button type="button" aria-pressed="false" data-tag="distillation">Distillation<span class="n">3</span></button>
+        <button type="button" aria-pressed="false" data-tag="ml">ML<span class="n">2</span></button>
+        <button type="button" aria-pressed="false" data-tag="nlp">NLP<span class="n">1</span></button>
+        <button type="button" aria-pressed="false" data-tag="security">Security<span class="n">1</span></button>
+        <button type="button" aria-pressed="false" data-tag="statistics">Statistics<span class="n">1</span></button>
+        <!-- chips:end -->
+    </div>
+  </div>
+
+  <div id="papers" aria-live="polite">
+        <!-- papers:start -->
+        
+      <article class="paper pinned" id="attention-is-all-you-need" data-tags="llm nlp" data-search="attention is all you need vaswani et al., neurips 2017 the transformer architecture dispenses with recurrence and convolutions entirely, relying solely on attention mechanisms — a deceptively simple idea that reshaped the entire field. llm nlp">
+        <div class="paper-head">
+          <h3>Attention Is All You Need</h3>
+          <p class="sub">Pinned · Vaswani et al., NeurIPS 2017</p>
+          <p class="take">The transformer architecture dispenses with recurrence and convolutions entirely, relying solely on attention mechanisms — a deceptively simple idea that reshaped the entire field.</p>
+          <button class="p-toggle" type="button" aria-expanded="false" aria-controls="attention-is-all-you-need-notes">Notes</button>
+        </div>
+        <div class="paper-body" id="attention-is-all-you-need-notes"><dl><div><dt>What it does</dt><dd>Proposes the Transformer — a sequence-to-sequence architecture built entirely on self-attention, with no RNNs or CNNs. Encoder and decoder stacks of multi-head attention + feedforward layers, connected by residual paths and layer norms.</dd></div><div><dt>Why it matters</dt><dd>It became the backbone of BERT, GPT, and virtually every modern LLM. By removing recurrence, training became fully parallelizable — making it practical to scale to massive datasets and model sizes.</dd></div><div><dt>How it works</dt><dd>Multi-head self-attention lets each token attend to all others simultaneously. Positional encodings inject sequence order. The encoder maps inputs to a continuous representation; the decoder generates outputs autoregressively attending to both.</dd></div><div><dt>Key result</dt><dd>SOTA BLEU on WMT'14 English-German and English-French translation, trained in a fraction of the time of prior RNN/CNN models. The quality-to-compute tradeoff was just different enough to shift the whole paradigm.</dd></div></dl><a class="read" href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener">Read the paper</a></div>
+      </article>
+      <article class="paper pinned" id="a-watermark-for-large-language-models" data-tags="llm security" data-search="a watermark for large language models kirchenbauer et al., icml 2023 embeds a statistical signal into llm outputs by partitioning the vocabulary into &quot;green&quot; and &quot;red&quot; lists at each token step — elegant in its simplicity, and surprisingly robust to paraphrasing attacks. llm security">
+        <div class="paper-head">
+          <h3>A Watermark for Large Language Models</h3>
+          <p class="sub">Pinned · Kirchenbauer et al., ICML 2023</p>
+          <p class="take">Embeds a statistical signal into LLM outputs by partitioning the vocabulary into &quot;green&quot; and &quot;red&quot; lists at each token step — elegant in its simplicity, and surprisingly robust to paraphrasing attacks.</p>
+          <button class="p-toggle" type="button" aria-expanded="false" aria-controls="a-watermark-for-large-language-models-notes">Notes</button>
+        </div>
+        <div class="paper-body" id="a-watermark-for-large-language-models-notes"><dl><div><dt>What it does</dt><dd>Introduces a practical watermarking scheme for LLM-generated text. At generation time, the model is biased to favor tokens from a &quot;green list&quot; derived by hashing the previous token. A z-test on the green-token fraction detects the watermark.</dd></div><div><dt>Why it matters</dt><dd>Provides the first practical, model-agnostic method to detect AI-generated text without model access. Directly relevant to AI misuse, academic integrity, and provenance tracking. Sparked a whole subfield.</dd></div><div><dt>How it works</dt><dd>Before sampling each token, they hash the previous token ID to seed a PRNG, then partition the vocab into a green list (50%) and red list. At generation, logits for green tokens get a soft boost δ. Detection is a one-sided z-test on green-token proportion.</dd></div><div><dt>Key result</dt><dd>&gt;95% detection power on sequences of 200+ tokens with a false positive rate near 0.01%, and less than 1% perplexity degradation. The watermark survives moderate paraphrasing, which was the surprising part.</dd></div></dl><a class="read" href="https://arxiv.org/abs/2301.10226" target="_blank" rel="noopener">Read the paper</a></div>
+      </article>
+      <article class="paper" id="distilling-step-by-step" data-tags="llm distillation" data-search="distilling step-by-step! hsieh et al., acl findings 2023 uses chain-of-thought rationales from large models as a supervision signal for smaller ones — a clever way to transfer reasoning capabilities, not just final answers. llm distillation">
+        <div class="paper-head">
+          <h3>Distilling Step-by-Step!</h3>
+          <p class="sub">Hsieh et al., ACL Findings 2023</p>
+          <p class="take">Uses chain-of-thought rationales from large models as a supervision signal for smaller ones — a clever way to transfer reasoning capabilities, not just final answers.</p>
+          <button class="p-toggle" type="button" aria-expanded="false" aria-controls="distilling-step-by-step-notes">Notes</button>
+        </div>
+        <div class="paper-body" id="distilling-step-by-step-notes"><dl><div><dt>What it does</dt><dd>A knowledge distillation framework where a large teacher LLM generates chain-of-thought rationales that then serve as auxiliary supervision for a small student model. The student learns to predict both the label and the reasoning chain.</dd></div><div><dt>Why it matters</dt><dd>Shows that a 770M-parameter model trained this way outperforms a 540B teacher (PaLM) on several benchmarks — using orders of magnitude less data than standard fine-tuning. Challenges the assumption that task performance requires scale.</dd></div><div><dt>How it works</dt><dd>Multi-task learning: the student has one head predicting the label, another predicting the rationale. Both losses are optimized together. The teacher (PaLM 540B) provides rationales via few-shot prompting at dataset construction time, not at inference.</dd></div><div><dt>Key result</dt><dd>Outperforms standard fine-tuning and distillation baselines across NLI, commonsense QA, and arithmetic tasks, with significantly less labeled data. The rationale supervision is the differentiating factor — labels alone don't close the gap.</dd></div></dl><a class="read" href="https://arxiv.org/abs/2305.02301" target="_blank" rel="noopener">Read the paper</a></div>
+      </article>
+      <article class="paper" id="invariant-risk-minimization" data-tags="ml theory" data-search="invariant risk minimization arjovsky et al., arxiv 2019 proposes learning data representations where the optimal classifier is invariant across training environments — a principled approach to ood generalization that fundamentally challenged erm assumptions. ml theory">
+        <div class="paper-head">
+          <h3>Invariant Risk Minimization</h3>
+          <p class="sub">Arjovsky et al., arXiv 2019</p>
+          <p class="take">Proposes learning data representations where the optimal classifier is invariant across training environments — a principled approach to OOD generalization that fundamentally challenged ERM assumptions.</p>
+          <button class="p-toggle" type="button" aria-expanded="false" aria-controls="invariant-risk-minimization-notes">Notes</button>
+        </div>
+        <div class="paper-body" id="invariant-risk-minimization-notes"><dl><div><dt>What it does</dt><dd>Introduces IRM, a learning paradigm that finds a feature representation Φ such that the optimal classifier on top of Φ is the same across all training environments. This forces the model to rely on causal, not spurious, features.</dd></div><div><dt>Why it matters</dt><dd>ERM (standard training) exploits any correlation in the training data, including spurious ones that don't hold at test time. IRM is a principled attempt to do causal learning from observational data — directly relevant to robustness and fairness.</dd></div><div><dt>How it works</dt><dd>Bi-level optimization: minimize ERM loss while also penalizing the gradient of a fixed dummy classifier (a scalar 1.0 on Φ). If the gradient is nonzero, it means the classifier isn't optimal everywhere — a sign of non-invariance. IRMv1 relaxes this as a penalty term.</dd></div><div><dt>Key result</dt><dd>Recovers causal features on ColoredMNIST (a spurious-correlation benchmark) where ERM completely fails. However, real-world results (e.g., WILDS benchmarks) are mixed, and later work showed IRM underperforms ERM in many practical settings. Important caveat.</dd></div></dl><a class="read" href="https://arxiv.org/abs/1907.02893" target="_blank" rel="noopener">Read the paper</a></div>
+      </article>
+      <article class="paper" id="sequential-change-point-detection-via-online-convex-optimiza" data-tags="statistics theory" data-search="sequential change-point detection via online convex optimization hazan et al., 2023 frames change-point detection as an online learning problem, achieving near-optimal detection delay with clean regret-style guarantees — a refreshing new lens on a classical statistics problem. statistics theory">
+        <div class="paper-head">
+          <h3>Sequential Change-Point Detection via Online Convex Optimization</h3>
+          <p class="sub">Hazan et al., 2023</p>
+          <p class="take">Frames change-point detection as an online learning problem, achieving near-optimal detection delay with clean regret-style guarantees — a refreshing new lens on a classical statistics problem.</p>
+          <button class="p-toggle" type="button" aria-expanded="false" aria-controls="sequential-change-point-detection-via-online-convex-optimiza-notes">Notes</button>
+        </div>
+        <div class="paper-body" id="sequential-change-point-detection-via-online-convex-optimiza-notes"><dl><div><dt>What it does</dt><dd>Reformulates sequential change-point detection as an instance of online convex optimization (OCO). The CUSUM statistic emerges naturally from an online mirror descent update, allowing regret analysis to bound detection delay.</dd></div><div><dt>Why it matters</dt><dd>Classical CUSUM theory requires parametric assumptions (known pre/post distributions). OCO framing enables data-adaptive, nonparametric detection with rigorous delay guarantees — a cleaner theoretical foundation for modern applications.</dd></div><div><dt>How it works</dt><dd>Define a loss function tied to the log-likelihood ratio. Run online mirror descent on this sequence of losses. Show that the cumulative loss until a stopping rule triggers has O(log T) regret relative to the optimal fixed-threshold strategy.</dd></div><div><dt>Key result</dt><dd>Near-optimal expected detection delay under Gaussian mean shift, matching the Lorden lower bound up to log factors. The connection to OCO also gives a clean modular way to plug in different divergences or loss structures.</dd></div></dl></div>
+      </article>
+      <article class="paper" id="language-models-are-few-shot-learners" data-tags="llm survey" data-search="language models are few-shot learners brown et al., neurips 2020 gpt-3 demonstrates that scale alone unlocks emergent few-shot behavior — raising more questions about what &quot;learning&quot; really means than it actually answers. llm survey">
+        <div class="paper-head">
+          <h3>Language Models are Few-Shot Learners</h3>
+          <p class="sub">Brown et al., NeurIPS 2020</p>
+          <p class="take">GPT-3 demonstrates that scale alone unlocks emergent few-shot behavior — raising more questions about what &quot;learning&quot; really means than it actually answers.</p>
+          <button class="p-toggle" type="button" aria-expanded="false" aria-controls="language-models-are-few-shot-learners-notes">Notes</button>
+        </div>
+        <div class="paper-body" id="language-models-are-few-shot-learners-notes"><dl><div><dt>What it does</dt><dd>Trains GPT-3 (175B parameters) on a massive diverse text corpus and evaluates it in zero-, one-, and few-shot settings — where &quot;few-shot&quot; means in-context examples in the prompt, no gradient updates.</dd></div><div><dt>Why it matters</dt><dd>Demonstrated that large-scale pretraining alone produces a model capable of adapting to arbitrary tasks via prompting. Spawned the prompt engineering era and raised deep questions about generalization, memorization, and what in-context learning actually is.</dd></div><div><dt>How it works</dt><dd>Standard autoregressive LM training on ~300B tokens from Common Crawl, WebText, Books, and Wikipedia. Evaluation is purely inference-time: condition on k examples (k=0,1,few) and score the model's completion. No fine-tuning whatsoever.</dd></div><div><dt>Key result</dt><dd>Few-shot GPT-3 matches or beats fine-tuned SOTA on SuperGLUE tasks. Performance scales smoothly and predictably with model size, context length, and data — the scaling laws paper companion made this quantitative.</dd></div></dl><a class="read" href="https://arxiv.org/abs/2005.14165" target="_blank" rel="noopener">Read the paper</a></div>
+      </article>
+      <article class="paper" id="small-language-models-slms-can-still-pack-a-punch-a-survey" data-tags="llm survey" data-search="small language models (slms) can still pack a punch: a survey gamage et al., arxiv 2025 a comprehensive survey showing that sub-10b models can match or exceed much larger counterparts when trained intelligently — covering architecture choices, data curation, and post-training techniques. llm survey">
+        <div class="paper-head">
+          <h3>Small Language Models (SLMs) Can Still Pack a Punch: A Survey</h3>
+          <p class="sub">Gamage et al., arXiv 2025</p>
+          <p class="take">A comprehensive survey showing that sub-10B models can match or exceed much larger counterparts when trained intelligently — covering architecture choices, data curation, and post-training techniques.</p>
+          <button class="p-toggle" type="button" aria-expanded="false" aria-controls="small-language-models-slms-can-still-pack-a-punch-a-survey-notes">Notes</button>
+        </div>
+        <div class="paper-body" id="small-language-models-slms-can-still-pack-a-punch-a-survey-notes"><p>A comprehensive survey showing that sub-10B models can match or exceed much larger counterparts when trained intelligently — covering architecture choices, data curation, and post-training techniques.</p><a class="read" href="https://arxiv.org/abs/2501.05465" target="_blank" rel="noopener">Read the paper</a></div>
+      </article>
+      <article class="paper" id="training-compute-optimal-large-language-models" data-tags="llm theory" data-search="training compute-optimal large language models hoffmann et al., arxiv 2022 shows most llms are severely undertrained — optimal compute allocation requires scaling data proportionally with model size, yielding the chinchilla recipe: 70b params, 1.4t tokens. llm theory">
+        <div class="paper-head">
+          <h3>Training Compute-Optimal Large Language Models</h3>
+          <p class="sub">Hoffmann et al., arXiv 2022</p>
+          <p class="take">Shows most LLMs are severely undertrained — optimal compute allocation requires scaling data proportionally with model size, yielding the Chinchilla recipe: 70B params, 1.4T tokens.</p>
+          <button class="p-toggle" type="button" aria-expanded="false" aria-controls="training-compute-optimal-large-language-models-notes">Notes</button>
+        </div>
+        <div class="paper-body" id="training-compute-optimal-large-language-models-notes"><p>Shows most LLMs are severely undertrained — optimal compute allocation requires scaling data proportionally with model size, yielding the Chinchilla recipe: 70B params, 1.4T tokens.</p><a class="read" href="https://arxiv.org/abs/2203.15556" target="_blank" rel="noopener">Read the paper</a></div>
+      </article>
+      <article class="paper" id="on-the-slow-death-of-scaling" data-tags="llm theory survey" data-search="on the slow death of scaling hooker, ssrn 2025 a critical examination of diminishing returns from scaling compute alone, arguing that continued progress requires architectural innovation, data quality improvements, and algorithmic efficiency gains. llm theory survey">
+        <div class="paper-head">
+          <h3>On the Slow Death of Scaling</h3>
+          <p class="sub">Hooker, SSRN 2025</p>
+          <p class="take">A critical examination of diminishing returns from scaling compute alone, arguing that continued progress requires architectural innovation, data quality improvements, and algorithmic efficiency gains.</p>
+          <button class="p-toggle" type="button" aria-expanded="false" aria-controls="on-the-slow-death-of-scaling-notes">Notes</button>
+        </div>
+        <div class="paper-body" id="on-the-slow-death-of-scaling-notes"><p>A critical examination of diminishing returns from scaling compute alone, arguing that continued progress requires architectural innovation, data quality improvements, and algorithmic efficiency gains.</p><a class="read" href="https://ssrn.com/abstract=5877662" target="_blank" rel="noopener">Read the paper</a></div>
+      </article>
+      <article class="paper" id="baguettotron-a-321m-parameter-generative-model" data-tags="llm" data-search="baguettotron: a 321m parameter generative model pleias, hugging face 2024 a 321m-parameter open french generative language model trained from scratch, demonstrating that high-quality small models can be built for non-english languages with modest compute. llm">
+        <div class="paper-head">
+          <h3>Baguettotron: A 321M Parameter Generative Model</h3>
+          <p class="sub">PleIAs, Hugging Face 2024</p>
+          <p class="take">A 321M-parameter open French generative language model trained from scratch, demonstrating that high-quality small models can be built for non-English languages with modest compute.</p>
+          <button class="p-toggle" type="button" aria-expanded="false" aria-controls="baguettotron-a-321m-parameter-generative-model-notes">Notes</button>
+        </div>
+        <div class="paper-body" id="baguettotron-a-321m-parameter-generative-model-notes"><p>A 321M-parameter open French generative language model trained from scratch, demonstrating that high-quality small models can be built for non-English languages with modest compute.</p><a class="read" href="https://huggingface.co/PleIAs/Baguettotron" target="_blank" rel="noopener">Read the paper</a></div>
+      </article>
+      <article class="paper" id="textbooks-are-all-you-need" data-tags="llm distillation" data-search="textbooks are all you need gunasekar et al., arxiv 2023 trains phi-1, a 1.3b coding llm, purely on high-quality synthetic &quot;textbook-like&quot; data — demonstrating that data quality can substitute for scale with far fewer tokens than conventional pretraining. llm distillation">
+        <div class="paper-head">
+          <h3>Textbooks Are All You Need</h3>
+          <p class="sub">Gunasekar et al., arXiv 2023</p>
+          <p class="take">Trains phi-1, a 1.3B coding LLM, purely on high-quality synthetic &quot;textbook-like&quot; data — demonstrating that data quality can substitute for scale with far fewer tokens than conventional pretraining.</p>
+          <button class="p-toggle" type="button" aria-expanded="false" aria-controls="textbooks-are-all-you-need-notes">Notes</button>
+        </div>
+        <div class="paper-body" id="textbooks-are-all-you-need-notes"><p>Trains phi-1, a 1.3B coding LLM, purely on high-quality synthetic &quot;textbook-like&quot; data — demonstrating that data quality can substitute for scale with far fewer tokens than conventional pretraining.</p><a class="read" href="https://arxiv.org/abs/2306.11644" target="_blank" rel="noopener">Read the paper</a></div>
+      </article>
+      <article class="paper" id="scaling-laws-for-optimal-data-mixtures" data-tags="llm theory" data-search="scaling laws for optimal data mixtures shukor et al., arxiv 2025 derives scaling laws for data mixing ratios across domains, showing that the optimal mixture itself shifts with compute budget and cannot be fixed once for all training runs. llm theory">
+        <div class="paper-head">
+          <h3>Scaling Laws for Optimal Data Mixtures</h3>
+          <p class="sub">Shukor et al., arXiv 2025</p>
+          <p class="take">Derives scaling laws for data mixing ratios across domains, showing that the optimal mixture itself shifts with compute budget and cannot be fixed once for all training runs.</p>
+          <button class="p-toggle" type="button" aria-expanded="false" aria-controls="scaling-laws-for-optimal-data-mixtures-notes">Notes</button>
+        </div>
+        <div class="paper-body" id="scaling-laws-for-optimal-data-mixtures-notes"><p>Derives scaling laws for data mixing ratios across domains, showing that the optimal mixture itself shifts with compute budget and cannot be fixed once for all training runs.</p><a class="read" href="https://arxiv.org/abs/2507.09404" target="_blank" rel="noopener">Read the paper</a></div>
+      </article>
+      <article class="paper" id="topic-over-source-the-key-to-effective-data-mixing-for-langu" data-tags="llm" data-search="topic over source: the key to effective data mixing for language models pre-training zhu et al., arxiv 2025 finds that grouping pretraining data by topic rather than by source domain leads to substantially more effective mixing strategies, challenging conventional domain-based data curation pipelines. llm">
+        <div class="paper-head">
+          <h3>Topic Over Source: The Key to Effective Data Mixing for Language Models Pre-training</h3>
+          <p class="sub">Zhu et al., arXiv 2025</p>
+          <p class="take">Finds that grouping pretraining data by topic rather than by source domain leads to substantially more effective mixing strategies, challenging conventional domain-based data curation pipelines.</p>
+          <button class="p-toggle" type="button" aria-expanded="false" aria-controls="topic-over-source-the-key-to-effective-data-mixing-for-langu-notes">Notes</button>
+        </div>
+        <div class="paper-body" id="topic-over-source-the-key-to-effective-data-mixing-for-langu-notes"><p>Finds that grouping pretraining data by topic rather than by source domain leads to substantially more effective mixing strategies, challenging conventional domain-based data curation pipelines.</p><a class="read" href="https://arxiv.org/abs/2502.16802" target="_blank" rel="noopener">Read the paper</a></div>
+      </article>
+      <article class="paper" id="smollm2-technical-report" data-tags="llm" data-search="smollm2 technical report allal et al., arxiv 2025 huggingface's family of compact language models (135m–1.7b) trained on carefully curated datasets — a practical and transparent reference point for efficient small-model training. llm">
+        <div class="paper-head">
+          <h3>SmolLM2 Technical Report</h3>
+          <p class="sub">Allal et al., arXiv 2025</p>
+          <p class="take">HuggingFace's family of compact language models (135M–1.7B) trained on carefully curated datasets — a practical and transparent reference point for efficient small-model training.</p>
+          <button class="p-toggle" type="button" aria-expanded="false" aria-controls="smollm2-technical-report-notes">Notes</button>
+        </div>
+        <div class="paper-body" id="smollm2-technical-report-notes"><p>HuggingFace's family of compact language models (135M–1.7B) trained on carefully curated datasets — a practical and transparent reference point for efficient small-model training.</p><a class="read" href="https://arxiv.org/abs/2502.02737" target="_blank" rel="noopener">Read the paper</a></div>
+      </article>
+      <article class="paper" id="the-smol-training-playbook" data-tags="llm" data-search="the smol training playbook ben allal et al., hugging face 2024 a practitioner's guide from huggingface covering the full recipe for training small language models: data curation, architecture choices, training dynamics, and evaluation strategies. llm">
+        <div class="paper-head">
+          <h3>The Smol Training Playbook</h3>
+          <p class="sub">Ben Allal et al., Hugging Face 2024</p>
+          <p class="take">A practitioner's guide from HuggingFace covering the full recipe for training small language models: data curation, architecture choices, training dynamics, and evaluation strategies.</p>
+          <button class="p-toggle" type="button" aria-expanded="false" aria-controls="the-smol-training-playbook-notes">Notes</button>
+        </div>
+        <div class="paper-body" id="the-smol-training-playbook-notes"><p>A practitioner's guide from HuggingFace covering the full recipe for training small language models: data curation, architecture choices, training dynamics, and evaluation strategies.</p><a class="read" href="https://huggingface.co/spaces/HuggingFaceTB/smol-training-playbook" target="_blank" rel="noopener">Read the paper</a></div>
+      </article>
+      <article class="paper" id="hymba-a-hybrid-head-architecture-for-small-language-models" data-tags="llm" data-search="hymba: a hybrid-head architecture for small language models nvidia, arxiv 2024 combines mamba state-space heads with attention heads in the same layer, achieving strong performance with a lower memory footprint than pure-attention models at small scales. llm">
+        <div class="paper-head">
+          <h3>Hymba: A Hybrid-head Architecture for Small Language Models</h3>
+          <p class="sub">NVIDIA, arXiv 2024</p>
+          <p class="take">Combines Mamba state-space heads with attention heads in the same layer, achieving strong performance with a lower memory footprint than pure-attention models at small scales.</p>
+          <button class="p-toggle" type="button" aria-expanded="false" aria-controls="hymba-a-hybrid-head-architecture-for-small-language-models-notes">Notes</button>
+        </div>
+        <div class="paper-body" id="hymba-a-hybrid-head-architecture-for-small-language-models-notes"><p>Combines Mamba state-space heads with attention heads in the same layer, achieving strong performance with a lower memory footprint than pure-attention models at small scales.</p><a class="read" href="https://arxiv.org/abs/2411.13676" target="_blank" rel="noopener">Read the paper</a></div>
+      </article>
+      <article class="paper" id="eagle-and-finch-rwkv-with-matrix-valued-states-and-dynamic-r" data-tags="llm" data-search="eagle and finch: rwkv with matrix-valued states and dynamic recurrence peng et al., arxiv 2024 extends rwkv with matrix-valued hidden states and dynamic recurrence gating, closing much of the quality gap with transformers while preserving linear-time inference. llm">
+        <div class="paper-head">
+          <h3>Eagle and Finch: RWKV with Matrix-Valued States and Dynamic Recurrence</h3>
+          <p class="sub">Peng et al., arXiv 2024</p>
+          <p class="take">Extends RWKV with matrix-valued hidden states and dynamic recurrence gating, closing much of the quality gap with transformers while preserving linear-time inference.</p>
+          <button class="p-toggle" type="button" aria-expanded="false" aria-controls="eagle-and-finch-rwkv-with-matrix-valued-states-and-dynamic-r-notes">Notes</button>
+        </div>
+        <div class="paper-body" id="eagle-and-finch-rwkv-with-matrix-valued-states-and-dynamic-r-notes"><p>Extends RWKV with matrix-valued hidden states and dynamic recurrence gating, closing much of the quality gap with transformers while preserving linear-time inference.</p><a class="read" href="https://arxiv.org/abs/2404.05892" target="_blank" rel="noopener">Read the paper</a></div>
+      </article>
+      <article class="paper" id="mobillama-towards-accurate-and-lightweight-fully-transparent" data-tags="llm" data-search="mobillama: towards accurate and lightweight fully transparent gpt thopilan et al., arxiv 2024 a fully transparent 0.5b-parameter llm designed for on-device deployment, using parameter sharing across all transformer layers to dramatically reduce model size without large quality losses. llm">
+        <div class="paper-head">
+          <h3>MobiLlama: Towards Accurate and Lightweight Fully Transparent GPT</h3>
+          <p class="sub">Thopilan et al., arXiv 2024</p>
+          <p class="take">A fully transparent 0.5B-parameter LLM designed for on-device deployment, using parameter sharing across all transformer layers to dramatically reduce model size without large quality losses.</p>
+          <button class="p-toggle" type="button" aria-expanded="false" aria-controls="mobillama-towards-accurate-and-lightweight-fully-transparent-notes">Notes</button>
+        </div>
+        <div class="paper-body" id="mobillama-towards-accurate-and-lightweight-fully-transparent-notes"><p>A fully transparent 0.5B-parameter LLM designed for on-device deployment, using parameter sharing across all transformer layers to dramatically reduce model size without large quality losses.</p><a class="read" href="https://arxiv.org/abs/2402.16840" target="_blank" rel="noopener">Read the paper</a></div>
+      </article>
+      <article class="paper" id="openelm-an-efficient-language-model-family" data-tags="llm" data-search="openelm: an efficient language model family mehta et al., arxiv 2024 apple's open-source model family using layer-wise scaling of attention heads and ffn dimensions, achieving competitive performance with fewer total parameters than uniformly-sized counterparts. llm">
+        <div class="paper-head">
+          <h3>OpenELM: An Efficient Language Model Family</h3>
+          <p class="sub">Mehta et al., arXiv 2024</p>
+          <p class="take">Apple's open-source model family using layer-wise scaling of attention heads and FFN dimensions, achieving competitive performance with fewer total parameters than uniformly-sized counterparts.</p>
+          <button class="p-toggle" type="button" aria-expanded="false" aria-controls="openelm-an-efficient-language-model-family-notes">Notes</button>
+        </div>
+        <div class="paper-body" id="openelm-an-efficient-language-model-family-notes"><p>Apple's open-source model family using layer-wise scaling of attention heads and FFN dimensions, achieving competitive performance with fewer total parameters than uniformly-sized counterparts.</p><a class="read" href="https://arxiv.org/abs/2404.14619" target="_blank" rel="noopener">Read the paper</a></div>
+      </article>
+      <article class="paper" id="conditional-memory-via-scalable-lookup-a-new-axis-of-sparsit" data-tags="llm" data-search="conditional memory via scalable lookup: a new axis of sparsity for large language models cheng et al., arxiv 2026 replaces dense attention's kv cache with a sparse lookup over a large external memory bank, introducing a new axis of sparsity that enables long-context modeling at dramatically lower memory cost. llm">
+        <div class="paper-head">
+          <h3>Conditional Memory via Scalable Lookup: A New Axis of Sparsity for Large Language Models</h3>
+          <p class="sub">Cheng et al., arXiv 2026</p>
+          <p class="take">Replaces dense attention's KV cache with a sparse lookup over a large external memory bank, introducing a new axis of sparsity that enables long-context modeling at dramatically lower memory cost.</p>
+          <button class="p-toggle" type="button" aria-expanded="false" aria-controls="conditional-memory-via-scalable-lookup-a-new-axis-of-sparsit-notes">Notes</button>
+        </div>
+        <div class="paper-body" id="conditional-memory-via-scalable-lookup-a-new-axis-of-sparsit-notes"><p>Replaces dense attention's KV cache with a sparse lookup over a large external memory bank, introducing a new axis of sparsity that enables long-context modeling at dramatically lower memory cost.</p><a class="read" href="https://arxiv.org/abs/2601.07372" target="_blank" rel="noopener">Read the paper</a></div>
+      </article>
+      <article class="paper" id="flexolmo-open-language-models-for-flexible-data-use" data-tags="llm" data-search="flexolmo: open language models for flexible data use shi et al., arxiv 2025 an olmo variant demonstrating that flexible data-licensing policies — mixing open and restricted sources with explicit provenance — can be incorporated without degrading model quality. llm">
+        <div class="paper-head">
+          <h3>FlexOLMo: Open Language Models for Flexible Data Use</h3>
+          <p class="sub">Shi et al., arXiv 2025</p>
+          <p class="take">An OLMo variant demonstrating that flexible data-licensing policies — mixing open and restricted sources with explicit provenance — can be incorporated without degrading model quality.</p>
+          <button class="p-toggle" type="button" aria-expanded="false" aria-controls="flexolmo-open-language-models-for-flexible-data-use-notes">Notes</button>
+        </div>
+        <div class="paper-body" id="flexolmo-open-language-models-for-flexible-data-use-notes"><p>An OLMo variant demonstrating that flexible data-licensing policies — mixing open and restricted sources with explicit provenance — can be incorporated without degrading model quality.</p><a class="read" href="https://arxiv.org/abs/2507.07024" target="_blank" rel="noopener">Read the paper</a></div>
+      </article>
+      <article class="paper" id="front-loading-reasoning-the-synergy-between-pretraining-and-" data-tags="llm" data-search="front-loading reasoning: the synergy between pretraining and post-training data nvidia and hugging face, arxiv 2025 shows that including reasoning-rich data early in pretraining — rather than deferring it to post-training — creates stronger base models that respond more effectively to rlhf and instruction tuning. llm">
+        <div class="paper-head">
+          <h3>Front-Loading Reasoning: The Synergy between Pretraining and Post-Training Data</h3>
+          <p class="sub">NVIDIA and Hugging Face, arXiv 2025</p>
+          <p class="take">Shows that including reasoning-rich data early in pretraining — rather than deferring it to post-training — creates stronger base models that respond more effectively to RLHF and instruction tuning.</p>
+          <button class="p-toggle" type="button" aria-expanded="false" aria-controls="front-loading-reasoning-the-synergy-between-pretraining-and--notes">Notes</button>
+        </div>
+        <div class="paper-body" id="front-loading-reasoning-the-synergy-between-pretraining-and--notes"><p>Shows that including reasoning-rich data early in pretraining — rather than deferring it to post-training — creates stronger base models that respond more effectively to RLHF and instruction tuning.</p><a class="read" href="https://arxiv.org/abs/2510.03264" target="_blank" rel="noopener">Read the paper</a></div>
+      </article>
+      <article class="paper" id="midtraining-bridges-pretraining-and-posttraining-distributio" data-tags="llm" data-search="midtraining bridges pretraining and posttraining distributions liu et al., arxiv 2025 introduces a midtraining phase that sits between pretraining and finetuning, reducing the distributional gap between the two and improving both instruction following and domain adaptation. llm">
+        <div class="paper-head">
+          <h3>Midtraining Bridges Pretraining and Posttraining Distributions</h3>
+          <p class="sub">Liu et al., arXiv 2025</p>
+          <p class="take">Introduces a midtraining phase that sits between pretraining and finetuning, reducing the distributional gap between the two and improving both instruction following and domain adaptation.</p>
+          <button class="p-toggle" type="button" aria-expanded="false" aria-controls="midtraining-bridges-pretraining-and-posttraining-distributio-notes">Notes</button>
+        </div>
+        <div class="paper-body" id="midtraining-bridges-pretraining-and-posttraining-distributio-notes"><p>Introduces a midtraining phase that sits between pretraining and finetuning, reducing the distributional gap between the two and improving both instruction following and domain adaptation.</p><a class="read" href="https://arxiv.org/abs/2510.14865" target="_blank" rel="noopener">Read the paper</a></div>
+      </article>
+      <article class="paper" id="balancing-the-budget-understanding-trade-offs-between-superv" data-tags="llm" data-search="balancing the budget: understanding trade-offs between supervised and preference-based finetuning raghavendra et al., acl 2025 analyzes the compute tradeoff between sft and preference-based finetuning (dpo/rlhf) under a fixed budget, finding that sft-heavy allocations generally outperform preference-heavy ones. llm">
+        <div class="paper-head">
+          <h3>Balancing the Budget: Understanding Trade-offs Between Supervised and Preference-Based Finetuning</h3>
+          <p class="sub">Raghavendra et al., ACL 2025</p>
+          <p class="take">Analyzes the compute tradeoff between SFT and preference-based finetuning (DPO/RLHF) under a fixed budget, finding that SFT-heavy allocations generally outperform preference-heavy ones.</p>
+          <button class="p-toggle" type="button" aria-expanded="false" aria-controls="balancing-the-budget-understanding-trade-offs-between-superv-notes">Notes</button>
+        </div>
+        <div class="paper-body" id="balancing-the-budget-understanding-trade-offs-between-superv-notes"><p>Analyzes the compute tradeoff between SFT and preference-based finetuning (DPO/RLHF) under a fixed budget, finding that SFT-heavy allocations generally outperform preference-heavy ones.</p><a class="read" href="https://aclanthology.org/2025.acl-long.1248.pdf" target="_blank" rel="noopener">Read the paper</a></div>
+      </article>
+      <article class="paper" id="the-llama-3-herd-of-models" data-tags="llm survey" data-search="the llama 3 herd of models dubey et al., arxiv 2024 meta's comprehensive report on llama 3 — covering pretraining data pipeline, architecture decisions, the full post-training stack, and safety work across 8b, 70b, and 405b scales. llm survey">
+        <div class="paper-head">
+          <h3>The Llama 3 Herd of Models</h3>
+          <p class="sub">Dubey et al., arXiv 2024</p>
+          <p class="take">Meta's comprehensive report on Llama 3 — covering pretraining data pipeline, architecture decisions, the full post-training stack, and safety work across 8B, 70B, and 405B scales.</p>
+          <button class="p-toggle" type="button" aria-expanded="false" aria-controls="the-llama-3-herd-of-models-notes">Notes</button>
+        </div>
+        <div class="paper-body" id="the-llama-3-herd-of-models-notes"><p>Meta's comprehensive report on Llama 3 — covering pretraining data pipeline, architecture decisions, the full post-training stack, and safety work across 8B, 70B, and 405B scales.</p><a class="read" href="https://arxiv.org/abs/2407.21783" target="_blank" rel="noopener">Read the paper</a></div>
+      </article>
+      <article class="paper" id="deepseek-v3-technical-report" data-tags="llm" data-search="deepseek-v3 technical report deepseek-ai, arxiv 2024 a 671b mixture-of-experts model achieving gpt-4-level performance at significantly lower training cost, with innovations in moe load balancing, multi-token prediction, and fp8 training. llm">
+        <div class="paper-head">
+          <h3>DeepSeek-V3 Technical Report</h3>
+          <p class="sub">DeepSeek-AI, arXiv 2024</p>
+          <p class="take">A 671B mixture-of-experts model achieving GPT-4-level performance at significantly lower training cost, with innovations in MoE load balancing, multi-token prediction, and FP8 training.</p>
+          <button class="p-toggle" type="button" aria-expanded="false" aria-controls="deepseek-v3-technical-report-notes">Notes</button>
+        </div>
+        <div class="paper-body" id="deepseek-v3-technical-report-notes"><p>A 671B mixture-of-experts model achieving GPT-4-level performance at significantly lower training cost, with innovations in MoE load balancing, multi-token prediction, and FP8 training.</p><a class="read" href="https://arxiv.org/abs/2412.19437" target="_blank" rel="noopener">Read the paper</a></div>
+      </article>
+      <article class="paper" id="jest-joint-example-selection-and-training-for-efficient-data" data-tags="llm ml" data-search="jest: joint example selection and training for efficient data selection mindermann et al., arxiv 2024 scores training examples by their joint utility for an entire mini-batch rather than individually, enabling more efficient pretraining convergence with substantially less data. llm ml">
+        <div class="paper-head">
+          <h3>JEST: Joint Example Selection and Training for Efficient Data Selection</h3>
+          <p class="sub">Mindermann et al., arXiv 2024</p>
+          <p class="take">Scores training examples by their joint utility for an entire mini-batch rather than individually, enabling more efficient pretraining convergence with substantially less data.</p>
+          <button class="p-toggle" type="button" aria-expanded="false" aria-controls="jest-joint-example-selection-and-training-for-efficient-data-notes">Notes</button>
+        </div>
+        <div class="paper-body" id="jest-joint-example-selection-and-training-for-efficient-data-notes"><p>Scores training examples by their joint utility for an entire mini-batch rather than individually, enabling more efficient pretraining convergence with substantially less data.</p><a class="read" href="https://arxiv.org/abs/2406.17711" target="_blank" rel="noopener">Read the paper</a></div>
+      </article>
+      <article class="paper" id="deepseek-v3-2-exp-boosting-long-context-efficiency-with-deep" data-tags="llm" data-search="deepseek-v3.2-exp: boosting long-context efficiency with deepseek sparse attention deepseek-ai, 2025 extends deepseek-v3 with sparse attention patterns that enable efficient long-context processing, reducing kv cache memory and compute without proportional quality losses. llm">
+        <div class="paper-head">
+          <h3>DeepSeek-V3.2-Exp: Boosting Long-Context Efficiency with DeepSeek Sparse Attention</h3>
+          <p class="sub">DeepSeek-AI, 2025</p>
+          <p class="take">Extends DeepSeek-V3 with sparse attention patterns that enable efficient long-context processing, reducing KV cache memory and compute without proportional quality losses.</p>
+          <button class="p-toggle" type="button" aria-expanded="false" aria-controls="deepseek-v3-2-exp-boosting-long-context-efficiency-with-deep-notes">Notes</button>
+        </div>
+        <div class="paper-body" id="deepseek-v3-2-exp-boosting-long-context-efficiency-with-deep-notes"><p>Extends DeepSeek-V3 with sparse attention patterns that enable efficient long-context processing, reducing KV cache memory and compute without proportional quality losses.</p><a class="read" href="https://www.ele-yufo.com/wp-content/uploads/2025/10/DeepSeek_V3_2-1.pdf" target="_blank" rel="noopener">Read the paper</a></div>
+      </article>
+      <article class="paper" id="olmoe-open-mixture-of-experts-language-models" data-tags="llm" data-search="olmoe: open mixture-of-experts language models muennighoff et al., arxiv 2024 a fully open-sourced sparse moe language model — releasing weights, training data, and code — establishing a transparency benchmark for mixture-of-experts research. llm">
+        <div class="paper-head">
+          <h3>OLMoE: Open Mixture-of-Experts Language Models</h3>
+          <p class="sub">Muennighoff et al., arXiv 2024</p>
+          <p class="take">A fully open-sourced sparse MoE language model — releasing weights, training data, and code — establishing a transparency benchmark for mixture-of-experts research.</p>
+          <button class="p-toggle" type="button" aria-expanded="false" aria-controls="olmoe-open-mixture-of-experts-language-models-notes">Notes</button>
+        </div>
+        <div class="paper-body" id="olmoe-open-mixture-of-experts-language-models-notes"><p>A fully open-sourced sparse MoE language model — releasing weights, training data, and code — establishing a transparency benchmark for mixture-of-experts research.</p><a class="read" href="https://arxiv.org/abs/2409.02060" target="_blank" rel="noopener">Read the paper</a></div>
+      </article>
+      <article class="paper" id="explaining-context-length-scaling-and-bounds-for-language-mo" data-tags="llm theory" data-search="explaining context length scaling and bounds for language models chen et al., arxiv 2025 derives theoretical bounds on how context length affects llm performance, providing a principled explanation for the empirical scaling behavior observed in long-context model evaluations. llm theory">
+        <div class="paper-head">
+          <h3>Explaining Context Length Scaling and Bounds for Language Models</h3>
+          <p class="sub">Chen et al., arXiv 2025</p>
+          <p class="take">Derives theoretical bounds on how context length affects LLM performance, providing a principled explanation for the empirical scaling behavior observed in long-context model evaluations.</p>
+          <button class="p-toggle" type="button" aria-expanded="false" aria-controls="explaining-context-length-scaling-and-bounds-for-language-mo-notes">Notes</button>
+        </div>
+        <div class="paper-body" id="explaining-context-length-scaling-and-bounds-for-language-mo-notes"><p>Derives theoretical bounds on how context length affects LLM performance, providing a principled explanation for the empirical scaling behavior observed in long-context model evaluations.</p><a class="read" href="https://arxiv.org/abs/2502.01481" target="_blank" rel="noopener">Read the paper</a></div>
+      </article>
+      <article class="paper" id="sample-efficient-language-modeling-with-linear-attention-and" data-tags="llm" data-search="sample-efficient language modeling with linear attention and lightweight enhancements haller et al., arxiv 2025 combines linear attention with a set of lightweight architectural enhancements to match standard transformer performance while requiring significantly fewer training tokens. llm">
+        <div class="paper-head">
+          <h3>Sample-Efficient Language Modeling with Linear Attention and Lightweight Enhancements</h3>
+          <p class="sub">Haller et al., arXiv 2025</p>
+          <p class="take">Combines linear attention with a set of lightweight architectural enhancements to match standard transformer performance while requiring significantly fewer training tokens.</p>
+          <button class="p-toggle" type="button" aria-expanded="false" aria-controls="sample-efficient-language-modeling-with-linear-attention-and-notes">Notes</button>
+        </div>
+        <div class="paper-body" id="sample-efficient-language-modeling-with-linear-attention-and-notes"><p>Combines linear attention with a set of lightweight architectural enhancements to match standard transformer performance while requiring significantly fewer training tokens.</p><a class="read" href="https://arxiv.org/abs/2511.05560" target="_blank" rel="noopener">Read the paper</a></div>
+      </article>
+      <article class="paper" id="lift-improving-long-context-understanding-via-long-input-fin" data-tags="llm" data-search="lift: improving long context understanding via long input fine-tuning wang et al., arxiv 2025 a fine-tuning approach for extending llm context windows that trains the model to attend to information spread across long inputs, improving retrieval accuracy and coherence on long-document tasks. llm">
+        <div class="paper-head">
+          <h3>LIFT: Improving Long Context Understanding via Long Input Fine-Tuning</h3>
+          <p class="sub">Wang et al., arXiv 2025</p>
+          <p class="take">A fine-tuning approach for extending LLM context windows that trains the model to attend to information spread across long inputs, improving retrieval accuracy and coherence on long-document tasks.</p>
+          <button class="p-toggle" type="button" aria-expanded="false" aria-controls="lift-improving-long-context-understanding-via-long-input-fin-notes">Notes</button>
+        </div>
+        <div class="paper-body" id="lift-improving-long-context-understanding-via-long-input-fin-notes"><p>A fine-tuning approach for extending LLM context windows that trains the model to attend to information spread across long inputs, improving retrieval accuracy and coherence on long-document tasks.</p><a class="read" href="https://arxiv.org/abs/2502.14644" target="_blank" rel="noopener">Read the paper</a></div>
+      </article>
+      <article class="paper" id="phi-4-technical-report" data-tags="llm distillation" data-search="phi-4 technical report microsoft research, arxiv 2024 microsoft's 14b model trained with a heavy emphasis on synthetic data generation and careful data curation, demonstrating again that data quality consistently outpunches raw scale. llm distillation">
+        <div class="paper-head">
+          <h3>Phi-4 Technical Report</h3>
+          <p class="sub">Microsoft Research, arXiv 2024</p>
+          <p class="take">Microsoft's 14B model trained with a heavy emphasis on synthetic data generation and careful data curation, demonstrating again that data quality consistently outpunches raw scale.</p>
+          <button class="p-toggle" type="button" aria-expanded="false" aria-controls="phi-4-technical-report-notes">Notes</button>
+        </div>
+        <div class="paper-body" id="phi-4-technical-report-notes"><p>Microsoft's 14B model trained with a heavy emphasis on synthetic data generation and careful data curation, demonstrating again that data quality consistently outpunches raw scale.</p><a class="read" href="https://arxiv.org/abs/2412.08905" target="_blank" rel="noopener">Read the paper</a></div>
+      </article>
+      <article class="paper" id="minicpm-unveiling-the-potential-of-small-language-models" data-tags="llm" data-search="minicpm: unveiling the potential of small language models hu et al., arxiv 2024 a family of sub-3b models from tsinghua/modelbest using scaling-law-guided training decisions — showing the 1-2b regime can be highly competitive with careful hyperparameter and data choices. llm">
+        <div class="paper-head">
+          <h3>MiniCPM: Unveiling the Potential of Small Language Models</h3>
+          <p class="sub">Hu et al., arXiv 2024</p>
+          <p class="take">A family of sub-3B models from Tsinghua/ModelBest using scaling-law-guided training decisions — showing the 1-2B regime can be highly competitive with careful hyperparameter and data choices.</p>
+          <button class="p-toggle" type="button" aria-expanded="false" aria-controls="minicpm-unveiling-the-potential-of-small-language-models-notes">Notes</button>
+        </div>
+        <div class="paper-body" id="minicpm-unveiling-the-potential-of-small-language-models-notes"><p>A family of sub-3B models from Tsinghua/ModelBest using scaling-law-guided training decisions — showing the 1-2B regime can be highly competitive with careful hyperparameter and data choices.</p><a class="read" href="https://arxiv.org/abs/2404.06395" target="_blank" rel="noopener">Read the paper</a></div>
+      </article>
+      <article class="paper" id="orpo-monolithic-preference-optimization-without-reference-mo" data-tags="llm" data-search="orpo: monolithic preference optimization without reference model hong et al., arxiv 2024 eliminates the reference model from preference optimization by incorporating an odds-ratio penalty directly into the sft loss — a cleaner, cheaper alternative to dpo and ppo. llm">
+        <div class="paper-head">
+          <h3>ORPO: Monolithic Preference Optimization without Reference Model</h3>
+          <p class="sub">Hong et al., arXiv 2024</p>
+          <p class="take">Eliminates the reference model from preference optimization by incorporating an odds-ratio penalty directly into the SFT loss — a cleaner, cheaper alternative to DPO and PPO.</p>
+          <button class="p-toggle" type="button" aria-expanded="false" aria-controls="orpo-monolithic-preference-optimization-without-reference-mo-notes">Notes</button>
+        </div>
+        <div class="paper-body" id="orpo-monolithic-preference-optimization-without-reference-mo-notes"><p>Eliminates the reference model from preference optimization by incorporating an odds-ratio penalty directly into the SFT loss — a cleaner, cheaper alternative to DPO and PPO.</p><a class="read" href="https://arxiv.org/abs/2403.07691" target="_blank" rel="noopener">Read the paper</a></div>
+      </article>
+      <article class="paper" id="language-modeling-is-compression" data-tags="llm theory" data-search="language modeling is compression delétang et al., arxiv 2023 formally proves that language modeling and data compression are equivalent — a model's perplexity directly determines its compression ratio, unifying the two fields under information theory. llm theory">
+        <div class="paper-head">
+          <h3>Language Modeling Is Compression</h3>
+          <p class="sub">Delétang et al., arXiv 2023</p>
+          <p class="take">Formally proves that language modeling and data compression are equivalent — a model's perplexity directly determines its compression ratio, unifying the two fields under information theory.</p>
+          <button class="p-toggle" type="button" aria-expanded="false" aria-controls="language-modeling-is-compression-notes">Notes</button>
+        </div>
+        <div class="paper-body" id="language-modeling-is-compression-notes"><p>Formally proves that language modeling and data compression are equivalent — a model's perplexity directly determines its compression ratio, unifying the two fields under information theory.</p><a class="read" href="https://arxiv.org/abs/2309.10668" target="_blank" rel="noopener">Read the paper</a></div>
+      </article>
+
+        <!-- papers:end -->
+  </div>
+  <p class="no-results" id="no-results" hidden>No notes match that.</p>
 </main>
 
-<footer class="wrap">
-  <div class="foot"><span>© 2026 Devashish Juyal</span><a href="index.html">← Home</a></div>
+<footer class="band page-foot">
+  <div class="wrap foot">
+    <p>© 2026 Devashish Juyal · New York City · <a href="index.html">Home</a></p>
+  </div>
 </footer>
 
 <script src="assets/js/main.js"></script>
-<script src="assets/js/papers-data.js"></script>
 <script src="assets/js/papers.js"></script>
 </body>
 </html>

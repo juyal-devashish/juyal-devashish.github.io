@@ -1,52 +1,45 @@
+/* Reading notes: the entries are already in the HTML (built by
+   tools/build-papers.js). This adds the topic filter, search and the
+   Notes toggles. */
 (function () {
   'use strict';
-  if (typeof papers === 'undefined') return;
-  var active = null;
-  var Q = ['What it does', 'Why it matters', 'How it works', 'Key result'];
-
-  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
-  function label(t) { return (typeof TAG_LABELS !== 'undefined' && TAG_LABELS[t]) || t; }
-
-  var counts = {};
-  papers.forEach(function (p) { p.tags.forEach(function (t) { counts[t] = (counts[t] || 0) + 1; }); });
-  var tags = Object.keys(counts).sort(function (a, b) { return counts[b] - counts[a]; });
-
-  var bar = document.getElementById('tags');
   var list = document.getElementById('papers');
+  var bar = document.getElementById('tags');
+  var search = document.getElementById('search');
+  var empty = document.getElementById('no-results');
+  if (!list) return;
+  var items = [].slice.call(list.querySelectorAll('.paper'));
+  var active = '';
 
-  function renderTags() {
-    bar.innerHTML = '<button aria-pressed="' + (active === null) + '" data-tag="">All ' + papers.length + '</button>' +
-      tags.map(function (t) { return '<button aria-pressed="' + (active === t) + '" data-tag="' + esc(t) + '">' + esc(label(t)) + '</button>'; }).join('');
-  }
-  function renderList() {
-    var items = papers.filter(function (p) { return !active || p.tags.indexOf(active) !== -1; })
-      .sort(function (a, b) { return (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0); });
-    list.innerHTML = items.map(function (p, i) {
-      var id = 'p' + i;
-      var notes = p.qa && p.qa.length
-        ? '<dl>' + p.qa.map(function (q, j) { return '<div><dt>' + esc(Q[j] || q.q) + '</dt><dd>' + esc(q.a) + '</dd></div>'; }).join('') + '</dl>'
-        : '<p class="excerpt">' + esc(p.excerpt) + '</p>';
-      return '<article class="paper">' +
-        '<button class="paper-head" aria-expanded="false" aria-controls="' + id + '">' +
-          '<h3>' + esc(p.title) + '</h3><span class="plus" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span>' +
-          '<span class="sub">' + (p.pinned ? 'Pinned · ' : '') + esc(p.authors) + '</span>' +
-        '</button>' +
-        '<div class="paper-body" id="' + id + '">' + notes +
-          (p.link ? '<a class="read" href="' + esc(p.link) + '" target="_blank" rel="noopener">Read the paper <svg class="icon"><use href="#i-arrow"/></svg></a>' : '') +
-        '</div></article>';
-    }).join('');
+  function apply() {
+    var q = (search && search.value || '').trim().toLowerCase();
+    var shown = 0;
+    items.forEach(function (el) {
+      var okTag = !active || (' ' + el.dataset.tags + ' ').indexOf(' ' + active + ' ') !== -1;
+      var okText = !q || el.dataset.search.indexOf(q) !== -1;
+      el.hidden = !(okTag && okText);
+      if (!el.hidden) shown++;
+    });
+    if (empty) empty.hidden = shown !== 0;
   }
 
-  bar.addEventListener('click', function (e) {
+  if (bar) bar.addEventListener('click', function (e) {
     var b = e.target.closest('button'); if (!b) return;
-    active = b.getAttribute('data-tag') || null;
-    renderTags(); renderList();
+    active = b.getAttribute('data-tag') || '';
+    [].forEach.call(bar.querySelectorAll('button'), function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+    apply();
   });
+  if (search) search.addEventListener('input', apply);
+
   list.addEventListener('click', function (e) {
-    var h = e.target.closest('.paper-head'); if (!h) return;
-    var open = h.parentElement.classList.toggle('open');
-    h.setAttribute('aria-expanded', open ? 'true' : 'false');
+    var t = e.target.closest('.p-toggle'); if (!t) return;
+    var el = t.closest('.paper'), open = el.classList.toggle('open');
+    t.setAttribute('aria-expanded', String(open));
+    t.textContent = open ? 'Hide notes' : 'Notes';
   });
 
-  renderTags(); renderList();
+  // #paper-id opens that entry.
+  var id = decodeURIComponent(location.hash.slice(1));
+  var target = id && document.getElementById(id);
+  if (target && target.classList.contains('paper')) target.querySelector('.p-toggle').click();
 })();

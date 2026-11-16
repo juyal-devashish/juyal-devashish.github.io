@@ -85,7 +85,7 @@ const papers = [
     {
         date: 'Feb 10, 2026',
         title: 'Invariant Risk Minimization',
-        authors: 'Arjovsky et al., 2019',
+        authors: 'Arjovsky et al., arXiv 2019',
         excerpt: 'Proposes learning data representations where the optimal classifier is invariant across training environments — a principled approach to OOD generalization that fundamentally challenged ERM assumptions.',
         tags: ['ml', 'theory'],
         pinned: false,
@@ -169,7 +169,7 @@ const papers = [
     {
         date: 'Jan 2025',
         title: 'Small Language Models (SLMs) Can Still Pack a Punch: A Survey',
-        authors: 'Gamage, Chathurika, et al.',
+        authors: 'Gamage et al., arXiv 2025',
         excerpt: 'A comprehensive survey showing that sub-10B models can match or exceed much larger counterparts when trained intelligently — covering architecture choices, data curation, and post-training techniques.',
         tags: ['llm', 'survey'],
         pinned: false,
@@ -179,7 +179,7 @@ const papers = [
     {
         date: 'Mar 2022',
         title: 'Training Compute-Optimal Large Language Models',
-        authors: 'Hoffmann, Jordan, et al. (Chinchilla)',
+        authors: 'Hoffmann et al., arXiv 2022',
         excerpt: 'Shows most LLMs are severely undertrained — optimal compute allocation requires scaling data proportionally with model size, yielding the Chinchilla recipe: 70B params, 1.4T tokens.',
         tags: ['llm', 'theory'],
         pinned: false,
@@ -189,7 +189,7 @@ const papers = [
     {
         date: '2025',
         title: 'On the Slow Death of Scaling',
-        authors: 'Hooker, Sarah',
+        authors: 'Hooker, SSRN 2025',
         excerpt: 'A critical examination of diminishing returns from scaling compute alone, arguing that continued progress requires architectural innovation, data quality improvements, and algorithmic efficiency gains.',
         tags: ['llm', 'theory', 'survey'],
         pinned: false,
@@ -199,7 +199,7 @@ const papers = [
     {
         date: '2024',
         title: 'Baguettotron: A 321M Parameter Generative Model',
-        authors: 'PleIAs',
+        authors: 'PleIAs, Hugging Face 2024',
         excerpt: 'A 321M-parameter open French generative language model trained from scratch, demonstrating that high-quality small models can be built for non-English languages with modest compute.',
         tags: ['llm'],
         pinned: false,
@@ -209,7 +209,7 @@ const papers = [
     {
         date: 'Jun 2023',
         title: 'Textbooks Are All You Need',
-        authors: 'Gunasekar, Suriya, et al.',
+        authors: 'Gunasekar et al., arXiv 2023',
         excerpt: 'Trains phi-1, a 1.3B coding LLM, purely on high-quality synthetic "textbook-like" data — demonstrating that data quality can substitute for scale with far fewer tokens than conventional pretraining.',
         tags: ['llm', 'distillation'],
         pinned: false,
@@ -219,7 +219,7 @@ const papers = [
     {
         date: 'Jul 2025',
         title: 'Scaling Laws for Optimal Data Mixtures',
-        authors: 'Mustafa Shukor, Louis Bethune, Dan Busbridge, David Grangier, Enrico Fini, Alaaeldin El-Nouby, Pierre Ablin',
+        authors: 'Shukor et al., arXiv 2025',
         excerpt: 'Derives scaling laws for data mixing ratios across domains, showing that the optimal mixture itself shifts with compute budget and cannot be fixed once for all training runs.',
         tags: ['llm', 'theory'],
         pinned: false,
@@ -229,7 +229,7 @@ const papers = [
     {
         date: 'Feb 2025',
         title: 'Topic Over Source: The Key to Effective Data Mixing for Language Models Pre-training',
-        authors: 'Zhu, Tong, et al.',
+        authors: 'Zhu et al., arXiv 2025',
         excerpt: 'Finds that grouping pretraining data by topic rather than by source domain leads to substantially more effective mixing strategies, challenging conventional domain-based data curation pipelines.',
         tags: ['llm'],
         pinned: false,
@@ -239,7 +239,7 @@ const papers = [
     {
         date: 'Feb 2025',
         title: 'SmolLM2 Technical Report',
-        authors: 'Allal et al.',
+        authors: 'Allal et al., arXiv 2025',
         excerpt: 'HuggingFace\'s family of compact language models (135M–1.7B) trained on carefully curated datasets — a practical and transparent reference point for efficient small-model training.',
         tags: ['llm'],
         pinned: false,
@@ -249,7 +249,7 @@ const papers = [
     {
         date: '2024',
         title: 'The Smol Training Playbook',
-        authors: 'Ben Allal, Loubna, et al.',
+        authors: 'Ben Allal et al., Hugging Face 2024',
         excerpt: 'A practitioner\'s guide from HuggingFace covering the full recipe for training small language models: data curation, architecture choices, training dynamics, and evaluation strategies.',
         tags: ['llm'],
         pinned: false,
@@ -259,7 +259,7 @@ const papers = [
     {
         date: 'Nov 2024',
         title: 'Hymba: A Hybrid-head Architecture for Small Language Models',
-        authors: 'NVIDIA Research',
+        authors: 'NVIDIA, arXiv 2024',
         excerpt: 'Combines Mamba state-space heads with attention heads in the same layer, achieving strong performance with a lower memory footprint than pure-attention models at small scales.',
         tags: ['llm'],
         pinned: false,
@@ -269,7 +269,7 @@ const papers = [
     {
         date: 'Apr 2024',
         title: 'Eagle and Finch: RWKV with Matrix-Valued States and Dynamic Recurrence',
-        authors: 'Peng, Bo, et al.',
+        authors: 'Peng et al., arXiv 2024',
         excerpt: 'Extends RWKV with matrix-valued hidden states and dynamic recurrence gating, closing much of the quality gap with transformers while preserving linear-time inference.',
         tags: ['llm'],
         pinned: false,
@@ -279,7 +279,7 @@ const papers = [
     {
         date: 'Feb 2024',
         title: 'MobiLlama: Towards Accurate and Lightweight Fully Transparent GPT',
-        authors: 'Thopilan, Romal, et al.',
+        authors: 'Thopilan et al., arXiv 2024',
         excerpt: 'A fully transparent 0.5B-parameter LLM designed for on-device deployment, using parameter sharing across all transformer layers to dramatically reduce model size without large quality losses.',
         tags: ['llm'],
         pinned: false,
@@ -289,7 +289,7 @@ const papers = [
     {
         date: 'Apr 2024',
         title: 'OpenELM: An Efficient Language Model Family',
-        authors: 'Mehta, Sachin, et al.',
+        authors: 'Mehta et al., arXiv 2024',
         excerpt: 'Apple\'s open-source model family using layer-wise scaling of attention heads and FFN dimensions, achieving competitive performance with fewer total parameters than uniformly-sized counterparts.',
         tags: ['llm'],
         pinned: false,
@@ -299,7 +299,7 @@ const papers = [
     {
         date: 'Jan 2026',
         title: 'Conditional Memory via Scalable Lookup: A New Axis of Sparsity for Large Language Models',
-        authors: 'Cheng et al.',
+        authors: 'Cheng et al., arXiv 2026',
         excerpt: 'Replaces dense attention\'s KV cache with a sparse lookup over a large external memory bank, introducing a new axis of sparsity that enables long-context modeling at dramatically lower memory cost.',
         tags: ['llm'],
         pinned: false,
@@ -309,7 +309,7 @@ const papers = [
     {
         date: 'Jul 2025',
         title: 'FlexOLMo: Open Language Models for Flexible Data Use',
-        authors: 'Shi et al.',
+        authors: 'Shi et al., arXiv 2025',
         excerpt: 'An OLMo variant demonstrating that flexible data-licensing policies — mixing open and restricted sources with explicit provenance — can be incorporated without degrading model quality.',
         tags: ['llm'],
         pinned: false,
@@ -319,7 +319,7 @@ const papers = [
     {
         date: 'Oct 2025',
         title: 'Front-Loading Reasoning: The Synergy between Pretraining and Post-Training Data',
-        authors: 'NVIDIA & Hugging Face Researchers',
+        authors: 'NVIDIA and Hugging Face, arXiv 2025',
         excerpt: 'Shows that including reasoning-rich data early in pretraining — rather than deferring it to post-training — creates stronger base models that respond more effectively to RLHF and instruction tuning.',
         tags: ['llm'],
         pinned: false,
@@ -329,7 +329,7 @@ const papers = [
     {
         date: 'Oct 2025',
         title: 'Midtraining Bridges Pretraining and Posttraining Distributions',
-        authors: 'Emmy Liu, Graham Neubig, Chenyan Xiong',
+        authors: 'Liu et al., arXiv 2025',
         excerpt: 'Introduces a midtraining phase that sits between pretraining and finetuning, reducing the distributional gap between the two and improving both instruction following and domain adaptation.',
         tags: ['llm'],
         pinned: false,
@@ -339,7 +339,7 @@ const papers = [
     {
         date: '2025',
         title: 'Balancing the Budget: Understanding Trade-offs Between Supervised and Preference-Based Finetuning',
-        authors: 'Mohit Raghavendra, Junmo Kang, Alan Ritter',
+        authors: 'Raghavendra et al., ACL 2025',
         excerpt: 'Analyzes the compute tradeoff between SFT and preference-based finetuning (DPO/RLHF) under a fixed budget, finding that SFT-heavy allocations generally outperform preference-heavy ones.',
         tags: ['llm'],
         pinned: false,
@@ -349,7 +349,7 @@ const papers = [
     {
         date: 'Jul 2024',
         title: 'The Llama 3 Herd of Models',
-        authors: 'Dubey, Abhimanyu, et al. (Meta AI)',
+        authors: 'Dubey et al., arXiv 2024',
         excerpt: 'Meta\'s comprehensive report on Llama 3 — covering pretraining data pipeline, architecture decisions, the full post-training stack, and safety work across 8B, 70B, and 405B scales.',
         tags: ['llm', 'survey'],
         pinned: false,
@@ -359,7 +359,7 @@ const papers = [
     {
         date: 'Dec 2024',
         title: 'DeepSeek-V3 Technical Report',
-        authors: 'DeepSeek AI',
+        authors: 'DeepSeek-AI, arXiv 2024',
         excerpt: 'A 671B mixture-of-experts model achieving GPT-4-level performance at significantly lower training cost, with innovations in MoE load balancing, multi-token prediction, and FP8 training.',
         tags: ['llm'],
         pinned: false,
@@ -369,7 +369,7 @@ const papers = [
     {
         date: 'Jun 2024',
         title: 'JEST: Joint Example Selection and Training for Efficient Data Selection',
-        authors: 'Mindermann, Sören, et al.',
+        authors: 'Mindermann et al., arXiv 2024',
         excerpt: 'Scores training examples by their joint utility for an entire mini-batch rather than individually, enabling more efficient pretraining convergence with substantially less data.',
         tags: ['llm', 'ml'],
         pinned: false,
@@ -379,7 +379,7 @@ const papers = [
     {
         date: '2025',
         title: 'DeepSeek-V3.2-Exp: Boosting Long-Context Efficiency with DeepSeek Sparse Attention',
-        authors: 'DeepSeek AI',
+        authors: 'DeepSeek-AI, 2025',
         excerpt: 'Extends DeepSeek-V3 with sparse attention patterns that enable efficient long-context processing, reducing KV cache memory and compute without proportional quality losses.',
         tags: ['llm'],
         pinned: false,
@@ -389,7 +389,7 @@ const papers = [
     {
         date: 'Sep 2024',
         title: 'OLMoE: Open Mixture-of-Experts Language Models',
-        authors: 'Muennighoff, Niklas, et al.',
+        authors: 'Muennighoff et al., arXiv 2024',
         excerpt: 'A fully open-sourced sparse MoE language model — releasing weights, training data, and code — establishing a transparency benchmark for mixture-of-experts research.',
         tags: ['llm'],
         pinned: false,
@@ -399,7 +399,7 @@ const papers = [
     {
         date: 'Feb 2025',
         title: 'Explaining Context Length Scaling and Bounds for Language Models',
-        authors: 'Chen, Y., et al.',
+        authors: 'Chen et al., arXiv 2025',
         excerpt: 'Derives theoretical bounds on how context length affects LLM performance, providing a principled explanation for the empirical scaling behavior observed in long-context model evaluations.',
         tags: ['llm', 'theory'],
         pinned: false,
@@ -409,7 +409,7 @@ const papers = [
     {
         date: 'Nov 2025',
         title: 'Sample-Efficient Language Modeling with Linear Attention and Lightweight Enhancements',
-        authors: 'Haller, Patrick, et al.',
+        authors: 'Haller et al., arXiv 2025',
         excerpt: 'Combines linear attention with a set of lightweight architectural enhancements to match standard transformer performance while requiring significantly fewer training tokens.',
         tags: ['llm'],
         pinned: false,
@@ -419,7 +419,7 @@ const papers = [
     {
         date: 'Feb 2025',
         title: 'LIFT: Improving Long Context Understanding via Long Input Fine-Tuning',
-        authors: 'Wang, Y., et al.',
+        authors: 'Wang et al., arXiv 2025',
         excerpt: 'A fine-tuning approach for extending LLM context windows that trains the model to attend to information spread across long inputs, improving retrieval accuracy and coherence on long-document tasks.',
         tags: ['llm'],
         pinned: false,
@@ -429,7 +429,7 @@ const papers = [
     {
         date: 'Dec 2024',
         title: 'Phi-4 Technical Report',
-        authors: 'Microsoft Research',
+        authors: 'Microsoft Research, arXiv 2024',
         excerpt: 'Microsoft\'s 14B model trained with a heavy emphasis on synthetic data generation and careful data curation, demonstrating again that data quality consistently outpunches raw scale.',
         tags: ['llm', 'distillation'],
         pinned: false,
@@ -439,7 +439,7 @@ const papers = [
     {
         date: 'Apr 2024',
         title: 'MiniCPM: Unveiling the Potential of Small Language Models',
-        authors: 'Hu, Shengding, et al.',
+        authors: 'Hu et al., arXiv 2024',
         excerpt: 'A family of sub-3B models from Tsinghua/ModelBest using scaling-law-guided training decisions — showing the 1-2B regime can be highly competitive with careful hyperparameter and data choices.',
         tags: ['llm'],
         pinned: false,
@@ -449,7 +449,7 @@ const papers = [
     {
         date: 'Mar 2024',
         title: 'ORPO: Monolithic Preference Optimization without Reference Model',
-        authors: 'Hong, Jiwoo, et al.',
+        authors: 'Hong et al., arXiv 2024',
         excerpt: 'Eliminates the reference model from preference optimization by incorporating an odds-ratio penalty directly into the SFT loss — a cleaner, cheaper alternative to DPO and PPO.',
         tags: ['llm'],
         pinned: false,
@@ -459,7 +459,7 @@ const papers = [
     {
         date: 'Sep 2023',
         title: 'Language Modeling Is Compression',
-        authors: 'Delétang, Grégoire, et al.',
+        authors: 'Delétang et al., arXiv 2023',
         excerpt: 'Formally proves that language modeling and data compression are equivalent — a model\'s perplexity directly determines its compression ratio, unifying the two fields under information theory.',
         tags: ['llm', 'theory'],
         pinned: false,
