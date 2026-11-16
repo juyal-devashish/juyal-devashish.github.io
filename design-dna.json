@@ -5,7 +5,8 @@
     "source_references": [
       "User brief 2026-11-04: neumorphism + glass hybrid, light/dark toggle, minimalistic palette, recruiter-first, agent-graph hero console",
       "Revision 2026-11-04: user asked for super minimalistic; removed hero console, metrics, chips, case studies, orbs",
-      "Revision 2026-11-16: step 2 of the move toward an expressive, personal portfolio (inspired by dharmashah.com structure, not its palette or fonts). Palette echoes the golden-hour light in the photography section."
+      "Revision 2026-11-16: step 2 of the move toward an expressive, personal portfolio (inspired by dharmashah.com structure, not its palette or fonts). Palette echoes the golden-hour light in the photography section.",
+      "Revision 2026-11-16b: closer to dharmashah.com structure for a product-minded audience (site still says \"AI engineer\"): full-screen photo hero from the owner's own sunrise shot, centred big section titles, experience as an outcome table, Fun stuff section with a drifting photo strip on a deep navy band."
     ],
     "created_at": "2026-11-04"
   },
@@ -49,7 +50,8 @@
       "surface": {
         "background": "#F4EFE7 light, #161A22 dark",
         "card": "same as background, extruded by shadow",
-        "elevated": "rgba(244,239,231,0.65) frosted glass, nav pill only"
+        "elevated": "rgba(244,239,231,0.65) frosted glass, nav pill only",
+        "band": "#12224A deep navy band behind the photo strip, fixed in both themes"
       },
       "contrast_strategy": "Every text token is at least 4.5:1 on its background in both themes (checked with the WCAG formula); figures are in the comment at the top of style.css."
     },
@@ -124,10 +126,10 @@
       "section_rhythm": "104px between sections desktop, 80px mobile"
     },
     "layout": {
-      "grid": "single column",
-      "max_width": "680px",
+      "grid": "single column, 760px; hero and photo band are full-bleed",
+      "max_width": "760px",
       "gutter": "24px desktop / 20px mobile",
-      "alignment": "left-aligned, list rows with right-aligned mono dates"
+      "alignment": "left-aligned body, centred section titles"
     },
     "shape": {
       "border_radius": {
@@ -159,8 +161,10 @@
     "components": {
       "button_style": "Clay pills (low extrusion) that press to inset on :active; 44px round icon buttons.",
       "card_style": "No cards. Content sits in flat rows; linked rows sink to an inset well on hover.",
-      "navigation_pattern": "Small floating glass pill: four links and an inset theme toggle.",
-      "inputs": "Tag filters are plain mono text; the active tag is inset."
+      "navigation_pattern": "Small floating glass pill: Projects, Experience, Fun stuff, Papers and an inset theme toggle.",
+      "inputs": "Tag filters are plain mono text; the active tag is inset.",
+      "hero": "Full-screen photo (sunrise over clouds) with a left-to-right scrim (top-to-bottom on phones) and a fade into the page. Fixed cream text, solid cream Email button, outlined LinkedIn/GitHub, italic underlined section links. Every text box measured at >= 4.5:1 over the photo.",
+      "experience": "Current employer as a heading with a two-column what/result table; earlier roles, education and recognition as hairline-ruled rows."
     }
   },
   "design_style": {
@@ -179,7 +183,7 @@
       "balance_type": "asymmetric hero, symmetric grids below"
     },
     "imagery": {
-      "photography": "portrait in a raised frame; a photography section shows one photo at a time in a 4:5 mount",
+      "photography": "full-screen hero photo; a strip of 25 photos 280px tall drifting left on a navy band, pausable, static and scrollable under reduced motion",
       "graphic_elements": "agent-graph diagram, soft blurred orbs",
       "iconography": "1.5px stroke inline SVG"
     },
