@@ -3,10 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Reading notes · Devashish Juyal</title>
-  <meta name="description" content="Short notes on research papers about LLMs, distillation, watermarking and statistics, by Devashish Juyal.">
+  <title>Reading shelf · Devashish Juyal</title>
+  <meta name="description" content="A shelf of the research papers Devashish Juyal has read, on LLMs, distillation, watermarking and statistics, with a takeaway for each.">
   <meta name="theme-color" content="#0C1631">
   <link rel="canonical" href="https://juyal-devashish.github.io/papers.html">
+  <link rel="alternate" type="text/markdown" href="papers.md">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
   <link rel="apple-touch-icon" href="assets/img/favicon-180.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,65 +23,61 @@
   <div class="nav-inner">
     <a class="nav-name" href="index.html">Devashish Juyal</a>
     <nav aria-label="Primary">
-      <a href="index.html#work">Work</a>
-      <a href="index.html#projects">Projects</a>
-      <a href="index.html#fun">Fun stuff</a>
-      <a href="papers.html" aria-current="page"><span class="long">Reading notes</span><span class="short">Notes</span></a>
+      <a href="index.html" class="only-phone">Home</a>
+      <a href="index.html#work" aria-keyshortcuts="Alt+1">Work</a>
+      <a href="index.html#projects" aria-keyshortcuts="Alt+2">Projects</a>
+      <a href="index.html#fun" aria-keyshortcuts="Alt+3">Fun stuff</a>
+      <a href="papers.html" aria-current="page" aria-keyshortcuts="Alt+4"><span class="long">Reading shelf</span><span class="short">Shelf</span></a>
     </nav>
   </div>
 </header>
 
 <main id="main" class="wrap">
   <section class="page-head">
-    <h1>Reading notes</h1>
-    <p>Papers I’ve read, in the order I added them.</p>
-    <figure class="page-photo"><img src="assets/img/archive/annotated-paper.jpg" alt="A printed IEEE paper on metamaterial-lined waveguides, highlighted and annotated by hand, with a pen beside it." width="800" height="1422"><figcaption>How I read: printed, highlighted, written on. From my MITACS summer, 2023.</figcaption></figure>
+    <h1>Reading shelf</h1>
+    <p>Papers I’ve read, in the order I added them. Pick a spine for the takeaway.</p>
   </section>
+
+  <div id="shelf" class="shelf" role="group" aria-label="Papers I’ve read, one spine each" hidden></div>
 
   <div id="papers">
         <!-- papers:start -->
         <ol class="paper-list">
-      <li class="paper" id="attention-is-all-you-need">
+      <li class="paper" id="attention-is-all-you-need" data-pinned>
           <h2><a href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener">Attention Is All You Need</a></h2>
           <p class="sub">Vaswani et al., NeurIPS 2017</p>
           <p class="take">The transformer architecture dispenses with recurrence and convolutions entirely, relying solely on attention mechanisms — a deceptively simple idea that reshaped the entire field.</p>
-          <button class="p-toggle" type="button" aria-expanded="false" aria-controls="attention-is-all-you-need-notes">Notes</button>
-          <div class="paper-body" id="attention-is-all-you-need-notes"><dl><div><dt>What it does</dt><dd>Proposes the Transformer — a sequence-to-sequence architecture built entirely on self-attention, with no RNNs or CNNs. Encoder and decoder stacks of multi-head attention + feedforward layers, connected by residual paths and layer norms.</dd></div><div><dt>Why it matters</dt><dd>It became the backbone of BERT, GPT, and virtually every modern LLM. By removing recurrence, training became fully parallelizable — making it practical to scale to massive datasets and model sizes.</dd></div><div><dt>How it works</dt><dd>Multi-head self-attention lets each token attend to all others simultaneously. Positional encodings inject sequence order. The encoder maps inputs to a continuous representation; the decoder generates outputs autoregressively attending to both.</dd></div><div><dt>Key result</dt><dd>SOTA BLEU on WMT'14 English-German and English-French translation, trained in a fraction of the time of prior RNN/CNN models. The quality-to-compute tradeoff was just different enough to shift the whole paradigm.</dd></div></dl></div>
+          <details class="notes"><summary>Notes</summary><dl><div><dt>What it does</dt><dd>Proposes the Transformer — a sequence-to-sequence architecture built entirely on self-attention, with no RNNs or CNNs. Encoder and decoder stacks of multi-head attention + feedforward layers, connected by residual paths and layer norms.</dd></div><div><dt>Why it matters</dt><dd>It became the backbone of BERT, GPT, and virtually every modern LLM. By removing recurrence, training became fully parallelizable — making it practical to scale to massive datasets and model sizes.</dd></div><div><dt>How it works</dt><dd>Multi-head self-attention lets each token attend to all others simultaneously. Positional encodings inject sequence order. The encoder maps inputs to a continuous representation; the decoder generates outputs autoregressively attending to both.</dd></div><div><dt>Key result</dt><dd>SOTA BLEU on WMT'14 English-German and English-French translation, trained in a fraction of the time of prior RNN/CNN models. The quality-to-compute tradeoff was just different enough to shift the whole paradigm.</dd></div></dl></details>
         </li>
-      <li class="paper" id="a-watermark-for-large-language-models">
+      <li class="paper" id="a-watermark-for-large-language-models" data-pinned>
           <h2><a href="https://arxiv.org/abs/2301.10226" target="_blank" rel="noopener">A Watermark for Large Language Models</a></h2>
           <p class="sub">Kirchenbauer et al., ICML 2023</p>
           <p class="take">Embeds a statistical signal into LLM outputs by partitioning the vocabulary into &quot;green&quot; and &quot;red&quot; lists at each token step — elegant in its simplicity, and surprisingly robust to paraphrasing attacks.</p>
-          <button class="p-toggle" type="button" aria-expanded="false" aria-controls="a-watermark-for-large-language-models-notes">Notes</button>
-          <div class="paper-body" id="a-watermark-for-large-language-models-notes"><dl><div><dt>What it does</dt><dd>Introduces a practical watermarking scheme for LLM-generated text. At generation time, the model is biased to favor tokens from a &quot;green list&quot; derived by hashing the previous token. A z-test on the green-token fraction detects the watermark.</dd></div><div><dt>Why it matters</dt><dd>Provides the first practical, model-agnostic method to detect AI-generated text without model access. Directly relevant to AI misuse, academic integrity, and provenance tracking. Sparked a whole subfield.</dd></div><div><dt>How it works</dt><dd>Before sampling each token, they hash the previous token ID to seed a PRNG, then partition the vocab into a green list (50%) and red list. At generation, logits for green tokens get a soft boost δ. Detection is a one-sided z-test on green-token proportion.</dd></div><div><dt>Key result</dt><dd>&gt;95% detection power on sequences of 200+ tokens with a false positive rate near 0.01%, and less than 1% perplexity degradation. The watermark survives moderate paraphrasing, which was the surprising part.</dd></div></dl></div>
+          <details class="notes"><summary>Notes</summary><dl><div><dt>What it does</dt><dd>Introduces a practical watermarking scheme for LLM-generated text. At generation time, the model is biased to favor tokens from a &quot;green list&quot; derived by hashing the previous token. A z-test on the green-token fraction detects the watermark.</dd></div><div><dt>Why it matters</dt><dd>Provides the first practical, model-agnostic method to detect AI-generated text without model access. Directly relevant to AI misuse, academic integrity, and provenance tracking. Sparked a whole subfield.</dd></div><div><dt>How it works</dt><dd>Before sampling each token, they hash the previous token ID to seed a PRNG, then partition the vocab into a green list (50%) and red list. At generation, logits for green tokens get a soft boost δ. Detection is a one-sided z-test on green-token proportion.</dd></div><div><dt>Key result</dt><dd>&gt;95% detection power on sequences of 200+ tokens with a false positive rate near 0.01%, and less than 1% perplexity degradation. The watermark survives moderate paraphrasing, which was the surprising part.</dd></div></dl></details>
         </li>
       <li class="paper" id="distilling-step-by-step">
           <h2><a href="https://arxiv.org/abs/2305.02301" target="_blank" rel="noopener">Distilling Step-by-Step!</a></h2>
           <p class="sub">Hsieh et al., ACL Findings 2023</p>
           <p class="take">Uses chain-of-thought rationales from large models as a supervision signal for smaller ones — a clever way to transfer reasoning capabilities, not just final answers.</p>
-          <button class="p-toggle" type="button" aria-expanded="false" aria-controls="distilling-step-by-step-notes">Notes</button>
-          <div class="paper-body" id="distilling-step-by-step-notes"><dl><div><dt>What it does</dt><dd>A knowledge distillation framework where a large teacher LLM generates chain-of-thought rationales that then serve as auxiliary supervision for a small student model. The student learns to predict both the label and the reasoning chain.</dd></div><div><dt>Why it matters</dt><dd>Shows that a 770M-parameter model trained this way outperforms a 540B teacher (PaLM) on several benchmarks — using orders of magnitude less data than standard fine-tuning. Challenges the assumption that task performance requires scale.</dd></div><div><dt>How it works</dt><dd>Multi-task learning: the student has one head predicting the label, another predicting the rationale. Both losses are optimized together. The teacher (PaLM 540B) provides rationales via few-shot prompting at dataset construction time, not at inference.</dd></div><div><dt>Key result</dt><dd>Outperforms standard fine-tuning and distillation baselines across NLI, commonsense QA, and arithmetic tasks, with significantly less labeled data. The rationale supervision is the differentiating factor — labels alone don't close the gap.</dd></div></dl></div>
+          <details class="notes"><summary>Notes</summary><dl><div><dt>What it does</dt><dd>A knowledge distillation framework where a large teacher LLM generates chain-of-thought rationales that then serve as auxiliary supervision for a small student model. The student learns to predict both the label and the reasoning chain.</dd></div><div><dt>Why it matters</dt><dd>Shows that a 770M-parameter model trained this way outperforms a 540B teacher (PaLM) on several benchmarks — using orders of magnitude less data than standard fine-tuning. Challenges the assumption that task performance requires scale.</dd></div><div><dt>How it works</dt><dd>Multi-task learning: the student has one head predicting the label, another predicting the rationale. Both losses are optimized together. The teacher (PaLM 540B) provides rationales via few-shot prompting at dataset construction time, not at inference.</dd></div><div><dt>Key result</dt><dd>Outperforms standard fine-tuning and distillation baselines across NLI, commonsense QA, and arithmetic tasks, with significantly less labeled data. The rationale supervision is the differentiating factor — labels alone don't close the gap.</dd></div></dl></details>
         </li>
       <li class="paper" id="invariant-risk-minimization">
           <h2><a href="https://arxiv.org/abs/1907.02893" target="_blank" rel="noopener">Invariant Risk Minimization</a></h2>
           <p class="sub">Arjovsky et al., arXiv 2019</p>
           <p class="take">Proposes learning data representations where the optimal classifier is invariant across training environments — a principled approach to OOD generalization that fundamentally challenged ERM assumptions.</p>
-          <button class="p-toggle" type="button" aria-expanded="false" aria-controls="invariant-risk-minimization-notes">Notes</button>
-          <div class="paper-body" id="invariant-risk-minimization-notes"><dl><div><dt>What it does</dt><dd>Introduces IRM, a learning paradigm that finds a feature representation Φ such that the optimal classifier on top of Φ is the same across all training environments. This forces the model to rely on causal, not spurious, features.</dd></div><div><dt>Why it matters</dt><dd>ERM (standard training) exploits any correlation in the training data, including spurious ones that don't hold at test time. IRM is a principled attempt to do causal learning from observational data — directly relevant to robustness and fairness.</dd></div><div><dt>How it works</dt><dd>Bi-level optimization: minimize ERM loss while also penalizing the gradient of a fixed dummy classifier (a scalar 1.0 on Φ). If the gradient is nonzero, it means the classifier isn't optimal everywhere — a sign of non-invariance. IRMv1 relaxes this as a penalty term.</dd></div><div><dt>Key result</dt><dd>Recovers causal features on ColoredMNIST (a spurious-correlation benchmark) where ERM completely fails. However, real-world results (e.g., WILDS benchmarks) are mixed, and later work showed IRM underperforms ERM in many practical settings. Important caveat.</dd></div></dl></div>
+          <details class="notes"><summary>Notes</summary><dl><div><dt>What it does</dt><dd>Introduces IRM, a learning paradigm that finds a feature representation Φ such that the optimal classifier on top of Φ is the same across all training environments. This forces the model to rely on causal, not spurious, features.</dd></div><div><dt>Why it matters</dt><dd>ERM (standard training) exploits any correlation in the training data, including spurious ones that don't hold at test time. IRM is a principled attempt to do causal learning from observational data — directly relevant to robustness and fairness.</dd></div><div><dt>How it works</dt><dd>Bi-level optimization: minimize ERM loss while also penalizing the gradient of a fixed dummy classifier (a scalar 1.0 on Φ). If the gradient is nonzero, it means the classifier isn't optimal everywhere — a sign of non-invariance. IRMv1 relaxes this as a penalty term.</dd></div><div><dt>Key result</dt><dd>Recovers causal features on ColoredMNIST (a spurious-correlation benchmark) where ERM completely fails. However, real-world results (e.g., WILDS benchmarks) are mixed, and later work showed IRM underperforms ERM in many practical settings. Important caveat.</dd></div></dl></details>
         </li>
       <li class="paper" id="sequential-change-point-detection-via-online-convex-optimiza">
           <h2>Sequential Change-Point Detection via Online Convex Optimization</h2>
           <p class="sub">Hazan et al., 2023</p>
           <p class="take">Frames change-point detection as an online learning problem, achieving near-optimal detection delay with clean regret-style guarantees — a refreshing new lens on a classical statistics problem.</p>
-          <button class="p-toggle" type="button" aria-expanded="false" aria-controls="sequential-change-point-detection-via-online-convex-optimiza-notes">Notes</button>
-          <div class="paper-body" id="sequential-change-point-detection-via-online-convex-optimiza-notes"><dl><div><dt>What it does</dt><dd>Reformulates sequential change-point detection as an instance of online convex optimization (OCO). The CUSUM statistic emerges naturally from an online mirror descent update, allowing regret analysis to bound detection delay.</dd></div><div><dt>Why it matters</dt><dd>Classical CUSUM theory requires parametric assumptions (known pre/post distributions). OCO framing enables data-adaptive, nonparametric detection with rigorous delay guarantees — a cleaner theoretical foundation for modern applications.</dd></div><div><dt>How it works</dt><dd>Define a loss function tied to the log-likelihood ratio. Run online mirror descent on this sequence of losses. Show that the cumulative loss until a stopping rule triggers has O(log T) regret relative to the optimal fixed-threshold strategy.</dd></div><div><dt>Key result</dt><dd>Near-optimal expected detection delay under Gaussian mean shift, matching the Lorden lower bound up to log factors. The connection to OCO also gives a clean modular way to plug in different divergences or loss structures.</dd></div></dl></div>
+          <details class="notes"><summary>Notes</summary><dl><div><dt>What it does</dt><dd>Reformulates sequential change-point detection as an instance of online convex optimization (OCO). The CUSUM statistic emerges naturally from an online mirror descent update, allowing regret analysis to bound detection delay.</dd></div><div><dt>Why it matters</dt><dd>Classical CUSUM theory requires parametric assumptions (known pre/post distributions). OCO framing enables data-adaptive, nonparametric detection with rigorous delay guarantees — a cleaner theoretical foundation for modern applications.</dd></div><div><dt>How it works</dt><dd>Define a loss function tied to the log-likelihood ratio. Run online mirror descent on this sequence of losses. Show that the cumulative loss until a stopping rule triggers has O(log T) regret relative to the optimal fixed-threshold strategy.</dd></div><div><dt>Key result</dt><dd>Near-optimal expected detection delay under Gaussian mean shift, matching the Lorden lower bound up to log factors. The connection to OCO also gives a clean modular way to plug in different divergences or loss structures.</dd></div></dl></details>
         </li>
       <li class="paper" id="language-models-are-few-shot-learners">
           <h2><a href="https://arxiv.org/abs/2005.14165" target="_blank" rel="noopener">Language Models are Few-Shot Learners</a></h2>
           <p class="sub">Brown et al., NeurIPS 2020</p>
           <p class="take">GPT-3 demonstrates that scale alone unlocks emergent few-shot behavior — raising more questions about what &quot;learning&quot; really means than it actually answers.</p>
-          <button class="p-toggle" type="button" aria-expanded="false" aria-controls="language-models-are-few-shot-learners-notes">Notes</button>
-          <div class="paper-body" id="language-models-are-few-shot-learners-notes"><dl><div><dt>What it does</dt><dd>Trains GPT-3 (175B parameters) on a massive diverse text corpus and evaluates it in zero-, one-, and few-shot settings — where &quot;few-shot&quot; means in-context examples in the prompt, no gradient updates.</dd></div><div><dt>Why it matters</dt><dd>Demonstrated that large-scale pretraining alone produces a model capable of adapting to arbitrary tasks via prompting. Spawned the prompt engineering era and raised deep questions about generalization, memorization, and what in-context learning actually is.</dd></div><div><dt>How it works</dt><dd>Standard autoregressive LM training on ~300B tokens from Common Crawl, WebText, Books, and Wikipedia. Evaluation is purely inference-time: condition on k examples (k=0,1,few) and score the model's completion. No fine-tuning whatsoever.</dd></div><div><dt>Key result</dt><dd>Few-shot GPT-3 matches or beats fine-tuned SOTA on SuperGLUE tasks. Performance scales smoothly and predictably with model size, context length, and data — the scaling laws paper companion made this quantitative.</dd></div></dl></div>
+          <details class="notes"><summary>Notes</summary><dl><div><dt>What it does</dt><dd>Trains GPT-3 (175B parameters) on a massive diverse text corpus and evaluates it in zero-, one-, and few-shot settings — where &quot;few-shot&quot; means in-context examples in the prompt, no gradient updates.</dd></div><div><dt>Why it matters</dt><dd>Demonstrated that large-scale pretraining alone produces a model capable of adapting to arbitrary tasks via prompting. Spawned the prompt engineering era and raised deep questions about generalization, memorization, and what in-context learning actually is.</dd></div><div><dt>How it works</dt><dd>Standard autoregressive LM training on ~300B tokens from Common Crawl, WebText, Books, and Wikipedia. Evaluation is purely inference-time: condition on k examples (k=0,1,few) and score the model's completion. No fine-tuning whatsoever.</dd></div><div><dt>Key result</dt><dd>Few-shot GPT-3 matches or beats fine-tuned SOTA on SuperGLUE tasks. Performance scales smoothly and predictably with model size, context length, and data — the scaling laws paper companion made this quantitative.</dd></div></dl></details>
         </li>
       <li class="paper" id="small-language-models-slms-can-still-pack-a-punch-a-survey">
           <h2><a href="https://arxiv.org/abs/2501.05465" target="_blank" rel="noopener">Small Language Models (SLMs) Can Still Pack a Punch: A Survey</a></h2>
@@ -235,6 +232,8 @@
         </ol>
         <!-- papers:end -->
   </div>
+
+  <figure class="page-photo"><img src="assets/img/archive/annotated-paper.jpg" alt="A printed IEEE paper on metamaterial-lined waveguides, highlighted and annotated by hand, with a pen beside it." width="800" height="1422"><figcaption>How I read: printed, highlighted, written on. From my MITACS summer, 2023.</figcaption></figure>
 </main>
 
 <footer class="band page-foot">
@@ -243,7 +242,22 @@
   </div>
 </footer>
 
+<dialog class="paper-dialog" id="paper-dialog" aria-labelledby="pd-title">
+  <div class="pd-body">
+    <h2 id="pd-title"></h2>
+    <p class="sub" id="pd-sub"></p>
+    <p class="take" id="pd-take"></p>
+    <div class="pd-notes" id="pd-notes"></div>
+    <a class="pd-read" id="pd-read" target="_blank" rel="noopener">Read the paper</a>
+  </div>
+  <div class="pd-bar">
+    <button type="button" id="pd-prev">Previous</button>
+    <button type="button" id="pd-next">Next</button>
+    <button type="button" id="pd-close">Close</button>
+  </div>
+</dialog>
+
 <script src="assets/js/main.js"></script>
-<script src="assets/js/papers.js"></script>
+<script src="assets/js/shelf.js"></script>
 </body>
 </html>

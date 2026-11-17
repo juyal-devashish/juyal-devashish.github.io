@@ -1,7 +1,7 @@
 # juyal-devashish.github.io
 
-Devashish Juyal's personal site, served by GitHub Pages from `main`. Plain HTML, CSS and JavaScript; no build step except the reading notes.
+Devashish Juyal's personal site, served by GitHub Pages from `main`. Plain HTML, CSS and JavaScript; the only build step makes the files generated from the site's own content.
 
 - **Preview:** `python3 -m http.server 8000`
-- **Reading notes:** edit `assets/js/papers-data.js`, then run `node tools/build-papers.js` and commit `papers.html`.
-- **Checks:** every push runs `.github/workflows/checks.yml` (accessibility, tap targets, screenshots, links, Lighthouse). Locally: `node tools/check.js http://127.0.0.1:8000` with `playwright` and `axe-core` installed.
+- **Papers on the shelf:** edit `assets/js/papers-data.js`, run `node tools/build.js`, and commit what it writes (`papers.html`, `papers.md`, `index.md`, `llms.txt`). Run it after editing `index.html` too, so `index.md` and `llms.txt` follow.
+- **Checks:** every push runs `.github/workflows/checks.yml` (generated files up to date, accessibility, tap targets, screenshots, links, Lighthouse). Locally: `node tools/check.js http://127.0.0.1:8000` with `playwright` and `axe-core` installed.

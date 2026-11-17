@@ -1,5 +1,6 @@
 (function () {
   'use strict';
+
   // The nav is light text while it sits on the hero image, and a solid bar once past it.
   var nav = document.getElementById('nav');
   var hero = document.querySelector('.hero');
@@ -21,5 +22,51 @@
       document.getElementById('lb-cap').textContent = cap ? cap.textContent : '';
       box.showModal();
     });
+  });
+
+  // The local time in New York, in the footer.
+  var stamp = document.querySelector('.local-time');
+  if (stamp && window.Intl && Intl.DateTimeFormat) {
+    var fmt = new Intl.DateTimeFormat('en-US', { hour: 'numeric', minute: '2-digit', timeZone: 'America/New_York' });
+    var clock = stamp.querySelector('time');
+    var tick = function () { clock.textContent = fmt.format(new Date()); };
+    tick(); stamp.hidden = false; setInterval(tick, 30000);
+  }
+
+  // Copy my email address.
+  var copy = document.querySelector('.copy');
+  if (copy) {
+    var status = document.getElementById('copy-status');
+    copy.hidden = false;
+    copy.addEventListener('click', function () {
+      var value = copy.getAttribute('data-copy');
+      function done(ok) {
+        copy.textContent = ok ? 'Copied' : 'Couldn’t copy';
+        if (status) status.textContent = ok ? 'Email address copied' : 'Could not copy. The address is on the button beside it.';
+        setTimeout(function () { copy.textContent = 'Copy email'; if (status) status.textContent = ''; }, 2000);
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(value).then(function () { done(true); }, function () { done(false); });
+      } else {
+        try {
+          var ta = document.createElement('textarea');
+          ta.value = value; ta.setAttribute('readonly', ''); ta.style.cssText = 'position:fixed;opacity:0';
+          document.body.appendChild(ta); ta.select();
+          var ok = document.execCommand('copy'); document.body.removeChild(ta); done(ok);
+        } catch (e) { done(false); }
+      }
+    });
+  }
+
+  // Alt+1 to 4 jump between sections (Alt, so it never fires while typing a letter or number).
+  var go = { Digit1: '#work', Digit2: '#projects', Digit3: '#fun', Digit4: 'papers.html' };
+  document.addEventListener('keydown', function (e) {
+    if (!e.altKey || e.ctrlKey || e.metaKey || e.shiftKey || !go[e.code]) return;
+    var t = e.target;
+    if (t && (/^(input|textarea|select)$/i.test(t.tagName) || t.isContentEditable)) return;
+    e.preventDefault();
+    var dest = go[e.code];
+    if (dest.charAt(0) === '#') { if (hero) location.hash = dest; else location.href = 'index.html' + dest; }
+    else if (!/papers\.html$/.test(location.pathname)) location.href = dest;
   });
 })();

@@ -20,10 +20,10 @@ jobs:
         with:
           node-version: 20
 
-      - name: Reading notes page is up to date with its data
+      - name: Generated files are up to date with their sources
         run: |
-          node tools/build-papers.js
-          git diff --exit-code papers.html || (echo "Run node tools/build-papers.js and commit papers.html" && exit 1)
+          node tools/build.js
+          git diff --exit-code -- papers.html papers.md index.md llms.txt || (echo "Run node tools/build.js and commit the results" && exit 1)
 
       - name: Install test tools
         run: |
