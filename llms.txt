@@ -1,0 +1,26 @@
+# Devashish Juyal
+
+> AI engineer in New York. I turn rough ideas into AI products people can trust.
+
+Personal site and portfolio. Each page below is also available as markdown.
+
+## Pages
+
+- [Home](https://juyal-devashish.github.io/index.md): who I am, what I’ve built and where I’ve worked
+- [Reading shelf](https://juyal-devashish.github.io/papers.md): papers I’ve read, with a takeaway for each
+- [Résumé (PDF)](https://juyal-devashish.github.io/assets/devashish-juyal-resume.pdf): work, education and projects
+
+## Projects
+
+- [Sama4](https://www.sama4.online/): News that explains itself, right beside the story.
+- [Inline](https://www.inlinetutor.com/): A writing tutor that asks questions about a draft instead of rewriting it. In beta with real students.
+- [AI operator release gate](https://evosdemo.vercel.app): Lets an AI agent earn trust step by step, and lose it quickly.
+- [Health-first voice onboarding](https://eatopia-demo.vercel.app): A nutrition app’s sign-up, rebuilt around Apple Health and your voice.
+- [Agentic Adjudication](https://github.com/juyal-devashish/Agentic-Adjudication): AI agents prepare clinical-trial safety cases; people make every call.
+- [Sequential watermark detection](https://juyal-devashish.github.io/LLM-Sequential-Watermarking/): Spotting AI-written text with far less computation.
+
+## Contact
+
+- Email: djuyal23@gmail.com
+- LinkedIn: https://www.linkedin.com/in/devashish-juyal
+- GitHub: https://github.com/juyal-devashish

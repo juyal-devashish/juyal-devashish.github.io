@@ -12,6 +12,8 @@
   <meta property="og:image" content="https://juyal-devashish.github.io/assets/img/hero/rings-wide.jpg">
   <meta name="theme-color" content="#0C1631">
   <link rel="canonical" href="https://juyal-devashish.github.io/">
+  <link rel="alternate" type="text/markdown" href="index.md">
+  <link rel="alternate" type="text/plain" href="llms.txt" title="Index for AI tools">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
   <link rel="apple-touch-icon" href="assets/img/favicon-180.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,10 +32,10 @@
   <div class="nav-inner">
     <a class="nav-name" href="#top">Devashish Juyal</a>
     <nav aria-label="Primary">
-      <a href="#work">Work</a>
-      <a href="#projects">Projects</a>
-      <a href="#fun">Fun stuff</a>
-      <a href="papers.html"><span class="long">Reading notes</span><span class="short">Notes</span></a>
+      <a href="#work" aria-keyshortcuts="Alt+1">Work</a>
+      <a href="#projects" aria-keyshortcuts="Alt+2">Projects</a>
+      <a href="#fun" aria-keyshortcuts="Alt+3">Fun stuff</a>
+      <a href="papers.html" aria-keyshortcuts="Alt+4"><span class="long">Reading shelf</span><span class="short">Shelf</span></a>
     </nav>
   </div>
 </header>
@@ -54,6 +56,15 @@
 </section>
 
 <main id="main" class="wrap">
+
+  <section class="glance" aria-label="At a glance">
+    <dl>
+      <div><dt>Now</dt><dd>Data Scientist at Tech Observer</dd></div>
+      <div><dt>Studied</dt><dd>MS in Electrical &amp; Computer Engineering (ML), University of Michigan</dd></div>
+      <div><dt>Before</dt><dd>Data Science at Micron; research at MITACS and ISRO</dd></div>
+      <div><dt>Off hours</dt><dd>Photography, trails, camping and tennis</dd></div>
+    </dl>
+  </section>
 
   <section id="work">
     <h2 class="section-title">Work</h2>
@@ -89,7 +100,7 @@
         </figure>
       </div>
       <div class="p-main">
-        <p class="p-meta"><span class="date">2026</span> · News and retrieval</p>
+        <p class="p-meta"><span class="date">2026</span> · News and retrieval <span class="badge status live">Live</span></p>
         <h3>Sama4</h3>
         <p class="p-sum">News that explains itself, right beside the story.</p>
         <p class="p-links"><a href="https://www.sama4.online/" target="_blank" rel="noopener">Try it live</a><a href="https://github.com/juyal-devashish/Sama4" target="_blank" rel="noopener">Code</a></p>
@@ -105,7 +116,7 @@
     <article class="project" id="inline">
       <img class="p-thumb" src="assets/img/work/inline-t.jpg" alt="" width="320" height="200" loading="lazy">
       <div class="p-main">
-        <p class="p-meta">Education and writing <span class="badge">In beta</span></p>
+        <p class="p-meta">Education and writing <span class="badge status live">Live · beta</span></p>
         <h3>Inline</h3>
         <p class="p-sum">A writing tutor that asks questions about a draft instead of rewriting it. In beta with real students.</p>
         <p class="p-links"><a href="https://www.inlinetutor.com/" target="_blank" rel="noopener">Try it live</a></p>
@@ -116,7 +127,7 @@
     <article class="project" id="release-gate">
       <img class="p-thumb" src="assets/img/work/evos-t.jpg" alt="" width="320" height="200" loading="lazy">
       <div class="p-main">
-        <p class="p-meta"><span class="date">2026</span> · AI quality <span class="badge">Simulated factory</span></p>
+        <p class="p-meta"><span class="date">2026</span> · AI quality <span class="badge status">Demo</span> <span class="badge">Simulated factory</span></p>
         <h3>AI operator release gate</h3>
         <p class="p-sum">Lets an AI agent earn trust step by step, and lose it quickly.</p>
         <p class="p-links"><a href="https://evosdemo.vercel.app" target="_blank" rel="noopener">Try it live</a><a href="https://www.loom.com/share/98c262700b4d478b86f9436d93006a86" target="_blank" rel="noopener">Walkthrough</a><a href="https://github.com/juyal-devashish/EvosDemo" target="_blank" rel="noopener">Code</a></p>
@@ -135,7 +146,7 @@
     <article class="project" id="onboarding">
       <img class="p-thumb" src="assets/img/work/eatopia-t.jpg" alt="" width="320" height="200" loading="lazy">
       <div class="p-main">
-        <p class="p-meta"><span class="date">2026</span> · Health, voice and LLMs <span class="badge">Synthetic data</span></p>
+        <p class="p-meta"><span class="date">2026</span> · Health, voice and LLMs <span class="badge status">Demo</span> <span class="badge">Synthetic data</span></p>
         <h3>Health-first voice onboarding</h3>
         <p class="p-sum">A nutrition app’s sign-up, rebuilt around Apple Health and your voice.</p>
         <p class="p-links"><a href="https://eatopia-demo.vercel.app" target="_blank" rel="noopener">Try it live</a><a href="https://github.com/juyal-devashish/eatopia" target="_blank" rel="noopener">Code</a></p>
@@ -154,7 +165,7 @@
     <article class="project" id="adjudication">
       <img class="p-thumb" src="assets/img/work/adjudication-t.jpg" alt="" width="320" height="200" loading="lazy">
       <div class="p-main">
-        <p class="p-meta"><span class="date">2026</span> · Clinical trials and AI agents <span class="badge">Synthetic data</span></p>
+        <p class="p-meta"><span class="date">2026</span> · Clinical trials and AI agents <span class="badge status">Prototype</span> <span class="badge">Synthetic data</span></p>
         <h3>Agentic Adjudication</h3>
         <p class="p-sum">AI agents prepare clinical-trial safety cases; people make every call.</p>
         <p class="p-links"><a href="https://github.com/juyal-devashish/Agentic-Adjudication" target="_blank" rel="noopener">Code</a></p>
@@ -173,7 +184,7 @@
     <article class="project" id="watermark">
       <img class="p-thumb" src="assets/img/work/watermark-t.jpg" alt="" width="320" height="200" loading="lazy">
       <div class="p-main">
-        <p class="p-meta"><span class="date">2025</span> · Research and statistics <span class="badge">Group project</span></p>
+        <p class="p-meta"><span class="date">2025</span> · Research and statistics <span class="badge status">Research</span> <span class="badge">Group project</span></p>
         <h3>Sequential watermark detection</h3>
         <p class="p-sum">Spotting AI-written text with far less computation.</p>
         <p class="p-links"><a href="https://juyal-devashish.github.io/LLM-Sequential-Watermarking/" target="_blank" rel="noopener">Exhibit</a><a href="https://github.com/juyal-devashish/LLM-Sequential-Watermarking" target="_blank" rel="noopener">Code</a></p>
@@ -226,9 +237,9 @@
     </div>
     <h3 class="sub-title">From the archive</h3>
     <div class="archive">
-      <figure><button type="button" data-full="assets/img/archive/ms-diploma.jpg"><img src="assets/img/archive/ms-diploma.jpg" alt="My University of Michigan diploma: Master of Science in Electrical and Computer Engineering." width="1000" height="1709" loading="lazy"></button><figcaption>Michigan, 2026</figcaption></figure>
-      <figure><button type="button" data-full="assets/img/archive/mitacs-cohort.jpg"><img src="assets/img/archive/mitacs-cohort.jpg" style="object-position: 50% 52%" alt="My MITACS certificate of participation from the University of Alberta, among my cohort’s certificates, which are blurred." width="899" height="900" loading="lazy"></button><figcaption>MITACS, Edmonton, 2023</figcaption></figure>
-      <figure><button type="button" data-full="assets/img/archive/mnit-exam.jpg"><img src="assets/img/archive/mnit-exam.jpg" alt="The cover of my graph theory end-term exam at MNIT Jaipur, with the mark circled in red." width="800" height="1467" loading="lazy"></button><figcaption>Graph theory, MNIT, 2022</figcaption></figure>
+      <figure><button type="button" data-full="assets/img/archive/ms-diploma.jpg"><img src="assets/img/archive/ms-diploma-t.jpg" alt="My University of Michigan diploma: Master of Science in Electrical and Computer Engineering." width="480" height="605" loading="lazy"></button><figcaption>Michigan, 2026</figcaption></figure>
+      <figure><button type="button" data-full="assets/img/archive/mitacs-cohort.jpg"><img src="assets/img/archive/mitacs-cohort-t.jpg" style="object-position: 50% 52%" alt="My MITACS certificate of participation from the University of Alberta, among my cohort’s certificates, which are blurred." width="480" height="481" loading="lazy"></button><figcaption>MITACS, Edmonton, 2023</figcaption></figure>
+      <figure><button type="button" data-full="assets/img/archive/mnit-exam.jpg"><img src="assets/img/archive/mnit-exam-t.jpg" alt="The cover of my graph theory end-term exam at MNIT Jaipur, with the mark circled in red." width="480" height="880" loading="lazy"></button><figcaption>Graph theory, MNIT, 2022</figcaption></figure>
     </div>
   </section>
 
@@ -238,7 +249,7 @@
       <li>I photograph skies and cities, mostly at dawn and dusk.</li>
       <li>Weekends go to drives, trails, camping and tennis.</li>
       <li>From India to Canada to the US; home is New York now.</li>
-      <li>I keep <a href="papers.html">notes on papers I read</a>.</li>
+      <li>The papers I’ve read sit on <a href="papers.html">a shelf</a>.</li>
       <li>I want to be remembered for the things I&nbsp;make.</li>
     </ul>
   </section>
@@ -248,7 +259,7 @@
   <div class="wrap closing">
     <h2>Let’s talk</h2>
     <p>Building something people need to trust? I’d like to hear about it.</p>
-    <p class="closing-actions"><a class="hbtn" href="mailto:djuyal23@gmail.com">djuyal23@gmail.com</a><a class="qlink" href="assets/devashish-juyal-resume.pdf">Résumé (PDF)</a></p>
+    <p class="closing-actions"><a class="hbtn" href="mailto:djuyal23@gmail.com">djuyal23@gmail.com</a><button class="qlink copy" type="button" data-copy="djuyal23@gmail.com" hidden>Copy email</button><a class="qlink" href="assets/devashish-juyal-resume.pdf">Résumé (PDF)</a><span class="visually-hidden" role="status" id="copy-status"></span></p>
   </div>
 
   <div class="reel" aria-label="Photos I’ve taken, dawn to night">
@@ -257,8 +268,8 @@
   </div>
 
   <div class="wrap foot">
-    <p>© 2026 Devashish Juyal · New York City</p>
-    <p class="colophon">Set in Newsreader and Inter. Photos taken in Ann Arbor, Chicago, Detroit, Los Angeles, Las Vegas and New York. Hand-written HTML and CSS, hosted on GitHub Pages. Updated November 2026.</p>
+    <p>© 2026 Devashish Juyal · New York City<span class="local-time" hidden> · <time></time></span></p>
+    <p class="colophon">Set in Newsreader and Inter. Photos taken in Ann Arbor, Chicago, Detroit, Los Angeles, Las Vegas and New York. Plain HTML, CSS and JavaScript, hosted on GitHub Pages. Alt+1 to 4 jumps between sections. Updated November 2026.</p>
   </div>
 </footer>
 
