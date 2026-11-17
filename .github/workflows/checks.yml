@@ -23,7 +23,7 @@ jobs:
       - name: Generated files are up to date with their sources
         run: |
           node tools/build.js
-          git diff --exit-code -- papers.html papers.md index.md llms.txt || (echo "Run node tools/build.js and commit the results" && exit 1)
+          git diff --exit-code -- papers.html papers.md index.md llms.txt assets/search-index.json || (echo "Run node tools/build.js and commit the results" && exit 1)
 
       - name: Install test tools
         run: |
