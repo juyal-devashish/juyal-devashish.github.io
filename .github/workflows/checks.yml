@@ -30,11 +30,14 @@ jobs:
           npm install --no-save --no-package-lock playwright@1.64.1 axe-core@4.14.1
           npx playwright install --with-deps chromium
 
-      - name: Accessibility, tap targets and screenshots at 12 sizes
+      - name: Accessibility, tap targets, screenshots at 12 sizes, and the search palette
         run: |
           python3 -m http.server 8000 --bind 127.0.0.1 >/dev/null 2>&1 &
           sleep 2
-          node tools/check.js http://127.0.0.1:8000 screenshots
+          status=0
+          node tools/check.js http://127.0.0.1:8000 screenshots || status=1
+          node tools/check-palette.js http://127.0.0.1:8000 || status=1
+          exit $status
 
       - name: Upload screenshots
         if: always()
