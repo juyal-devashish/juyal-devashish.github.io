@@ -33,28 +33,32 @@
     tick(); stamp.hidden = false; setInterval(tick, 30000);
   }
 
+  // Copying to the clipboard, shared by the footer button and the search palette.
+  var Site = window.Site = window.Site || {};
+  Site.copy = function (value, done) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(value).then(function () { done(true); }, function () { done(false); });
+      return;
+    }
+    try {
+      var ta = document.createElement('textarea');
+      ta.value = value; ta.setAttribute('readonly', ''); ta.style.cssText = 'position:fixed;opacity:0';
+      document.body.appendChild(ta); ta.select();
+      var ok = document.execCommand('copy'); document.body.removeChild(ta); done(ok);
+    } catch (e) { done(false); }
+  };
+
   // Copy my email address.
   var copy = document.querySelector('.copy');
   if (copy) {
     var status = document.getElementById('copy-status');
     copy.hidden = false;
     copy.addEventListener('click', function () {
-      var value = copy.getAttribute('data-copy');
-      function done(ok) {
+      Site.copy(copy.getAttribute('data-copy'), function (ok) {
         copy.textContent = ok ? 'Copied' : 'Couldn’t copy';
         if (status) status.textContent = ok ? 'Email address copied' : 'Could not copy. The address is on the button beside it.';
         setTimeout(function () { copy.textContent = 'Copy email'; if (status) status.textContent = ''; }, 2000);
-      }
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(value).then(function () { done(true); }, function () { done(false); });
-      } else {
-        try {
-          var ta = document.createElement('textarea');
-          ta.value = value; ta.setAttribute('readonly', ''); ta.style.cssText = 'position:fixed;opacity:0';
-          document.body.appendChild(ta); ta.select();
-          var ok = document.execCommand('copy'); document.body.removeChild(ta); done(ok);
-        } catch (e) { done(false); }
-      }
+      });
     });
   }
 

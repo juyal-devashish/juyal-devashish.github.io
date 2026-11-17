@@ -206,6 +206,47 @@ section + section { margin-top: var(--s6); }
 .lightbox figcaption { padding: 12px 16px 0; font-size: .875rem; }
 .lb-close { display: block; min-height: 44px; margin: 4px 16px 8px auto; font-size: .875rem; font-weight: 500; color: #FFF8EE; text-decoration: underline; text-underline-offset: 4px; }
 
+/* ---------- search palette (Ctrl or ⌘ K) ---------- */
+.nav-search { display: none; flex: none; align-items: center; justify-content: center; width: 44px; height: 44px; margin-left: calc(-1 * var(--s1)); color: inherit; border-radius: 8px; }
+.js .nav-search { display: inline-flex; }
+.nav-search svg, .pal-ico { width: 20px; height: 20px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
+.nav-search:hover { color: var(--accent); }
+.palette { width: min(94vw, 880px); max-height: min(600px, 84dvh); margin: 9vh auto auto; padding: 0; border: 1px solid var(--hair); border-radius: 14px; background: var(--bg); color: var(--ink); overflow: hidden; box-shadow: 0 24px 80px rgba(0, 0, 0, .55); }
+.palette[open] { display: flex; flex-direction: column; }
+.palette::backdrop { background: rgba(4, 8, 22, .72); }
+.pal-head { display: flex; align-items: center; gap: 12px; padding: 0 var(--s2); border-bottom: 1px solid var(--hair); color: var(--ink-3); }
+.pal-head:focus-within { box-shadow: inset 0 -2px 0 var(--accent); color: var(--ink); }
+.pal-input { flex: 1; min-width: 0; min-height: 56px; border: 0; background: transparent; color: var(--ink); font: 400 1.0625rem/1.4 var(--font-body); outline: none; }
+.pal-input::placeholder { color: var(--ink-3); opacity: 1; }
+.pal-x { min-height: 44px; min-width: 44px; padding: 0 10px; border: 1px solid var(--hair); border-radius: 8px; color: var(--ink-3); font-size: .8125rem; font-weight: 500; }
+.pal-x:hover { color: var(--ink); border-color: var(--ink-3); }
+.pal-body { display: grid; grid-template-columns: minmax(0, 1fr) 300px; flex: 1; min-height: min(400px, 60dvh); }
+.pal-results { overflow-y: auto; overscroll-behavior: contain; padding: 8px; max-height: min(480px, 66dvh); }
+.pal-gh { padding: 12px 12px 4px; font: 600 .75rem/1 var(--font-body); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); }
+.pal-o { display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 6px 12px; border-radius: 8px; cursor: pointer; }
+.pal-o[aria-selected="true"] { background: var(--surface); box-shadow: inset 2px 0 0 var(--accent); }
+.pal-t { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pal-t mark { background: none; color: var(--accent); font-weight: 600; }
+.pal-m { flex: none; max-width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: .8125rem; color: var(--ink-3); }
+.pal-empty { padding: var(--s3) 12px; color: var(--ink-2); }
+.pal-preview { padding: var(--s3); border-left: 1px solid var(--hair); overflow-y: auto; background: color-mix(in srgb, var(--surface) 55%, var(--bg)); }
+.pal-pimg { display: block; width: 100%; height: 150px; object-fit: cover; border-radius: 8px; border: 1px solid var(--hair); margin-bottom: var(--s2); }
+.pal-pt { font: 500 1.25rem/1.25 var(--font-head); }
+.pal-pm { margin-top: 4px; font-size: .8125rem; color: var(--ink-3); }
+.pal-pb { margin-top: var(--s1); font-size: .9375rem; color: var(--ink-2); }
+.pal-pl { display: flex; flex-wrap: wrap; gap: 4px var(--s2); margin-top: var(--s2); font-size: .875rem; font-weight: 500; }
+.pal-pl a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+.pal-ph { margin-top: var(--s2); font-size: .8125rem; color: var(--ink-3); }
+.pal-foot { display: flex; gap: var(--s3); padding: 10px var(--s2); border-top: 1px solid var(--hair); font-size: .8125rem; color: var(--ink-3); }
+@media (max-width: 760px) {
+  .palette { width: 100%; max-width: 100%; margin: 0 auto auto; border-radius: 0 0 14px 14px; border-top: 0; max-height: 88dvh; }
+  .pal-body { grid-template-columns: 1fr; min-height: 0; }
+  .pal-preview, .pal-foot { display: none; }
+  .pal-results { max-height: 70dvh; }
+  .pal-o { min-height: 48px; }
+  .pal-m { max-width: 38%; }
+}
+
 /* ---------- reading notes page ---------- */
 .page-head h1 { font-size: clamp(2.4rem, 7vw, 3.4rem); letter-spacing: -.015em; line-height: 1.05; }
 .page-head p { color: var(--ink-2); margin-top: var(--s2); max-width: 600px; }

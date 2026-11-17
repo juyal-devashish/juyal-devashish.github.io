@@ -198,4 +198,4 @@ Building something people need to trust? I’d like to hear about it.
 
 © 2026 Devashish Juyal · New York City
 
-Set in Newsreader and Inter. Photos taken in Ann Arbor, Chicago, Detroit, Los Angeles, Las Vegas and New York. Plain HTML, CSS and JavaScript, hosted on GitHub Pages. Alt+1 to 4 jumps between sections. Updated November 2026.
+Set in Newsreader and Inter. Photos taken in Ann Arbor, Chicago, Detroit, Los Angeles, Las Vegas and New York. Plain HTML, CSS and JavaScript, hosted on GitHub Pages. Alt+1 to 4 jumps between sections, and Ctrl or ⌘ K searches. Updated November 2026.
