@@ -208,7 +208,9 @@ section + section { margin-top: var(--s6); }
 
 /* ---------- search palette (Ctrl or ⌘ K) ---------- */
 .nav-search { display: none; flex: none; align-items: center; justify-content: center; width: 44px; height: 44px; margin-left: calc(-1 * var(--s1)); color: inherit; border-radius: 8px; }
-.js .nav-search { display: inline-flex; }
+/* Invisible (but still taking its space, so nothing shifts) until palette.js has run and added .ready, so it's never a button that does nothing. */
+.js .nav-search { display: inline-flex; visibility: hidden; }
+.nav-search.ready { visibility: visible; }
 .nav-search svg, .pal-ico { width: 20px; height: 20px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
 .nav-search:hover { color: var(--accent); }
 .palette { width: min(94vw, 880px); max-height: min(600px, 84dvh); margin: 9vh auto auto; padding: 0; border: 1px solid var(--hair); border-radius: 14px; background: var(--bg); color: var(--ink); overflow: hidden; box-shadow: 0 24px 80px rgba(0, 0, 0, .55); }

@@ -263,6 +263,7 @@
   btn.addEventListener('click', open);
   btn.addEventListener('pointerenter', load);
   btn.addEventListener('focus', load);
+  btn.classList.add('ready');
   document.addEventListener('keydown', function (ev) {
     if ((ev.metaKey || ev.ctrlKey) && !ev.altKey && !ev.shiftKey && (ev.key === 'k' || ev.key === 'K')) {
       ev.preventDefault();

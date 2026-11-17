@@ -66,13 +66,26 @@ async function run(browser, size, w, h, mobile, pageName) {
     return p;
   };
   const start = pageName === 'home' ? '' : 'papers.html';
-  const homeStart = pageName === 'home';
 
   await step(where, 'button is there, named and 44px', async () => {
     const p = await fresh();
     const b = await p.$eval('.nav-search', e => { const r = e.getBoundingClientRect(); return { w: r.width, h: r.height, name: e.getAttribute('aria-label'), pop: e.getAttribute('aria-haspopup'), shown: !!e.offsetParent }; });
     ok(b.shown, 'button not visible'); ok(b.w >= 44 && b.h >= 44, `button is ${b.w}x${b.h}`); ok(b.name, 'no accessible name'); eq(b.pop, 'dialog', 'aria-haspopup');
     await p.close();
+  });
+
+  await step(where, 'on a slow connection the search button stays hidden until it works', async () => {
+    const slow = await browser.newContext({ viewport: { width: w, height: h }, isMobile: mobile, hasTouch: mobile });
+    await slow.route(/palette\.js/, async r => { await new Promise(x => setTimeout(x, 1500)); await r.continue(); });
+    const p = await slow.newPage();
+    await p.goto(BASE + start, { waitUntil: 'commit' });
+    await p.waitForSelector('.nav-search', { state: 'attached' });
+    eq(await p.$eval('.nav-search', e => getComputedStyle(e).visibility), 'hidden', 'button visibility before palette.js has run');
+    const box = await p.$eval('.nav-search', e => { const r = e.getBoundingClientRect(); return [r.width, r.height]; });
+    ok(box[0] >= 44 && box[1] >= 44, `hidden button gave up its space (${box})`);
+    await p.click('.nav-search');                       // waits until it is visible, i.e. until it works
+    await p.waitForSelector('#palette[open] .pal-o');
+    await slow.close();
   });
 
   await step(where, 'opens by button, focuses the input, Esc returns focus', async () => {
@@ -83,7 +96,7 @@ async function run(browser, size, w, h, mobile, pageName) {
     eq(attrs.role, 'combobox', 'role'); eq(attrs.exp, 'true', 'aria-expanded'); eq(attrs.ctl, 'pal-list', 'aria-controls');
     await p.keyboard.press('Escape');
     await p.waitForSelector('#palette:not([open])', { state: 'attached' });
-    eq(await p.evaluate(() => document.activeElement.className), 'nav-search', 'focus after Esc');
+    ok(await p.evaluate(() => document.activeElement.classList.contains('nav-search')), 'focus should go back to the search button after Esc');
     await p.close();
   });
 
