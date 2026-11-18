@@ -6,6 +6,8 @@ export const site = {
   role: 'AI engineer',
   pitch: 'I turn rough ideas into AI products people can trust.',
   city: 'New York',
+  // The home hero's aurora timelapse (tools/hero-video.mjs).
+  heroCredit: 'Aurora, recorded on my GoPro in my Ann Arbor backyard, November 2024.',
   timeZone: 'America/New_York',
   email: 'djuyal23@gmail.com',
   resume: '/assets/devashish-juyal-resume.pdf',

@@ -14,6 +14,7 @@ import Reveal from '@/components/Reveal';
 import StatusBadge from '@/components/StatusBadge';
 import Clock from '@/components/Clock';
 import DemoClip from '@/components/home/DemoClip';
+import HeroArt from '@/components/home/HeroArt';
 import GitHubCalendar from '@/components/widgets/GitHubCalendar';
 import CodingOrbits from '@/components/widgets/CodingOrbits';
 import s from './page.module.css';
@@ -48,10 +49,7 @@ export default async function Home() {
   return (
     <>
       <div className={`${s.hero} bleed`} id="top">
-        <picture className={s.art}>
-          <source media="(max-width: 700px)" srcSet="/assets/img/hero/rings-tall.jpg" width={876} height={1168} />
-          <img src="/assets/img/hero/rings-wide.jpg" alt="" width={1800} height={1169} fetchPriority="high" />
-        </picture>
+        <HeroArt className={s.art} />
         <div className={s.heroIn}>
           <p className="kicker">{site.role} · {site.city}</p>
           <h1 className={s.name}>Devashish <span className={s.l2}><em>Juyal</em></span></h1>
@@ -68,6 +66,7 @@ export default async function Home() {
             <a className="hbtn" href={site.links.github} rel="noopener">GitHub</a>
           </div>
         </div>
+        <p className={s.credit}>{site.heroCredit}</p>
         <p className={s.cue} aria-hidden="true">Scroll</p>
       </div>
 
