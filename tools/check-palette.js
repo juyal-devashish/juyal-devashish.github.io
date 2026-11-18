@@ -195,7 +195,7 @@ async function run(browser, size, w, h, mobile, start) {
     const p = await fresh(); await openPalette(p, 'key'); await query(p, 'hollywood');
     await Promise.all([p.waitForURL(/\/photos#img_0510$/), p.keyboard.press('Enter')]);
     await p.waitForSelector('#lightbox[open]');
-    await p.waitForFunction(() => document.getElementById('lb-cap').textContent === 'Los Angeles · Mar 2024');
+    await p.waitForFunction(() => document.getElementById('lb-cap').textContent === 'Los Angeles'); // captions are place names only (lib/photos.ts)
     ok(/img_0510/.test(await p.$eval('#lb-img', e => e.currentSrc || e.src)), 'viewer image');
     await p.keyboard.press('Escape');
     await p.close();
