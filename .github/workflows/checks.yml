@@ -1,7 +1,8 @@
 name: Site checks
 
-# Runs on every push and pull request. Vercel deploys on its own; a red run here
-# means "look before you share", not "the site is down".
+# Runs on every push and pull request: types, unit tests and a production build.
+# The browser checks (npm run check, npm run check:palette) run locally, not here.
+# Vercel deploys on its own; a red run here means "look before you share", not "the site is down".
 on:
   push:
   pull_request:
@@ -12,10 +13,8 @@ permissions:
 jobs:
   checks:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 15
     env:
-      # Absolute links (canonical, og:url, llms.txt) point at the local server, so lychee can follow them.
-      NEXT_PUBLIC_SITE_URL: http://127.0.0.1:3200
       NEXT_TELEMETRY_DISABLED: 1
     steps:
       - uses: actions/checkout@v4
@@ -34,53 +33,3 @@ jobs:
           npm test
 
       - run: npx next build
-
-      - name: Start the production server
-        run: |
-          npx next start -p 3200 > next-start.log 2>&1 &
-          npx --yes wait-on@8.0.5 --timeout 60000 http://127.0.0.1:3200/
-
-      - run: npx playwright install --with-deps chromium
-
-      - name: Accessibility, tap targets, text routes, screenshots at 12 sizes, and the search palette
-        run: |
-          status=0
-          node tools/check.js http://127.0.0.1:3200 screenshots || status=1
-          node tools/check-palette.js http://127.0.0.1:3200 || status=1
-          exit $status
-
-      - name: Upload screenshots
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: screenshots
-          path: screenshots/
-          retention-days: 14
-
-      - name: Check links
-        uses: lycheeverse/lychee-action@v2
-        with:
-          # LinkedIn and SSRN block automated requests; lychee skips mailto links by default.
-          # /writing 404s while writing is switched off (writingOn in lib/site.ts); add it back then.
-          args: >-
-            --no-progress --max-retries 2 --accept 200,206,429
-            --exclude linkedin.com --exclude ssrn.com
-            http://127.0.0.1:3200/ http://127.0.0.1:3200/projects
-            http://127.0.0.1:3200/stack http://127.0.0.1:3200/resume http://127.0.0.1:3200/photos
-            http://127.0.0.1:3200/now http://127.0.0.1:3200/cmd http://127.0.0.1:3200/llms.txt
-          fail: true
-
-      - name: Lighthouse (accessibility score at least 0.95; settings in lighthouserc.json)
-        run: npx --yes @lhci/cli@0.16.1 autorun
-
-      - name: Upload Lighthouse reports
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: lighthouse
-          path: .lighthouseci/
-          retention-days: 14
-
-      - name: Server log
-        if: failure()
-        run: cat next-start.log

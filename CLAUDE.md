@@ -15,7 +15,7 @@ npm run check                    # axe (system set to dark and to light; the sit
 npm run check:palette            # search palette behaviour + every /search-index.json link resolves to a 200 page with that #id
 ```
 
-Several dev servers can run side by side: `NEXT_DIST_DIR=.next-<name> npx next dev -p <port>`. CI (`.github/workflows/checks.yml`) runs typegen, tsc, unit tests, build, both check scripts, lychee and Lighthouse (accessibility ≥ 0.95, `lighthouserc.json`).
+Several dev servers can run side by side: `NEXT_DIST_DIR=.next-<name> npx next dev -p <port>`. CI (`.github/workflows/checks.yml`) is kept minimal: typegen, tsc, unit tests and build. Run both check scripts locally before shipping UI changes.
 
 ## Where things live
 
