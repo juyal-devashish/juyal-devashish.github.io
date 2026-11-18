@@ -61,10 +61,11 @@ jobs:
         uses: lycheeverse/lychee-action@v2
         with:
           # LinkedIn and SSRN block automated requests; lychee skips mailto links by default.
+          # /writing 404s while writing is switched off (writingOn in lib/site.ts); add it back then.
           args: >-
             --no-progress --max-retries 2 --accept 200,206,429
             --exclude linkedin.com --exclude ssrn.com
-            http://127.0.0.1:3200/ http://127.0.0.1:3200/projects http://127.0.0.1:3200/writing
+            http://127.0.0.1:3200/ http://127.0.0.1:3200/projects
             http://127.0.0.1:3200/stack http://127.0.0.1:3200/resume http://127.0.0.1:3200/photos
             http://127.0.0.1:3200/now http://127.0.0.1:3200/cmd http://127.0.0.1:3200/llms.txt
           fail: true
