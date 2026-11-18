@@ -139,9 +139,14 @@ async function run(browser, size, w, h, mobile, start) {
     const state = () => p.evaluate(() => ({ sel: document.querySelectorAll('.pal-o[aria-selected="true"]').length, id: document.querySelector('.pal-input').getAttribute('aria-activedescendant'), selId: (document.querySelector('.pal-o[aria-selected="true"]') || {}).id }));
     let s = await state(); eq(s.sel, 1, 'selected options at start'); eq(s.id, s.selId, 'activedescendant matches');
     const first = s.id;
-    await p.keyboard.press('ArrowDown'); s = await state(); ok(s.id !== first, 'ArrowDown did not move'); eq(s.sel, 1, 'selected options after ArrowDown');
-    await p.keyboard.press('ArrowUp'); await p.keyboard.press('ArrowUp'); s = await state();
-    const last = await p.$$eval('.pal-o', n => n[n.length - 1].id); eq(s.id, last, 'ArrowUp from the first option should wrap to the last');
+    // Give React a moment to render each key before reading (CI runners are slow); the checks below stay exact.
+    await p.keyboard.press('ArrowDown');
+    await p.waitForFunction(f => document.querySelector('.pal-input').getAttribute('aria-activedescendant') !== f, first, { timeout: 2000 }).catch(() => {});
+    s = await state(); ok(s.id !== first, 'ArrowDown did not move'); eq(s.sel, 1, 'selected options after ArrowDown');
+    const last = await p.$$eval('.pal-o', n => n[n.length - 1].id);
+    await p.keyboard.press('ArrowUp'); await p.keyboard.press('ArrowUp');
+    await p.waitForFunction(l => document.querySelector('.pal-input').getAttribute('aria-activedescendant') === l, last, { timeout: 2000 }).catch(() => {});
+    s = await state(); eq(s.id, last, 'ArrowUp from the first option should wrap to the last');
     await p.close();
   });
 
