@@ -34,7 +34,7 @@ Set in Vercel (see `.env.example`). Without a variable, its widget is simply not
 
 ## Rules
 
-Minimal words. Stack = papers he has read, nothing else. No health widgets. Live widgets show real data or nothing. Zero axe violations in both themes, 44px targets, no sideways scroll, works without JavaScript.
+Minimal words. Stack = papers he has read, nothing else. No health widgets. Live widgets show real data or nothing. Night only, no light mode. Zero axe violations, 44px targets, no sideways scroll, works without JavaScript.
 
 ## Moving from GitHub Pages
 

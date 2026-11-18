@@ -96,7 +96,6 @@ export function searchIndex(): SearchEntry[] {
   const e: SearchEntry[] = [];
   e.push({ id: 'email', type: 'action', title: 'Email me', meta: site.email, blurb: 'Opens your mail app.', kw: 'contact write hire', href: `mailto:${site.email}` });
   e.push({ id: 'copy-email', type: 'action', title: 'Copy email address', meta: site.email, blurb: 'Copies my address.', kw: 'contact clipboard', act: 'copy-email', value: site.email });
-  e.push({ id: 'theme', type: 'action', title: 'Switch theme', meta: 'Alt+T', blurb: 'Light or dark.', kw: 'dark light mode appearance', act: 'theme' });
   e.push({ id: 'resume-pdf', type: 'action', title: 'Résumé (PDF)', meta: 'PDF', blurb: 'One page.', kw: 'cv download', href: site.resume });
   e.push({ id: 'github', type: 'action', title: 'GitHub', meta: 'New tab', blurb: 'My code.', kw: 'code repos', ext: site.links.github });
   e.push({ id: 'linkedin', type: 'action', title: 'LinkedIn', meta: 'New tab', blurb: 'My profile.', kw: 'social connect', ext: site.links.linkedin });

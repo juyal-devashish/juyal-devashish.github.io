@@ -11,7 +11,7 @@ npm run dev                      # http://localhost:3000
 npm test                         # unit tests (node --test, tests/*.test.ts)
 npx tsc --noEmit                 # on a fresh clone run `npx next typegen` first
 npx next build && npx next start -p 3200
-npm run check                    # axe in both themes, tap targets, sideways scroll, h1, no-JS, text routes, screenshots at 12 sizes
+npm run check                    # axe (system set to dark and to light; the site must look the same), tap targets, sideways scroll, h1, no-JS, text routes, screenshots at 12 sizes
 npm run check:palette            # search palette behaviour + every /search-index.json link resolves to a 200 page with that #id
 ```
 
@@ -33,7 +33,7 @@ Several dev servers can run side by side: `NEXT_DIST_DIR=.next-<name> npx next d
 - Minimal words: short labels, one-line summaries. Never invent biography facts; everything comes from `lib/`.
 - The stack (/stack, formerly the shelf) shows only papers he has read. No books, films or shows. No health or fitness widgets.
 - Live widgets render real data only. With no data, render nothing. Sample data (`DEV_FIXTURES=1`, `lib/fixtures.ts`) never reaches a production build.
-- Accessibility is enforced: zero axe violations (wcag2a/aa, 21aa, 22aa, best-practice) in night and daybreak; controls outside running text ≥ 44px tall and ≥ 24px wide; no sideways scroll at 360–2560px; contrast ≥ 4.5:1; respects reduced motion; content and links work without JavaScript.
+- Accessibility is enforced: zero axe violations (wcag2a/aa, 21aa, 22aa, best-practice) with the system set to dark or light (the site is night only); controls outside running text ≥ 44px tall and ≥ 24px wide; no sideways scroll at 360–2560px; contrast ≥ 4.5:1; respects reduced motion; content and links work without JavaScript.
 - Stable anchors: project ids on `/projects`, role ids on `/resume`, `slug(title)` on `/stack`, file names without `.jpg` on `/photos`. Search results link to them.
 - Colours and fonts only through the tokens in `app/globals.css`.
 - New dependencies only if essential, pinned to an exact version.

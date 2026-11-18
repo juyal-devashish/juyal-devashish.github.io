@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState, type CSSProperties, type FormEvent, type KeyboardEvent, type MouseEvent } from 'react';
 import { play, soundOn, setSoundOn, isTouchOnly } from '@/lib/sound';
-import { setTheme, toggleTheme, themeName } from '@/lib/theme';
 import { announce } from '@/components/util';
 import { run, complete, searchLines, type Line, type Seg, type TermData, type IndexEntry } from './engine';
 import s from './terminal.module.css';
@@ -113,11 +112,6 @@ export default function Terminal({ data, banner }: { data: TermData; banner: { m
         push(cmd, res.lines);
         router.push(ef.href);
         return;
-      case 'theme': {
-        const tme = ef.value ? (setTheme(ef.value), ef.value) : toggleTheme();
-        push(cmd, [{ segs: [`theme: ${themeName(tme)}`] }]);
-        return;
-      }
       case 'sound': {
         if (ef.value !== undefined) setSoundOn(ef.value);
         const on = ef.value ?? soundOn();

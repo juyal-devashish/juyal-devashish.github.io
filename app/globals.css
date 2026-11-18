@@ -1,6 +1,5 @@
 /* ============================================================
-   NIGHT (default dark) and DAYBREAK (light).
-   Same horizon orange, same rings; daybreak is a warm paper sky.
+   NIGHT: the site has one theme, a dark night sky.
    Pages: use these tokens, never literal colours or font names.
    ============================================================ */
 :root {
@@ -40,37 +39,6 @@
   --g: clamp(16px, 4vw, 48px);
   --bar: 64px;
 }
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme="dark"]) {
-    --bg: #F6EEE2; --bg-deep: #EFE2CF; --surface: #FFF9F0; --surface-2: #F1E4D2;
-    --ink: #0E1A3A; --ink-2: #2E3A5A; --ink-3: #4F5A74;
-    --hair: rgba(14, 26, 58, .14); --hair-2: rgba(14, 26, 58, .3);
-    --accent: #B0441A; --accent-strong: #C2501F; --on-accent: #FFF8EE;
-    --ring: #2B55A6; --ring-soft: rgba(43, 85, 166, .16); --glow: rgba(255, 150, 90, .28);
-    --shadow: 0 30px 70px -34px rgba(60, 35, 10, .45);
-    --hero-filter: invert(1) hue-rotate(180deg) saturate(1.1) brightness(1.04);
-    --hero-fg: #0E1A3A; --hero-fg-2: #2B3656; --hero-scrim: 250, 240, 226;
-    --hero-accent: #8A3210; --hero-halo: 0 0 28px rgba(250, 240, 226, .95), 0 0 6px rgba(250, 240, 226, .9);
-    --grain: .05;
-    --c0: #CDD4E4; --c1: #9DB0D6; --c2: #6683BE; --c3: #2B55A6; --c4: #C2501F; --c-edge: rgba(14, 26, 58, .22);
-    color-scheme: light;
-  }
-}
-:root[data-theme="light"] {
-  --bg: #F6EEE2; --bg-deep: #EFE2CF; --surface: #FFF9F0; --surface-2: #F1E4D2;
-  --ink: #0E1A3A; --ink-2: #2E3A5A; --ink-3: #4F5A74;
-  --hair: rgba(14, 26, 58, .14); --hair-2: rgba(14, 26, 58, .3);
-  --accent: #B0441A; --accent-strong: #C2501F; --on-accent: #FFF8EE;
-  --ring: #2B55A6; --ring-soft: rgba(43, 85, 166, .16); --glow: rgba(255, 150, 90, .28);
-  --shadow: 0 30px 70px -34px rgba(60, 35, 10, .45);
-  --hero-filter: invert(1) hue-rotate(180deg) saturate(1.1) brightness(1.04);
-  --hero-fg: #0E1A3A; --hero-fg-2: #2B3656; --hero-scrim: 250, 240, 226;
-  --hero-accent: #8A3210; --hero-halo: 0 0 28px rgba(250, 240, 226, .95), 0 0 6px rgba(250, 240, 226, .9);
-  --grain: .05;
-  --c0: #CDD4E4; --c1: #9DB0D6; --c2: #6683BE; --c3: #2B55A6; --c4: #C2501F; --c-edge: rgba(14, 26, 58, .22);
-  color-scheme: light;
-}
-:root[data-theme="dark"] { color-scheme: dark; }
 
 /* ---------- base ---------- */
 *, *::before, *::after { box-sizing: border-box; }
@@ -264,15 +232,6 @@ html:not(.js) .util { display: none; }
 /* no interface sounds on touch-only devices */
 @media (hover: none) and (pointer: coarse), (prefers-reduced-motion: reduce) { .util .snd { display: none; } }
 .snd[aria-pressed="false"] .snd-on, .snd[aria-pressed="true"] .snd-off { display: none; }
-.theme-ico { display: grid; place-items: center; width: 18px; height: 18px; }
-.theme-ico svg { display: block; }
-.theme-ico .moon { display: none; }
-:root[data-theme="light"] .theme-ico .sun { display: none; }
-:root[data-theme="light"] .theme-ico .moon { display: block; }
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme="dark"]) .theme-ico .sun { display: none; }
-  :root:not([data-theme="dark"]) .theme-ico .moon { display: block; }
-}
 
 /* ---------- contact band and footer (components/Footer) ---------- */
 .contact { position: relative; z-index: 1; margin-top: clamp(80px, 12vw, 160px); padding: clamp(72px, 10vw, 130px) var(--g) 32px; overflow: hidden; isolation: isolate; background: var(--bg-deep); }
@@ -373,8 +332,8 @@ html:not(.js) .util { display: none; }
   .orn.armed path { stroke-dashoffset: 0; }
 }
 @media print {
-  /* Paper is white: print in daybreak ink whichever theme is on screen. */
-  :root:root, :root[data-theme] {
+  /* Paper is white: print in dark ink on white. */
+  :root:root {
     --bg: #fff; --bg-deep: #fff; --surface: #fff; --surface-2: #f4f4f4;
     --ink: #000; --ink-2: #222; --ink-3: #444;
     --hair: #bbb; --hair-2: #888;

@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { Inter, JetBrains_Mono, Newsreader } from 'next/font/google';
 import { site } from '@/lib/site';
-import { themeScript } from '@/lib/theme';
 import Rail from '@/components/Rail';
 import Controls from '@/components/Controls';
 import Palette from '@/components/Palette';
@@ -35,19 +34,18 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   viewportFit: 'cover',
-  colorScheme: 'dark light',
-  themeColor: [
-    { media: '(prefers-color-scheme: dark)', color: '#0A1330' },
-    { media: '(prefers-color-scheme: light)', color: '#F6EEE2' },
-  ],
+  colorScheme: 'dark',
+  themeColor: '#0A1330',
 };
+
+const bootScript = `(function(){document.documentElement.classList.add('js');try{localStorage.removeItem('theme')}catch(e){}})()`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" data-scroll-behavior="smooth" className={`${serif.variable} ${sans.variable} ${mono.variable}`} suppressHydrationWarning>
       <head>
-        {/* Before paint: mark html.js and apply a stored theme, so there is no flash. */}
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        {/* Before paint: mark html.js, and drop the theme pick stored by the old light mode. */}
+        <script dangerouslySetInnerHTML={{ __html: bootScript }} />
       </head>
       <body>
         <a className="skip" href="#main">Skip to content</a>

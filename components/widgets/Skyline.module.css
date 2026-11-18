@@ -17,10 +17,6 @@
   -webkit-user-select: none;
   transition: opacity .35s var(--ease);
 }
-@media (prefers-color-scheme: light) {
-  :global(:root:not([data-theme="dark"])) .stage { --win: var(--surface); --shade: var(--ink); --base: var(--surface-2); }
-}
-:global(:root[data-theme="light"]) .stage { --win: var(--surface); --shade: var(--ink); --base: var(--surface-2); }
 .grab { cursor: grabbing; }
 
 /* Cell pitch from the panel width. One floor per contribution, so heights are literal:

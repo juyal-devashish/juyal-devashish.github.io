@@ -1,13 +1,12 @@
 'use client';
 // The orbit rail: a vertical nav on desktop, a bottom bar on phones.
-// Alt+1..7 jump between pages (e.code, so Option works on macOS); Alt+T switches theme.
+// Alt+1..7 jump between pages (e.code, so Option works on macOS).
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { nav } from '@/lib/site';
-import { toggleTheme, themeName } from '@/lib/theme';
 import { play } from '@/lib/sound';
-import { announce, isTyping } from './util';
+import { isTyping } from './util';
 
 export function isActive(pathname: string, href: string) {
   if (href === '/') return pathname === '/';
@@ -28,13 +27,6 @@ export default function Rail() {
         e.preventDefault();
         play('nav');
         router.push(item.href);
-        return;
-      }
-      if (e.code === 'KeyT' && !e.shiftKey) {
-        e.preventDefault();
-        const t = toggleTheme();
-        play('toggle');
-        announce(`${themeName(t)[0].toUpperCase()}${themeName(t).slice(1)} theme`);
       }
     };
     document.addEventListener('keydown', onKey);

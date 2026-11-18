@@ -1,6 +1,5 @@
 /* ---------- the paper stack ----------
-   Sheets are paper in both themes, so they carry their own small palette
-   (defined once here); the theme shows in everything around them.
+   Sheets are paper, so they carry their own small palette (defined once here).
    Every text pair on the cream is ≥ 4.5:1. */
 .wrap {
   --paper: #F3ECDD;        /* night: a touch dimmer, so it doesn't glare */
@@ -17,10 +16,6 @@
   position: relative;
   margin-top: clamp(4px, 1vw, 12px);
 }
-@media (prefers-color-scheme: light) {
-  :global(:root:not([data-theme="dark"])) .wrap { --paper: #FFFCF6; --paper-2: #EDE3D2; --clip: #C2501F; --sheet-shadow: 0 1px 1px rgba(60, 35, 10, .16), 0 14px 26px -14px rgba(60, 35, 10, .5); }
-}
-:global(:root[data-theme="light"]) .wrap { --paper: #FFFCF6; --paper-2: #EDE3D2; --clip: #C2501F; --sheet-shadow: 0 1px 1px rgba(60, 35, 10, .16), 0 14px 26px -14px rgba(60, 35, 10, .5); }
 
 /* intro: heading with the photo of a marked-up paper beside it */
 .intro { display: grid; grid-template-columns: minmax(0, 1fr); }

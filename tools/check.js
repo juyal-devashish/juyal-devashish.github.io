@@ -1,7 +1,7 @@
 // Site checks, run in CI on every push (and locally against a production build):
 //   npx next build && npx next start -p 3200
 //   node tools/check.js http://127.0.0.1:3200 [screenshot-dir]
-// Fails on: any axe violation (both themes, phone 375x812 and laptop 1366x768), a control
+// Fails on: any axe violation (system dark and light, phone 375x812 and laptop 1366x768), a control
 // under 44px tall or 24px wide outside running text, sideways scroll at any of 12 sizes,
 // not exactly one h1, script errors, or a text route with the wrong status or content type.
 // Writes full-page screenshots of every page at the 12 sizes.
@@ -96,7 +96,7 @@ async function run() {
   const bg = {};
   for (const scheme of ['dark', 'light']) {
     for (const [size, w, h, mobile] of SIZES) {
-      // Every size in dark; light only at the two audited sizes (axe + targets + overflow).
+      // Every size with the system dark; system light only at the two audited sizes (axe + targets + overflow).
       if (scheme === 'light' && !AUDITED.has(size)) continue;
       const ctx = await browser.newContext({ viewport: { width: w, height: h }, isMobile: mobile && w < 700, hasTouch: mobile, colorScheme: scheme });
       const page = await ctx.newPage();
@@ -146,8 +146,8 @@ async function run() {
     }
   }
 
-  // Proof that the light pass really rendered daybreak.
-  for (const [k, v] of Object.entries(bg)) if (v.dark === v.light) fail(k, `body background is ${v.dark} in both themes`);
+  // The site is night only: a light system setting must not change it.
+  for (const [k, v] of Object.entries(bg)) if (v.dark !== v.light) fail(k, `body background is ${v.light} with the system light, ${v.dark} with it dark`);
 
   // Without JavaScript, content and links still render.
   const nojs = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 390, height: 844 } });
@@ -165,5 +165,5 @@ async function run() {
 
 run().then(n => {
   if (problems.length) { console.error(problems.join('\n')); console.error(`\n${problems.length} problems.`); process.exit(1); }
-  console.log(`All checks passed: ${n} pages x ${SIZES.length} sizes (dark), axe + tap targets in dark and light at ${[...AUDITED].join(', ')}, text routes, no-JS.`);
+  console.log(`All checks passed: ${n} pages x ${SIZES.length} sizes (dark), axe + tap targets with the system dark and light at ${[...AUDITED].join(', ')}, text routes, no-JS.`);
 }).catch(e => { console.error(e); process.exit(1); });

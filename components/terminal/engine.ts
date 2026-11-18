@@ -21,7 +21,6 @@ export type TermData = {
 export type Effect =
   | { type: 'nav'; href: string }
   | { type: 'clear' }
-  | { type: 'theme'; value?: 'light' | 'dark' }
   | { type: 'sound'; value?: boolean }
   | { type: 'search'; q: string }
   | { type: 'history' }
@@ -38,7 +37,6 @@ export const COMMANDS: { name: string; args?: string; about: string }[] = [
   { name: 'search', args: '<words>', about: 'search the site' },
   { name: 'whoami', about: 'who’s here' },
   { name: 'date', about: 'time in New York' },
-  { name: 'theme', args: '[light|dark]', about: 'night or daybreak' },
   { name: 'sound', args: '[on|off]', about: 'interface clicks' },
   { name: 'history', about: 'past commands' },
   { name: 'echo', args: '<text>', about: 'say it back' },
@@ -231,12 +229,6 @@ export function run(input: string, d: TermData, now = new Date()): Result {
       return { lines: [], effect: { type: 'search', q: arg } };
     case 'whoami': return { lines: [t('guest'), t(`(this is ${d.name}’s site: ${d.role}, ${d.city})`, 'dim')] };
     case 'date': return { lines: [], effect: { type: 'date' } };
-    case 'theme': {
-      const v = args[0]?.toLowerCase();
-      const map: Record<string, 'light' | 'dark'> = { light: 'light', day: 'light', daybreak: 'light', dark: 'dark', night: 'dark' };
-      if (v && !map[v]) return suggest(v, Object.keys(map), 'theme: unknown');
-      return { lines: [], effect: { type: 'theme', value: v ? map[v] : undefined } };
-    }
     case 'sound': {
       const v = args[0]?.toLowerCase();
       if (v && v !== 'on' && v !== 'off') return { error: true, lines: [t(`sound: on or off, not ${v}`, 'err')] };
@@ -267,7 +259,6 @@ export function complete(input: string, d: TermData): { value: string; options: 
     if (c === 'ls') return [...sectionNames(d).filter(n => n !== 'home'), ...fileNames(d)];
     if (c === 'cat') return fileNames(d);
     if (c === 'open') return projectIds(d);
-    if (c === 'theme') return ['light', 'dark'];
     if (c === 'sound') return ['on', 'off'];
     return [];
   })();

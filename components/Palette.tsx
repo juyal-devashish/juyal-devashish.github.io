@@ -6,9 +6,8 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import type { SearchEntry } from '@/lib/text';
-import { toggleTheme, themeName } from '@/lib/theme';
 import { play } from '@/lib/sound';
-import { announce, copyText, isMac, PALETTE_OPEN, PALETTE_READY } from './util';
+import { copyText, isMac, PALETTE_OPEN, PALETTE_READY } from './util';
 
 type Entry = SearchEntry & { _t: string; _m: number[]; _k: string; _x: string };
 type Type = SearchEntry['type'];
@@ -228,13 +227,6 @@ export default function Palette() {
       closeTimer.current = window.setTimeout(doClose, ok ? 700 : 1500);
       return;
     }
-    if (e.act === 'theme') {
-      doClose();
-      const t = toggleTheme();
-      play('toggle');
-      announce(`${themeName(t) === 'night' ? 'Night' : 'Daybreak'} theme`);
-      return;
-    }
     if (isExternalOnly(e)) { window.open(e.ext, '_blank', 'noopener'); doClose(); return; }
     if (!e.href) return;
     if (newTab && !/^mailto:/.test(e.href)) { window.open(new URL(e.href, window.location.href).href, '_blank', 'noopener'); doClose(); return; }
@@ -258,7 +250,6 @@ export default function Palette() {
 
   function hint(e: Entry) {
     if (e.act === 'copy-email') return 'Enter copies it';
-    if (e.act === 'theme') return 'Enter switches it';
     if (isExternalOnly(e)) return 'Enter opens it in a new tab ↗';
     if (e.href && /^mailto:/.test(e.href)) return 'Enter opens your mail app';
     return `Enter goes there · ${mod} Enter opens a new tab`;

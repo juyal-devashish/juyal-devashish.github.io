@@ -1,5 +1,4 @@
-/* The terminal is always night, in both themes (as in the prototype's contact card).
-   These are the night tokens, pinned here so daybreak doesn't flip them. */
+/* The terminal's own palette: the night tokens, pinned here (as in the prototype's contact card). */
 .wrap {
   --t-bg: #050A1C;
   --t-bar: #0B1430;

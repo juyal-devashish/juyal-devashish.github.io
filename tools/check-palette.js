@@ -117,7 +117,7 @@ async function run(browser, size, w, h, mobile, start) {
     await p.close();
   });
 
-  await step(where, 'axe finds nothing with the palette open (empty and with results), in both themes', async () => {
+  await step(where, 'axe finds nothing with the palette open (empty and with results), system dark and light', async () => {
     for (const scheme of ['dark', 'light']) {
       const p = await fresh();
       await p.emulateMedia({ colorScheme: scheme });
