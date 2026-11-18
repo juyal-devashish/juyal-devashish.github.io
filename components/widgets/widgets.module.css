@@ -1,0 +1,75 @@
+/* Live-data widgets: star-dot contribution calendar and concentric coding orbits.
+   Put each inside a .panel (globals). Colours come from the theme tokens only. */
+.top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; flex-wrap: wrap; margin-bottom: 18px; }
+.big { display: flex; flex-wrap: wrap; gap: 6px 28px; margin-bottom: 18px; }
+.big div { display: flex; flex-direction: column; }
+.big b { font: 300 clamp(2.2rem, 4vw, 3rem)/1 var(--f-serif); letter-spacing: -.02em; color: var(--ink); }
+.big span { font-size: .8125rem; color: var(--ink-3); }
+.narrowOnly { display: none; }
+@media (max-width: 700px) {
+  .wideOnly { display: none; }
+  .narrowOnly { display: revert; }
+  .big.narrowOnly { display: flex; }
+}
+
+/* ---------- contribution calendar (squares, so Skyline can extrude them) ---------- */
+.gh { min-width: 0; }
+.calWrap { border-radius: 10px; padding: 4px 0 6px; }
+.calWrap:focus-visible { outline-offset: 6px; }
+.cal { display: grid; grid-auto-flow: column; grid-template-rows: auto repeat(7, auto); grid-template-columns: 30px repeat(var(--weeks, 52), minmax(0, 1fr)); gap: clamp(2px, .35vw, 5px); width: 100%; max-width: var(--cal-max, none); }
+.mo, .dy { font: 500 .6875rem/1 var(--f-mono); color: var(--ink-3); white-space: nowrap; }
+.mo { align-self: end; padding-bottom: 4px; min-width: 0; overflow: visible; }
+.dy { align-self: center; line-height: 0; }  /* rows follow the squares, not the label text */
+.c { display: block; width: 100%; aspect-ratio: 1; border-radius: 2px; background: var(--c0); box-shadow: inset 0 0 0 1px var(--c-edge); transition: transform .2s var(--ease); }
+.c[data-l="1"] { background: var(--c1); box-shadow: none; }
+.c[data-l="2"] { background: var(--c2); box-shadow: none; }
+.c[data-l="3"] { background: var(--c3); box-shadow: none; }
+.c[data-l="4"] { background: var(--c4); box-shadow: 0 0 8px var(--glow); }
+.none { visibility: hidden; }
+.on { transform: scale(1.35); box-shadow: 0 0 0 2px var(--bg), 0 0 0 3.5px var(--accent) !important; }
+@media (max-width: 700px) {
+  .cal { grid-template-columns: 26px repeat(var(--weeks-phone, 26), minmax(0, 1fr)); }
+  .cal [data-old] { display: none; }
+}
+.calFoot { max-width: var(--cal-max, none); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 6px 20px; margin-top: 12px; }
+.legend { display: flex; align-items: center; gap: 6px; font-size: .75rem; color: var(--ink-3); }
+.legend .c { width: 10px; height: 10px; }
+.read { font: 500 .75rem/1.4 var(--f-mono); color: var(--ink-2); min-height: 1.4em; }
+
+/* ---------- coding orbits ---------- */
+.cd { min-width: 0; }
+.orbit { display: grid; grid-template-columns: minmax(0, 240px) minmax(0, 1fr); gap: 20px 32px; align-items: center; }
+@media (min-width: 900px) { .orbit { grid-template-columns: 240px minmax(0, 1fr) minmax(0, 1fr); } }
+@media (max-width: 480px) { .orbit { grid-template-columns: 1fr; } .orbit svg { max-width: 220px; margin: 0 auto; } }
+.orbit svg { width: 100%; height: auto; display: block; overflow: visible; }
+.track { fill: none; stroke: var(--c0); }
+.arc { fill: none; stroke-linecap: round; transform: rotate(-90deg); transform-origin: 120px 120px; transition: stroke-dashoffset 1.4s var(--ease), opacity .25s, stroke-width .25s; }
+.hl .arc:not(.arcOn) { opacity: .25; }
+.arcOn { stroke-width: 10; }
+/* draws in when the panel reveals (only armed below the fold; never without JS or with reduced motion) */
+:global(.rv-armed) .arc { stroke-dashoffset: var(--c) !important; }
+:global(.rv-armed.in) .arc { stroke-dashoffset: var(--o) !important; }
+.tot { fill: var(--ink); font: 300 24px var(--f-serif); }
+.totLbl { fill: var(--ink-3); font: 500 10px var(--f-mono); letter-spacing: .08em; }
+.daysCol { min-width: 0; }
+.days li { display: flex; align-items: center; gap: 10px; font-size: .875rem; color: var(--ink-2); padding: 5px 6px; margin: 0 -6px; border-bottom: 1px solid var(--hair); border-radius: 4px; transition: background .2s; }
+.days li i { width: 8px; height: 8px; border-radius: 50%; background: var(--c2); flex: none; }
+.days li.today i { background: var(--accent); }
+.days li b { margin-left: auto; font: 500 .8125rem/1.4 var(--f-mono); color: var(--ink); }
+.days li.dayOn { background: var(--ring-soft); color: var(--ink); }
+.langs { min-width: 0; grid-column: 1 / -1; }
+@media (min-width: 900px) { .langs { grid-column: auto; align-self: start; } }
+.langs .label { margin-bottom: 8px; }
+.langs li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 12px; padding: 6px 0; font-size: .875rem; color: var(--ink-2); }
+.langs li b { font: 500 .8125rem/1.4 var(--f-mono); color: var(--ink); }
+.langs li i { grid-column: 1 / -1; height: 3px; border-radius: 3px; background: linear-gradient(90deg, var(--accent), var(--c2)); }
+.note { grid-column: 1 / -1; font-size: .8125rem; color: var(--ink-3); }
+.daysGroup { border-radius: 8px; }
+.daysGroup:focus-visible { outline-offset: 6px; }
+.days li { cursor: default; }
+.range { margin-top: 8px; font: 500 .75rem/1.4 var(--f-mono); color: var(--ink-3); }
+/* Skyline toggle (3D view lives in Skyline.tsx / Skyline.module.css) */
+.skyBtn { flex: none; order: -1; margin-right: -8px; }
+.calFoot .legend { margin-right: auto; }
+@media (max-width: 700px) { .calFoot .read { flex-basis: 100%; } }
+.skyBtn[aria-pressed="true"] { color: var(--ink); border-color: var(--accent); background: var(--ring-soft); }

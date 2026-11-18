@@ -1,0 +1,33 @@
+# Devashish Juyal
+
+> AI engineer in New York. I turn rough ideas into AI products people can trust.
+
+Each page is also available as markdown at the URL below.
+
+## Pages
+
+- [Home](https://juyal-devashish.vercel.app/index.md): who I am and what I’m building
+- [Projects](https://juyal-devashish.vercel.app/projects.md): things I’ve built
+- [Writing](https://juyal-devashish.vercel.app/writing.md): 0 posts
+- [Stack](https://juyal-devashish.vercel.app/stack.md): papers I’ve read, with notes
+- [Résumé](https://juyal-devashish.vercel.app/resume.md): work, education, recognition
+- [Photos](https://juyal-devashish.vercel.app/photos.md): photos I’ve taken
+- [Now](https://juyal-devashish.vercel.app/now.md): what I’m focused on
+- [2026, so far](https://juyal-devashish.vercel.app/2026.md): the year in data
+- [Résumé (PDF)](https://juyal-devashish.vercel.app/assets/devashish-juyal-resume.pdf)
+
+## Projects
+
+- [Sama4](https://www.sama4.online/): News that explains itself, right beside the story.
+- [AI operator release gate](https://evosdemo.vercel.app): An AI agent earns trust step by step, and loses it fast.
+- [Health-first voice onboarding](https://eatopia-demo.vercel.app): Sign-up rebuilt around Apple Health and your voice.
+- [Agentic Adjudication](https://github.com/juyal-devashish/Agentic-Adjudication): Agents prepare trial safety cases; people make every call.
+- [Sequential watermark detection](https://juyal-devashish.github.io/LLM-Sequential-Watermarking/): Spotting AI-written text with far less compute.
+- [MichiganSLM](https://github.com/juyal-devashish/umichslm-walkthrough): Experiments behind Michigan’s first small language model.
+- [Multi-stage distillation](https://github.com/juyal-devashish/ELI500Model-Sequential-Distillation): Shrinking a large model into small ones, step by step.
+
+## Contact
+
+- Email: djuyal23@gmail.com
+- LinkedIn: https://www.linkedin.com/in/devashish-juyal
+- GitHub: https://github.com/juyal-devashish

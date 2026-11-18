@@ -1,0 +1,149 @@
+/* Skyline: the contribution calendar as a CSS 3D city. Tokens only; transforms only.
+   No overflow/opacity/filter on preserve-3d elements (they would flatten the scene). */
+.stage {
+  --win: color-mix(in srgb, var(--accent) 30%, var(--hero-fg));
+  --shade: var(--bg-deep);
+  --base: color-mix(in srgb, var(--surface-2) 70%, var(--bg-deep));
+  --wv: var(--weeks);
+  --mx: var(--max);
+  container-type: inline-size;
+  max-width: var(--cal-max, none);
+  position: relative;
+  overflow: clip;
+  overflow-clip-margin: 4px;
+  touch-action: pan-y;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: opacity .35s var(--ease);
+}
+@media (prefers-color-scheme: light) {
+  :global(:root:not([data-theme="dark"])) .stage { --win: var(--surface); --shade: var(--ink); --base: var(--surface-2); }
+}
+:global(:root[data-theme="light"]) .stage { --win: var(--surface); --shade: var(--ink); --base: var(--surface-2); }
+.grab { cursor: grabbing; }
+
+/* Cell pitch from the panel width. One floor per contribution, so heights are literal:
+   the floor is sized per calendar so the tallest tower stands ~1.3x the plate's depth,
+   but never thinner than 1.5px (1px on dense phone screens) so floors read, never taller than half a cell
+   (a quiet month stays a town), and only below 1.5px (to 1px) when a huge day would outgrow --hcap. */
+.scene {
+  --pitch: min(calc(82cqw / (var(--wv) + 4)), 32px);
+  --hcap: 560px;
+  --fmin: 1.5px;
+  --floor: max(1px, min(calc(var(--pitch) * .5), max(var(--fmin), calc(var(--pitch) * 11 / var(--mx))), calc(var(--hcap) / var(--mx))));
+  --hmax: calc(var(--mx) * var(--floor));
+  position: relative;
+  height: calc(var(--pitch) * 9.6 + var(--hmax) * .9 + 40px);
+  perspective: calc(var(--pitch) * 80 + 600px);
+  perspective-origin: 50% 60%;
+}
+.plate {
+  --yaw: -20deg;
+  --tilt: 56deg;
+  --fx: 0px; --fy: 0px; --fs: 1; --fsy: var(--fs);
+  position: absolute;
+  left: 50%;
+  top: calc(100% - var(--pitch) * 5.4 - 22px);
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(7, var(--pitch)) calc(var(--pitch) * 1.1);
+  grid-auto-columns: var(--pitch);
+  padding: calc(var(--pitch) * .45) calc(var(--pitch) * .45) 0;
+  border-radius: calc(var(--pitch) * .4);
+  background: var(--base);
+  box-shadow: 0 0 0 1px var(--hair), 0 calc(var(--pitch) * .6) calc(var(--pitch) * 1.6) calc(var(--pitch) * -.2) color-mix(in srgb, var(--shade) 55%, transparent);
+  transform-style: preserve-3d;
+  transform: translate(0px, 0px) translate(-50%, -50%) scale(1, 1) rotateX(var(--tilt)) rotateZ(var(--yaw));
+  transition: background-color .4s var(--ease), box-shadow .4s var(--ease);
+}
+
+/* zero days: flat tiles, lifted a hair off the plate (no z-fighting) */
+.tile, .tw { display: block; position: relative; margin: var(--inset, 12%); border-radius: 2px; }
+.tile { background: var(--c0); box-shadow: inset 0 0 0 1px var(--c-edge); transform: translateZ(.5px); }
+.gap { display: block; }
+
+/* towers: <b> is the roof, ::before the south wall, ::after the east or west wall */
+.tw {
+  --hp: calc(var(--n) * var(--floor));
+  --tc: color-mix(in srgb, var(--ring) 40%, var(--surface));
+  --sc: var(--tc);
+  border-radius: 0;
+  transform-style: preserve-3d;
+  transform: translateZ(.5px) scaleZ(1);
+  transition: transform calc(.42s + .3s * var(--r)) cubic-bezier(.2, .9, .25, 1.15) var(--a);
+}
+.tw[data-l="2"] { --tc: color-mix(in srgb, var(--ring) 62%, var(--surface)); }
+.tw[data-l="3"] { --tc: color-mix(in srgb, var(--ring) 85%, var(--surface)); }
+.tw[data-l="4"] { --tc: var(--accent); --sc: color-mix(in srgb, var(--ring) 85%, var(--surface)); }
+.tw > b { position: absolute; inset: 0; border-radius: 2px; background: linear-gradient(var(--rc), var(--rc)), var(--surface); transform: translateZ(var(--hp)); }
+/* roofs wear the flat calendar's own colours, so the squares simply extrude */
+.tw { --rc: var(--c1); } .tw[data-l="2"] { --rc: var(--c2); } .tw[data-l="3"] { --rc: var(--c3); } .tw[data-l="4"] { --rc: var(--c4); }
+.tw[data-l="4"] > b { box-shadow: 0 0 8px var(--glow), 0 0 calc(var(--pitch) * .45) var(--glow); }
+.stage:not(.flat) .tw[data-l="4"] > b { box-shadow: 0 0 calc(var(--pitch) * .45) var(--accent), 0 0 calc(var(--pitch) * 1.1) var(--glow); }
+.tw::before, .tw::after { content: ""; position: absolute;
+  /* one faint line per floor, a firmer one every tenth, so 170 floors read as 17 bands of 10 */
+  --lw: max(.5px, calc(var(--floor) * .34));
+  --fl: color-mix(in srgb, var(--shade) 26%, transparent);
+  --f10: color-mix(in srgb, var(--shade) 55%, transparent);
+  background-color: var(--w);
+  background-image:
+    repeating-linear-gradient(var(--up), transparent 0 calc(var(--floor) * 10 - 1px), var(--f10) 0 calc(var(--floor) * 10)),
+    repeating-linear-gradient(var(--up), transparent 0 calc(var(--floor) - var(--lw)), var(--fl) 0 var(--floor));
+}
+.tw::before { --up: to bottom; --w: color-mix(in srgb, var(--sc) 74%, var(--shade));
+  left: 0; top: 100%; width: 100%; height: var(--hp); transform-origin: 50% 0; transform: rotateX(90deg); }
+.tw::after { --up: to right; --w: color-mix(in srgb, var(--sc) 52%, var(--shade));
+  top: 0; left: 100%; width: var(--hp); height: 100%; transform-origin: 0 50%; transform: rotateY(-90deg); }
+.plate[data-side="w"] .tw::after { left: auto; right: 100%; transform-origin: 100% 50%; transform: rotateY(90deg); }
+/* busy days: every floor lit, split into windows by mullions */
+.tw[data-l="3"]::before, .tw[data-l="4"]::before, .tw[data-l="3"]::after, .tw[data-l="4"]::after {
+  background-color: color-mix(in srgb, var(--win) 50%, var(--w));
+  background-image: linear-gradient(var(--across), var(--w) 0 34%, transparent 0),
+    repeating-linear-gradient(var(--up), transparent 0 calc(var(--floor) * 10 - 1px), var(--f10) 0 calc(var(--floor) * 10)),
+    repeating-linear-gradient(var(--up), transparent 0 calc(var(--floor) - var(--lw)), color-mix(in srgb, var(--w) 80%, transparent) 0 var(--floor));
+}
+.tw[data-l="3"]::before, .tw[data-l="4"]::before { --across: to right; background-size: 25% 100%, auto, auto; }
+.tw[data-l="3"]::after, .tw[data-l="4"]::after { --across: to bottom; background-size: 100% 25%, auto, auto; }
+
+/* the tallest tower's count, turned to face the camera, just above its roof */
+.max {
+  position: absolute; left: 50%; top: 50%;
+  transform-origin: 0 0;
+  transform: translateZ(calc(var(--hp) + 4px)) rotateZ(calc(-1 * var(--yaw))) rotateX(calc(-1 * var(--tilt))) translate(-50%, -100%);
+  font: 500 .6875rem/1 var(--f-mono); color: var(--ink); white-space: nowrap;
+  padding: 3px 5px; border-radius: 4px;
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  box-shadow: 0 0 0 1px var(--hair);
+  transition: opacity .3s var(--ease);
+}
+.max[data-for="phone"] { display: none; }
+.flat .max, .anim .max { opacity: 0; transition: none; }
+
+/* highlighted day (hover / click / keyboard readout) */
+.on > b, .tile.on { box-shadow: 0 0 0 2px var(--bg), 0 0 0 3.5px var(--accent); }
+
+/* month names printed along the near edge of the plate */
+.mo { align-self: center; font: 500 .6875rem/1 var(--f-mono); color: var(--ink-2); white-space: nowrap; padding-left: 12%; transform: translateZ(.5px); }
+
+/* entering / leaving: start from (or return to) a flat, face-on grid */
+.flat .plate { transform: translate(var(--fx), var(--fy)) translate(-50%, -50%) scale(var(--fs), var(--fsy)) rotateX(0deg) rotateZ(0deg); background-color: transparent; box-shadow: none; }
+.mo { transition: opacity .3s var(--ease) .3s; }
+.flat .mo { opacity: 0; transition-delay: 0s; }
+.flat .tw { transform: translateZ(.5px) scaleZ(.001); }
+.anim .plate { transition: transform .6s var(--ease), background-color .4s var(--ease), box-shadow .4s var(--ease); will-change: transform; }
+.anim .tw { will-change: transform; }
+.out .tw { transition: transform .38s var(--ease) var(--b); }
+.out .plate { transition: transform .5s var(--ease) .18s, background-color .4s var(--ease) .3s, box-shadow .4s var(--ease) .3s; }
+
+@media (max-width: 700px) {
+  .stage { --wv: var(--weeks-phone); }
+  .stage { --mx: var(--max-phone); }
+  .scene { --pitch: min(calc(90cqw / (var(--wv) + 3)), 32px); --hcap: 420px; --fmin: 1px; }
+  .plate [data-old] { display: none; }
+  .max[data-for="wide"] { display: none; }
+  .max[data-for="phone"] { display: block; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .stage, .plate, .tw, .mo, .max, .anim .plate, .out .tw, .out .plate { transition: none !important; }
+}

@@ -1,0 +1,122 @@
+/* The terminal is always night, in both themes (as in the prototype's contact card).
+   These are the night tokens, pinned here so daybreak doesn't flip them. */
+.wrap {
+  --t-bg: #050A1C;
+  --t-bar: #0B1430;
+  --t-ink: #D9DCEA;
+  --t-dim: #A6AAC0;
+  --t-hot: #F59A5C;
+  --t-ring: #8FB0EE;
+  --t-err: #FF9B8F;
+  --t-edge: rgba(243, 238, 230, .14);
+  max-width: 920px;
+}
+
+.term {
+  position: relative;
+  font: 400 .8125rem/1.7 var(--f-mono);
+  background: radial-gradient(90% 60% at 100% 0%, rgba(245, 154, 92, .08), transparent 60%), var(--t-bg);
+  color: var(--t-ink);
+  border-radius: 18px;
+  border: 1px solid var(--hair);
+  padding: 16px clamp(14px, 3vw, 24px) 18px;
+  box-shadow: var(--shadow);
+  min-height: 420px;
+  cursor: text;
+}
+.term:focus { outline: none; }
+.term:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.term :focus-visible { outline-color: var(--t-hot); }
+.term p { margin: 0; }
+.term b { font-weight: 600; color: var(--t-hot); }
+
+.bar { display: flex; gap: 6px; align-items: center; margin: 0 0 16px !important; padding-bottom: 12px; border-bottom: 1px solid var(--t-edge); }
+.bar i { width: 10px; height: 10px; border-radius: 50%; border: 1px solid #6F7591; }
+.bar i:first-child { border-color: var(--t-hot); }
+.bar span { margin-left: auto; color: var(--t-dim); font-size: .6875rem; letter-spacing: .04em; }
+
+/* ---------- boot (CSS only) ---------- */
+.boot { display: flex; align-items: center; gap: 12px; color: var(--t-dim); overflow: hidden; max-height: 40px; }
+.loader { flex: none; overflow: visible; }
+.loader ellipse { fill: none; stroke: var(--t-ring); stroke-opacity: .55; stroke-width: 1; stroke-dasharray: 2 3; }
+.sun { fill: var(--t-ink); }
+.planet { fill: var(--t-hot); }
+
+.banner { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 28px; margin: 4px 0 14px; }
+.art { margin: 0; font: inherit; line-height: 1.25; color: var(--t-ring); white-space: pre; }
+.art b { color: var(--t-hot); }
+.who { min-width: 0; }
+.name { font: 400 clamp(1.6rem, 5vw, 2.4rem)/1.05 var(--f-serif); font-style: italic; color: var(--t-hot); letter-spacing: -.01em; }
+.dim { color: var(--t-dim); }
+.bootlines { color: var(--t-ink); margin-bottom: 14px; }
+.bootlines p { white-space: pre-wrap; overflow-wrap: anywhere; }
+.ok { color: var(--t-ring); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .boot { animation: bootOut .3s 1s var(--ease) forwards; }
+  .banner, .bootlines p { opacity: 0; animation: lineIn .35s var(--ease) forwards; }
+  .banner { animation-delay: 1.05s; }
+  .bootlines p:nth-child(1) { animation-delay: 1.2s; }
+  .bootlines p:nth-child(2) { animation-delay: 1.3s; }
+  .bootlines p:nth-child(3) { animation-delay: 1.4s; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .boot { display: none; }
+}
+@keyframes bootOut { to { opacity: 0; max-height: 0; margin: 0; } }
+@keyframes lineIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+/* ---------- output ---------- */
+.log { min-width: 0; }
+.entry { margin-top: 6px; }
+.echo { white-space: pre-wrap; overflow-wrap: anywhere; }
+.line { white-space: pre-wrap; overflow-wrap: anywhere; min-height: 1.7em; }
+.line pre { margin: 0; font: inherit; line-height: 1.25; white-space: pre; overflow: hidden; }
+.hot { color: var(--t-hot); }
+.err { color: var(--t-err); }
+.ring { color: var(--t-ring); }
+.art { color: var(--t-ring); }
+.cols { display: grid; grid-template-columns: minmax(0, var(--k, 12ch)) minmax(0, 1fr); }
+@media (max-width: 600px) { .cols { grid-template-columns: minmax(0, min(var(--k, 12ch), 45%)) minmax(0, 1fr); column-gap: 1ch; } }
+.cols.row { display: grid; align-items: center; }
+.row { display: flex; align-items: center; min-height: 44px; }
+.link { color: var(--t-ink); text-decoration: underline; text-decoration-color: var(--t-hot); text-underline-offset: 4px; display: inline-flex; align-items: center; min-height: 44px; min-width: 24px; }
+.link:hover { color: var(--t-hot); }
+
+/* ---------- prompt ---------- */
+.prompt { color: var(--t-hot); white-space: nowrap; }
+.form { display: flex; flex-wrap: wrap; align-items: center; column-gap: 1ch; margin-top: 6px; scroll-margin-bottom: calc(var(--bar) + 24px); }
+.input {
+  flex: 1 1 12ch; min-width: 0; min-height: 44px; margin: 0; padding: 0 4px;
+  font: inherit; color: var(--t-ink); caret-color: var(--t-hot);
+  background: transparent; border: 0; border-radius: 6px;
+}
+.input:focus { outline: none; }
+.input:focus-visible { outline: none; box-shadow: inset 0 -2px 0 var(--t-hot); }
+@media (max-width: 600px) {
+  .input { font-size: 16px; } /* keeps iOS from zooming in */
+}
+
+/* ---------- below the screen ---------- */
+.hint { margin-top: 16px; color: var(--ink-2); font-size: .9375rem; }
+.hint kbd { font-size: .875em; padding: .05em .4em; border: 1px solid var(--hair-2); border-radius: 5px; }
+.quick { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+.qbtn {
+  display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border-radius: 999px;
+  font: 500 .8125rem/1 var(--f-mono); color: var(--ink); background: var(--surface);
+  border: 1px solid var(--hair-2); transition: border-color .2s, transform .2s var(--ease);
+}
+.qbtn::before { content: "$"; color: var(--accent); margin-right: .6ch; }
+.qbtn:hover { border-color: var(--accent); transform: translateY(-1px); }
+
+/* ---------- without JS ---------- */
+.nojs { margin-top: 8px; }
+:global(html.js) .nojs { display: none; }
+.nojs ul { display: grid; gap: 0; border-top: 1px solid var(--hair); max-width: 640px; }
+.nojs li { border-bottom: 1px solid var(--hair); }
+.nojs a { display: flex; align-items: baseline; gap: 16px; min-height: 52px; padding: 12px 0; text-decoration: none; }
+.nojs a:hover .nm { color: var(--accent); }
+.nm { font-family: var(--f-mono); color: var(--ink); min-width: 11ch; }
+.ab { color: var(--ink-2); }
+.nojsHead { font-family: var(--f-mono); color: var(--ink-2); margin-bottom: 12px; }
+.nojsHead span { color: var(--accent); }

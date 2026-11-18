@@ -1,0 +1,5 @@
+/* /projects Activity: GitHub and coding panels side by side on wide screens, stacked on phones. */
+.grid { display: grid; gap: 18px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 1000px) { .two { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: stretch; } }
+.panel { min-width: 0; }
+.solo { --cal-max: 760px; }

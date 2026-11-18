@@ -1,9 +1,19 @@
 {
   "ci": {
     "collect": {
-      "staticDistDir": ".",
-      "url": ["http://localhost/index.html", "http://localhost/papers.html"],
-      "numberOfRuns": 1
+      "url": [
+        "http://127.0.0.1:3200/",
+        "http://127.0.0.1:3200/projects",
+        "http://127.0.0.1:3200/writing",
+        "http://127.0.0.1:3200/stack",
+        "http://127.0.0.1:3200/resume",
+        "http://127.0.0.1:3200/photos",
+        "http://127.0.0.1:3200/now",
+        "http://127.0.0.1:3200/cmd",
+        "http://127.0.0.1:3200/2026"
+      ],
+      "numberOfRuns": 1,
+      "settings": { "chromeFlags": "--no-sandbox --headless=new" }
     },
     "assert": {
       "assertions": { "categories:accessibility": ["error", { "minScore": 0.95 }] }

@@ -1,7 +1,7 @@
 name: Site checks
 
-# Runs on every push and pull request. GitHub Pages still publishes main on
-# its own; a red run here means "look before you share", not "the site is down".
+# Runs on every push and pull request. Vercel deploys on its own; a red run here
+# means "look before you share", not "the site is down".
 on:
   push:
   pull_request:
@@ -12,31 +12,41 @@ permissions:
 jobs:
   checks:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
+    env:
+      # Absolute links (canonical, og:url, llms.txt) point at the local server, so lychee can follow them.
+      NEXT_PUBLIC_SITE_URL: http://127.0.0.1:3200
+      NEXT_TELEMETRY_DISABLED: 1
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
+          cache: npm
 
-      - name: Generated files are up to date with their sources
-        run: |
-          node tools/build.js
-          git diff --exit-code -- papers.html papers.md index.md llms.txt assets/search-index.json || (echo "Run node tools/build.js and commit the results" && exit 1)
+      - run: npm ci
 
-      - name: Install test tools
+      - name: Types and unit tests
         run: |
-          npm install --no-save --no-package-lock playwright@1.64.1 axe-core@4.14.1
-          npx playwright install --with-deps chromium
+          npx next typegen
+          npx tsc --noEmit
+          npm test
 
-      - name: Accessibility, tap targets, screenshots at 12 sizes, and the search palette
+      - run: npx next build
+
+      - name: Start the production server
         run: |
-          python3 -m http.server 8000 --bind 127.0.0.1 >/dev/null 2>&1 &
-          sleep 2
+          npx next start -p 3200 > next-start.log 2>&1 &
+          npx --yes wait-on@8.0.5 --timeout 60000 http://127.0.0.1:3200/
+
+      - run: npx playwright install --with-deps chromium
+
+      - name: Accessibility, tap targets, text routes, screenshots at 12 sizes, and the search palette
+        run: |
           status=0
-          node tools/check.js http://127.0.0.1:8000 screenshots || status=1
-          node tools/check-palette.js http://127.0.0.1:8000 || status=1
+          node tools/check.js http://127.0.0.1:3200 screenshots || status=1
+          node tools/check-palette.js http://127.0.0.1:3200 || status=1
           exit $status
 
       - name: Upload screenshots
@@ -54,8 +64,9 @@ jobs:
           args: >-
             --no-progress --max-retries 2 --accept 200,206,429
             --exclude linkedin.com --exclude ssrn.com
-            --root-dir ${{ github.workspace }}
-            index.html papers.html 404.html
+            http://127.0.0.1:3200/ http://127.0.0.1:3200/projects http://127.0.0.1:3200/writing
+            http://127.0.0.1:3200/stack http://127.0.0.1:3200/resume http://127.0.0.1:3200/photos
+            http://127.0.0.1:3200/now http://127.0.0.1:3200/cmd http://127.0.0.1:3200/llms.txt
           fail: true
 
       - name: Lighthouse (accessibility score at least 0.95; settings in lighthouserc.json)
@@ -68,3 +79,7 @@ jobs:
           name: lighthouse
           path: .lighthouseci/
           retention-days: 14
+
+      - name: Server log
+        if: failure()
+        run: cat next-start.log

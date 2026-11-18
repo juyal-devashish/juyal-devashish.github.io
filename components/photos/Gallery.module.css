@@ -1,0 +1,110 @@
+/* Justified rows: tile width = r × (row height + extra), so every tile in a row shares
+   one height and the row fills the line. The ::after spacer soaks up the last row. */
+.grid {
+  --row: clamp(140px, 20vw, 250px);
+  --gap: clamp(8px, 1.2vw, 14px);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.grid::after { content: ""; flex: 100000 1 0px; }
+
+.tile {
+  flex: var(--r) 1 calc(var(--r) * var(--row));
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* Overlay text sits on the photo, so its colours are fixed (theme-independent),
+   like the lightbox and the 404 photo. */
+.fig {
+  --ph-fg: #FFF8EE;
+  --ph-fg-2: #D9DCEA;
+  --ph-scrim: 4, 7, 20;
+  position: relative;
+  margin: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--bg-deep);
+  scroll-margin-top: 96px;
+  scroll-margin-bottom: calc(var(--bar) + 16px);
+}
+/* The focus ring is drawn on the figure, so overflow:hidden can't clip it. */
+.fig:has(.link:focus-visible) { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+.link { display: block; position: relative; color: inherit; cursor: zoom-in; }
+.link:focus-visible { outline: none; }
+
+.img {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* a tile left alone on a narrow line would grow very tall: crop it (the viewer shows it whole) */
+  max-height: calc(var(--row) * 2);
+  object-fit: cover;
+  background: var(--surface);
+}
+
+.cap {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  display: grid;
+  gap: 2px;
+  padding: 32px 12px 10px;
+  font: 500 .75rem/1.25 var(--f-mono);
+  letter-spacing: .02em;
+  color: var(--ph-fg);
+  background: linear-gradient(rgba(var(--ph-scrim), 0), rgba(var(--ph-scrim), .82) 45%, rgba(var(--ph-scrim), .94));
+  text-shadow: 0 1px 2px rgba(var(--ph-scrim), .9);
+  text-wrap: balance;
+}
+.place > span { white-space: nowrap; }
+.gear { color: var(--ph-fg-2); font-size: .6875rem; }
+
+/* ---------- Star trails: hover / keyboard focus ----------
+   A long exposure in miniature. Concentric trails wheel around a pole star near the
+   top-right corner, revealed by a sweeping conic mask; the outermost trail burns
+   orange. The photo itself dims a touch, as if the shutter stayed open after dark.
+   Motion-only: nothing changes at all under reduced motion. */
+@property --sweep { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+
+.trails {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  --pole: 86% 12%;
+  background:
+    radial-gradient(circle at var(--pole), var(--ph-fg) 0 1.5px, rgba(255, 248, 238, .5) 2.5px, transparent 7px),
+    radial-gradient(circle at var(--pole), transparent 0 41.2%, var(--accent-strong) 41.5% 41.8%, transparent 42.1%),
+    repeating-radial-gradient(circle at var(--pole), transparent 0 13px, rgba(255, 248, 238, .24) 13px 14px, transparent 14px 23px, rgba(185, 205, 245, .2) 23px 24px, transparent 24px 31px);
+  mix-blend-mode: screen;
+  /* the sweep (conic) intersected with a falloff, so trails fade away from the pole */
+  -webkit-mask: conic-gradient(from 200deg at var(--pole), #000 var(--sweep), transparent calc(var(--sweep) + 25deg)), radial-gradient(circle at var(--pole), #000 25%, transparent 70%);
+  -webkit-mask-composite: source-in;
+  mask: conic-gradient(from 200deg at var(--pole), #000 var(--sweep), transparent calc(var(--sweep) + 25deg)), radial-gradient(circle at var(--pole), #000 25%, transparent 70%);
+  mask-composite: intersect;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .img { transition: transform 1.1s var(--ease), filter .6s var(--ease); }
+  .trails { transition: opacity .35s var(--ease), --sweep 1.6s var(--ease); }
+  .cap { transition: transform .5s var(--ease); }
+
+  .link:focus-visible .img { transform: scale(1.035); filter: brightness(.8) saturate(1.1); }
+  .link:focus-visible .trails { opacity: 1; --sweep: 150deg; }
+
+  @media (hover: hover) {
+    .link:hover .img { transform: scale(1.035); filter: brightness(.8) saturate(1.1); }
+    .link:hover .trails { opacity: 1; --sweep: 150deg; }
+  }
+}
+
+@media print {
+  .trails { display: none; }
+  .tile { break-inside: avoid; }
+}
