@@ -149,7 +149,7 @@ export const resumeProjects: ResumeProject[] = [
     id: 'adjudication', name: 'Agentic Adjudication', fromPdf: false, project: 'adjudication',
     links: [{ label: 'GitHub', href: 'https://github.com/juyal-devashish/Agentic-Adjudication' }],
     bullets: [
-      'An independent proof of concept, on synthetic data only: AI agents prepare clinical-trial adverse events for independent adjudication, code checks every agent answer, and people sign every decision.',
+      'A proof of concept on synthetic data only: AI agents prepare clinical-trial adverse events for independent adjudication, code checks every agent answer, and people sign every decision.',
       'Built on one rule: agents do the work between the people’s steps, deterministic code decides whether an agent’s answer can be used, and anything that needs medical judgement is done and signed by a person.',
       'Covers four flows end to end: intake, quality check and narrative, adjudication (no AI), and outcome.',
     ],

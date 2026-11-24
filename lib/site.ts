@@ -123,7 +123,7 @@ export const archive = [
 
 // /now — edit freely; `updated` shows on the page.
 export const now = {
-  updated: '2026-11-17',
+  updated: '2026-11-24',
   focus: 'AI Engineer at Tech Observer, building agentic AI systems: multi-agent workflows that cut human touchpoints, tool-using pipelines, and the checks that keep them reliable.',
   building: projects.filter(p => p.status.startsWith('Live')).map(p => p.name),
 };
