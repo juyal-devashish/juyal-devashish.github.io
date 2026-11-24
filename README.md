@@ -27,9 +27,7 @@ Set in Vercel (see `.env.example`). Without a variable, its widget is simply not
 |---|---|
 | `NEXT_PUBLIC_SITE_URL` | Absolute links. Default `https://juyal-devashish.vercel.app` |
 | `GITHUB_TOKEN` | Contribution calendar (recommended; without it the public calendar page is used, and a year it can't fully cover is hidden) |
-| `WAKATIME_TOKEN`, `WAKATIME_API_URL`, `WAKATIME_AUTH` | Coding hours |
-| `KV_REST_API_URL`, `KV_REST_API_TOKEN` | Upstash store for coding history and post views |
-| `CRON_SECRET` | Daily `/api/cron` |
+| `KV_REST_API_URL`, `KV_REST_API_TOKEN` | Upstash store for post views |
 | `VERCEL_ANALYTICS_TOKEN`, `VERCEL_PROJECT_ID`, `VERCEL_TEAM_ID` | Page views on the year page |
 
 ## Rules

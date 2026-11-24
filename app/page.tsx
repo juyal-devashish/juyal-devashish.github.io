@@ -6,8 +6,7 @@ import { papers } from '@/lib/papers';
 import { photos } from '@/lib/photos';
 import { getPosts, formatDate } from '@/lib/posts';
 import { getRecentContributions, RECENT_WEEKS, RECENT_LABEL } from '@/lib/github';
-import { getCodingDays } from '@/lib/coding';
-import { fixtureContributions, fixtureCoding } from '@/lib/fixtures';
+import { fixtureContributions } from '@/lib/fixtures';
 import { slug } from '@/lib/text';
 import SectionHeader from '@/components/SectionHeader';
 import Reveal from '@/components/Reveal';
@@ -16,7 +15,6 @@ import Clock from '@/components/Clock';
 import DemoClip from '@/components/home/DemoClip';
 import HeroArt from '@/components/home/HeroArt';
 import GitHubCalendar from '@/components/widgets/GitHubCalendar';
-import CodingOrbits from '@/components/widgets/CodingOrbits';
 import s from './page.module.css';
 
 export const revalidate = 3600;
@@ -26,10 +24,7 @@ const TEASER_PHOTOS = ['img_1128', 'img_3684', 'img_5342', 'img_7344', 'img_1364
 const Arrow = () => <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>;
 
 export default async function Home() {
-  const [ghReal, codingReal] = await Promise.all([getRecentContributions(), getCodingDays(7)]);
-  const gh = ghReal ?? fixtureContributions();
-  const codingRaw = codingReal ?? fixtureCoding();
-  const coding = codingRaw && codingRaw.some(d => d.hours > 0) ? codingRaw : null;
+  const gh = (await getRecentContributions()) ?? fixtureContributions();
   const posts = getPosts().slice(0, 3);
   const read = papers.filter(p => p.read);
   const shelf = [...read.filter(p => p.pinned), ...read.filter(p => !p.pinned).reverse()].slice(0, 4);
@@ -155,12 +150,11 @@ export default async function Home() {
         <p className={s.more}><Link className="qlink" href="/projects">All projects</Link></p>
       </section>
 
-      {gh || coding ? (
+      {gh ? (
         <section className="sec" id="instruments" aria-labelledby="instruments-h">
           <SectionHeader id="instruments" no={no()} label="Instruments" title="The week," accent="in orbit" />
           <div className={s.inst}>
-            {gh ? <Reveal className="panel"><GitHubCalendar data={gh} weeks={RECENT_WEEKS} phoneWeeks={null} span={RECENT_LABEL} range /></Reveal> : null}
-            {coding ? <Reveal className="panel"><CodingOrbits days={coding} /></Reveal> : null}
+            <Reveal className="panel"><GitHubCalendar data={gh} weeks={RECENT_WEEKS} phoneWeeks={null} span={RECENT_LABEL} range /></Reveal>
           </div>
         </section>
       ) : null}

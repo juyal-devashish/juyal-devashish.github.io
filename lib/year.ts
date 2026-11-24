@@ -2,8 +2,7 @@
 // Each part is null when its source has nothing, and the page leaves that section out.
 // Relative imports only: lib/text.ts imports this, and the node test resolver doesn't know `@/`.
 import { getContributions, type ContribDay } from './github';
-import { getMany, dayKey } from './store';
-import type { CodingDay } from './coding';
+import { dayKey } from './store';
 import { projects, type Project } from './site';
 import { papers, type Paper } from './papers';
 import { getPosts, type Post } from './posts';
@@ -109,10 +108,9 @@ export type GitHubYear = {
   days: ContribDay[]; total: number; streak: number; busiestWeekday: string | null; activeDays: number;
   months: number[]; moments: Moment[];
 };
-export type CodingYear = { hours: number; days: number; months: number[]; languages: { name: string; hours: number }[] };
 export type YearData = {
   year: number; current: boolean; through: string;
-  github: GitHubYear | null; coding: CodingYear | null;
+  github: GitHubYear | null;
   posts: Post[]; projects: Project[]; papers: Paper[]; views: Views | null;
 };
 
@@ -128,24 +126,6 @@ export function summarizeGitHub(days: ContribDay[], through?: string): GitHubYea
     activeDays: days.filter(d => d.count > 0).length,
     months: byMonth(days),
     moments: pickMoments(days, through),
-  };
-}
-
-export function summarizeCoding(rows: CodingDay[]): CodingYear | null {
-  const days = rows.filter(r => r.hours > 0);
-  if (!days.length) return null;
-  const months = Array(12).fill(0);
-  const langs = new Map<string, number>();
-  for (const d of days) {
-    months[+d.date.slice(5, 7) - 1] += d.hours;
-    d.languages.forEach(l => langs.set(l.name, (langs.get(l.name) ?? 0) + l.hours));
-  }
-  const r1 = (x: number) => Math.round(x * 10) / 10;
-  return {
-    hours: r1(days.reduce((s, d) => s + d.hours, 0)),
-    days: days.length,
-    months: months.map(r1),
-    languages: [...langs].map(([name, h]) => ({ name, hours: r1(h) })).filter(l => l.hours > 0).sort((a, b) => b.hours - a.hours).slice(0, 5),
   };
 }
 
@@ -167,19 +147,16 @@ export async function getYear(year: number): Promise<YearData> {
   const dates = yearDates(year, through);
 
   // Fixed bounds (end of today, or end of year) keep GitHub's request stable for the cache.
-  const [cal, codingRows, views] = await Promise.all([
+  const [cal, views] = await Promise.all([
     getContributions(new Date(`${year}-01-01T00:00:00Z`), new Date(`${through}T23:59:59Z`)),
-    getMany<CodingDay>(dates.map(d => `coding:${d}`)),
     viewsFor(year),
   ]);
 
   const ghDays = (cal?.days ?? fixtureDays(dates)).filter(d => d.date >= dates[0] && d.date <= through).sort((a, b) => a.date.localeCompare(b.date));
-  const coding = codingRows.filter((r): r is CodingDay => !!r);
 
   return {
     year, current, through,
     github: cal || useFixtures ? summarizeGitHub(ghDays, current ? through : undefined) : null,
-    coding: summarizeCoding(coding.length ? coding : fixtureCoding(dates)),
     views: views ?? (useFixtures ? { pageviews: 18_420, visitors: 6_105, source: 'vercel' } : null),
     ...yearStatic(year),
   };
@@ -197,13 +174,5 @@ function fixtureDays(dates: string[]): ContribDay[] {
     const quiet = i > 150 && i < 172; // a quiet stretch to annotate
     const x = quiet ? 0 : r() * (dow === 0 || dow === 6 ? 0.6 : 1) + i / 900;
     return { date, count: x < 0.4 ? 0 : Math.round(x * x * 12) };
-  });
-}
-function fixtureCoding(dates: string[]): CodingDay[] {
-  if (!useFixtures) return [];
-  const r = rng(5);
-  return dates.map(date => {
-    const h = Math.round(r() * 7 * 10) / 10;
-    return { date, hours: h, languages: [['TypeScript', 0.5], ['Python', 0.32], ['CSS', 0.1], ['Markdown', 0.08]].map(([name, f]) => ({ name: name as string, hours: Math.round(h * (f as number) * 10) / 10 })) };
   });
 }

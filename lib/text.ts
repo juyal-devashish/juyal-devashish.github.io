@@ -66,7 +66,7 @@ export function markdownFor(path: string): string | null {
     // Static parts only (markdownFor is synchronous); live numbers are on the page itself.
     const y = parseYear(key)!;
     const st = yearStatic(y);
-    out.push(`# ${y}${y === currentYear() ? ', so far' : ''}`, '', `Live numbers (GitHub contributions, coding hours, page views) are on ${site.url}/${y}.`, '',
+    out.push(`# ${y}${y === currentYear() ? ', so far' : ''}`, '', `Live numbers (GitHub contributions, page views) are on ${site.url}/${y}.`, '',
       `- Projects: ${st.projects.length}`, `- Posts: ${st.posts.length}`, ...(st.papers.length ? [`- Papers read: ${st.papers.length}`] : []), '',
       ...(st.projects.length ? ['## Projects', '', projectsMd(st.projects), ''] : []),
       ...(st.posts.length ? ['## Writing', '', ...st.posts.map(p => `- [${p.title}](${site.url}/writing/${p.slug}.md) · ${formatDate(p.date)}`), ''] : []),

@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
-const { pickMoments, summarizeGitHub, summarizeCoding, parseYear, yearDates, byMonth, currentYear } = await import('../lib/year');
+const { pickMoments, summarizeGitHub, parseYear, yearDates, byMonth, currentYear } = await import('../lib/year');
 const { markdownFor } = await import('../lib/text');
 
 const days = (counts: number[], start = '2026-01-01') => yearDates(2026, '2026-12-31').slice(yearDates(2026, '2026-12-31').indexOf(start)).slice(0, counts.length).map((date, i) => ({ date, count: counts[i] }));
@@ -70,18 +70,6 @@ test('byMonth and summarizeGitHub', () => {
   assert.equal(s.total, 6);
   assert.equal(s.streak, 3);
   assert.equal(s.activeDays, 3);
-});
-
-test('summarizeCoding ignores empty days and returns null with none', () => {
-  assert.equal(summarizeCoding([{ date: '2026-01-01', hours: 0, languages: [] }]), null);
-  const s = summarizeCoding([
-    { date: '2026-01-01', hours: 2, languages: [{ name: 'Python', hours: 1.5 }, { name: 'CSS', hours: 0.5 }] },
-    { date: '2026-02-01', hours: 1, languages: [{ name: 'CSS', hours: 1 }] },
-  ])!;
-  assert.equal(s.hours, 3);
-  assert.equal(s.days, 2);
-  assert.deepEqual(s.months.slice(0, 2), [2, 1]);
-  assert.deepEqual(s.languages.map(l => l.name), ['Python', 'CSS'], 'a tie keeps first-seen order');
 });
 
 test('markdownFor(<year>) returns the year, null outside the range', () => {

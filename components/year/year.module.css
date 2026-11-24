@@ -69,10 +69,6 @@ html:not(:global(.js)) .moment { cursor: default; }
 .table tfoot th, .table tfoot td { color: var(--ink); font-weight: 600; border-bottom: 0; }
 .table th:last-child, .table td:last-child { padding-right: 0; }
 
-/* ---------- coding ---------- */
-.monthList { columns: 2; column-gap: 24px; }
-.monthList li { break-inside: avoid; }
-
 /* ---------- shipped ---------- */
 .cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 32px clamp(24px, 4vw, 48px); }
 .col { min-width: 0; }

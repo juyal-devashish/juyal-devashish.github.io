@@ -13,7 +13,6 @@ import StatusBadge from '@/components/StatusBadge';
 import CalendarGrid from '@/components/widgets/CalendarGrid';
 import { buildWeeks } from '@/components/widgets/GitHubCalendar';
 import AnnotatedYear, { type ChartMoment } from '@/components/year/AnnotatedYear';
-import MonthOrbits from '@/components/year/MonthOrbits';
 import w from '@/components/widgets/widgets.module.css';
 import s from '@/components/year/year.module.css';
 
@@ -36,18 +35,17 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   if (!y) notFound();
   const current = y === allYears().at(-1);
   const title = titleFor(y, current);
-  const description = `${y} in numbers: contributions, coding hours, projects, writing and papers read.`;
+  const description = `${y} in numbers: contributions, projects, writing and papers read.`;
   return pageMeta(`/${y}`, title, description);
 }
 
 const fmt = (n: number) => n.toLocaleString('en-US');
-const h1 = (n: number) => n.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 
 export default async function YearPage({ params }: Params) {
   const y = parseYear((await params).year);
   if (!y) notFound();
   const d = await getYear(y);
-  const { github: gh, coding } = d;
+  const { github: gh } = d;
   const dates = yearDates(y, `${y}-12-31`);
   const index = new Map(dates.map((x, i) => [x, i]));
   const through = index.get(d.through) ?? dates.length - 1;
@@ -60,7 +58,6 @@ export default async function YearPage({ params }: Params) {
   if (gh) stats.push({ k: 'Contributions', v: fmt(gh.total), sub: `${gh.activeDays} active days` });
   if (gh && gh.streak) stats.push({ k: 'Longest streak', v: `${gh.streak}`, sub: gh.streak === 1 ? 'day' : 'days' });
   if (gh?.busiestWeekday) stats.push({ k: 'Busiest weekday', v: gh.busiestWeekday.slice(0, 3) });
-  if (coding) stats.push({ k: 'Coding', v: fmt(Math.round(coding.hours)), sub: 'hours' });
   if (d.views) stats.push({ k: d.views.source === 'vercel' ? 'Page views' : 'Post views', v: fmt(d.views.pageviews), sub: d.views.visitors ? `${fmt(d.views.visitors)} visitors` : undefined });
   stats.push({ k: 'Projects', v: String(d.projects.length) });
   stats.push({ k: 'Posts', v: String(d.posts.length) });
@@ -88,7 +85,7 @@ export default async function YearPage({ params }: Params) {
             <Link key={yy} href={`/${yy}`} aria-current={yy === y ? 'page' : undefined}>{yy}</Link>
           ))}
         </nav>
-        {!gh && !coding && !d.views && !shipped ? <p className={s.empty}>Nothing on record for {y}.</p> : (
+        {!gh && !d.views && !shipped ? <p className={s.empty}>Nothing on record for {y}.</p> : (
         <Reveal as="dl" className={s.stats}>
           {stats.map(x => (
             <div key={x.k}><dt>{x.k}</dt><dd><b>{x.v}</b>{x.sub ? <span>{x.sub}</span> : null}</dd></div>
@@ -127,34 +124,18 @@ export default async function YearPage({ params }: Params) {
             <table className={s.table}>
               <caption>{y} by month</caption>
               <thead>
-                <tr><th scope="col">Month</th><th scope="col">Contributions</th>{coding ? <th scope="col">Coding hours</th> : null}</tr>
+                <tr><th scope="col">Month</th><th scope="col">Contributions</th></tr>
               </thead>
               <tbody>
                 {MONTHS.slice(0, upto).map((m, i) => (
-                  <tr key={m}><th scope="row">{m}</th><td>{fmt(gh.months[i])}</td>{coding ? <td>{h1(coding.months[i])}</td> : null}</tr>
+                  <tr key={m}><th scope="row">{m}</th><td>{fmt(gh.months[i])}</td></tr>
                 ))}
               </tbody>
               <tfoot>
-                <tr><th scope="row">Total</th><td>{fmt(gh.total)}</td>{coding ? <td>{h1(coding.hours)}</td> : null}</tr>
+                <tr><th scope="row">Total</th><td>{fmt(gh.total)}</td></tr>
               </tfoot>
             </table>
           </Reveal>
-        </section>
-      ) : null}
-
-      {coding ? (
-        <section className="sec" id="coding" aria-labelledby="coding-h">
-          <SectionHeader id="coding" no={no()} label="Coding" title="Hours at the" accent="keyboard" />
-          <Reveal className={`panel ${s.panel}`}><MonthOrbits data={coding} upto={upto} /></Reveal>
-          {!gh ? (
-            <Reveal className={s.tableWrap}>
-              <table className={s.table}>
-                <caption>Coding hours by month</caption>
-                <thead><tr><th scope="col">Month</th><th scope="col">Hours</th></tr></thead>
-                <tbody>{MONTHS.slice(0, upto).map((m, i) => <tr key={m}><th scope="row">{m}</th><td>{h1(coding.months[i])}</td></tr>)}</tbody>
-              </table>
-            </Reveal>
-          ) : null}
         </section>
       ) : null}
 

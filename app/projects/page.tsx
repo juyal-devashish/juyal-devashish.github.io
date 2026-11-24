@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react';
 import Image from 'next/image';
 import { projects, site } from '@/lib/site';
 import SectionHeader from '@/components/SectionHeader';
@@ -7,15 +8,11 @@ import ProjectList from '@/components/projects/ProjectList';
 import Clip from '@/components/projects/Clip';
 import { Links, Meta, Notes } from '@/components/projects/parts';
 import GitHubCalendar from '@/components/widgets/GitHubCalendar';
-import CodingWeek from '@/components/widgets/CodingWeek';
-import HourlyPattern from '@/components/widgets/HourlyPattern';
 import { getContributions } from '@/lib/github';
-import { getCodingWeek } from '@/lib/coding';
-import { fixtureContributions, fixtureCodingWeek } from '@/lib/fixtures';
+import { fixtureContributions } from '@/lib/fixtures';
 import { dayKey } from '@/lib/store';
 import { pageMeta } from '@/lib/meta';
 import s from '@/components/projects/projects.module.css';
-import a from './activity.module.css';
 
 export const metadata = pageMeta('/projects', 'Projects', 'Things I’ve built: AI products, demos and research.');
 
@@ -34,12 +31,7 @@ function activityEnd(): Date {
 }
 
 export default async function ProjectsPage() {
-  const [ghReal, weekReal] = await Promise.all([getContributions(activityStart(), activityEnd()), getCodingWeek()]);
-  const gh = ghReal ?? fixtureContributions();
-  const weekRaw = weekReal ?? fixtureCodingWeek();
-  // A week of zeros means nothing was saved yet, not that nothing happened: hide it.
-  const week = weekRaw && weekRaw.days.some(d => d.hours > 0) ? weekRaw : null;
-  const hourly = week?.hourly && week.hourly.some(v => v > 0) ? week.hourly : null;
+  const gh = (await getContributions(activityStart(), activityEnd())) ?? fixtureContributions();
 
   const featured = projects.find(p => p.featured);
   const cards = projects.filter(p => p !== featured && p.thumb && p.status !== 'Archived');
@@ -95,22 +87,12 @@ export default async function ProjectsPage() {
       <p className={s.gh}><a className="qlink" href={site.links.github} rel="noopener">Everything else is on GitHub</a></p>
     </section>
 
-    {gh || week ? (
+    {gh ? (
       <section className="sec" id="activity" aria-labelledby="activity-h">
         <SectionHeader id="activity" no="02.1" label="Activity" title="Lately, at the" accent="keyboard" />
-        <div className={`${a.grid} ${gh && week ? a.two : ''}`}>
-          {gh ? (
-            <Reveal className={`panel ${a.panel} ${week ? '' : a.solo}`}>
-              <GitHubCalendar data={gh} weeks={26} phoneWeeks={26} source="GitHub activity" span="past 6 months" title="Contributions" id="activity-gh" totalOnly range />
-            </Reveal>
-          ) : null}
-          {week ? (
-            <Reveal className={`panel ${a.panel}`}>
-              <CodingWeek days={week.days} />
-              {hourly ? <HourlyPattern hourly={hourly} label={`Hourly pattern · past ${week!.hourlyDays} day${week!.hourlyDays === 1 ? '' : 's'}`} /> : null}
-            </Reveal>
-          ) : null}
-        </div>
+        <Reveal className="panel" style={{ '--cal-max': '760px' } as CSSProperties}>
+          <GitHubCalendar data={gh} weeks={26} phoneWeeks={26} source="GitHub activity" span="past 6 months" title="Contributions" id="activity-gh" totalOnly range />
+        </Reveal>
       </section>
     ) : null}
     </>

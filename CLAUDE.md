@@ -24,7 +24,7 @@ Several dev servers can run side by side: `NEXT_DIST_DIR=.next-<name> npx next d
 - `lib/photos.ts`: photos, in time-of-day order; files in `public/assets/img/photos/` (600px tall, metadata stripped).
 - `content/posts/<slug>.md`: posts, front matter `title`, `date`, `summary`, optional `draft: true`.
 - `lib/text.ts`: markdown copies (`/<page>.md`), `llms.txt`, the search index. Built from the same data as the pages.
-- Live data, each `null` when unconfigured: `lib/github.ts` (`GITHUB_TOKEN`), `lib/coding.ts` (`WAKATIME_*`), `lib/store.ts` (Upstash `KV_REST_API_*`), `lib/views.ts` (`VERCEL_ANALYTICS_TOKEN`, `VERCEL_PROJECT_ID`). `/api/cron` (daily, `CRON_SECRET`) saves coding days. All env vars are in `.env.example`.
+- Live data, each `null` when unconfigured: `lib/github.ts` (`GITHUB_TOKEN`), `lib/store.ts` (Upstash `KV_REST_API_*`), `lib/views.ts` (`VERCEL_ANALYTICS_TOKEN`, `VERCEL_PROJECT_ID`). All env vars are in `.env.example`.
 - `components/README.md`: shared tokens, classes and components. The layout renders the rail, controls, palette and footer; pages render only content with exactly one h1.
 - `legacy-pages/`: GitHub Pages redirect stubs for the old URLs (cutover steps in its README; regenerate with `tools/legacy-pages.mjs`).
 
