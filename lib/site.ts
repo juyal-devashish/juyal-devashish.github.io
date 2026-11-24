@@ -115,22 +115,6 @@ export const work = {
   ],
 };
 
-export type Row = { id: string; org: string; role?: string; dates?: string; text?: string };
-export const experience: Row[] = [
-  { id: 'um-research', org: 'University of Michigan', role: 'Research Assistant', dates: '2024–2026', text: 'Detecting AI-written text; change detection.' },
-  { id: 'micron', org: 'Micron Technology', role: 'Data Science Intern', dates: '2024', text: 'Internal code generator; equipment monitoring.' },
-  { id: 'mitacs', org: 'MITACS, University of Alberta', role: 'Research Intern', dates: '2023', text: 'ML for materials design.' },
-  { id: 'isro', org: 'ISRO', role: 'Research Intern', dates: '2022', text: 'Deep learning for radar signals.' },
-];
-export const education: Row[] = [
-  { id: 'um-ms', org: 'University of Michigan', role: 'MS, Electrical & Computer Engineering (ML)', dates: '2026' },
-  { id: 'mnit', org: 'MNIT Jaipur', role: 'BTech, Electronics & Communication', dates: '2024' },
-];
-export const recognition: Row[] = [
-  { id: 'mitacs-fellowship', org: 'MITACS Globalink Fellowship', dates: '2023' },
-  { id: 'startup-challenge', org: 'Startup challenge finalist', role: 'Featured in a national newspaper.' },
-  { id: 'aws-lambda', org: 'AWS and Lambda funding', role: 'For my master’s project.' },
-];
 export const archive = [
   { full: '/assets/img/archive/ms-diploma.jpg', thumb: '/assets/img/archive/ms-diploma-t.jpg', w: 480, h: 605, alt: 'My University of Michigan diploma: Master of Science in Electrical and Computer Engineering.', caption: 'Michigan, 2026' },
   { full: '/assets/img/archive/mitacs-cohort.jpg', thumb: '/assets/img/archive/mitacs-cohort-t.jpg', w: 480, h: 481, alt: 'My MITACS certificate of participation from the University of Alberta, among my cohort’s certificates, which are blurred.', caption: 'MITACS, Edmonton, 2023' },

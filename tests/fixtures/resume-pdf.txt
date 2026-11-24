@@ -1,0 +1,57 @@
+Devashish Juyal
+djuyal23@gmail.com | linkedin.com/in/devashish-juyal
+Education
+University of Michigan MS in Electrical and Computer Engineering | GPA: 3.52/4 Coursework: Small Language Models (SLM), Natural Language Processing (NLP), Large Language Models (LLM), SQL, ML
+Malaviya National Institute of Technology BTech in Electronics and Communication Engineering | GPA: 3.8/4 Coursework: Data Structures and Algorithms, Operating Systems, Graph Theory, Probability, Neural Networks
+Skills
+Ann Arbor, MI
+May 2026
+Jaipur, India
+May 2024
+Languages & ML: Python, SQL, TypeScript, C++, PyTorch, TensorFlow, XGBoost, Hugging Face, pandas, NumPy, CUDA, Weights
+& Biases, HTML/CSS, Flask, Node.js, React, REST APIs
+MLOps: LangGraph, LangChain, Retrieval-Augmented Generation (RAG), Agentic AI, Model Context Protocol (MCP), Tool Calling,
+FastAPI, AWS (SageMaker, Bedrock, EKS, S3, Lambda), GCP, Docker, Kubernetes, PostgreSQL, CI/CD, Claude Code
+Work Experience
+Tech Observer Jersey City, NJ
+Data Scientist Aug 2024 – Present
+• Architected an agentic clinical adjudication platform automating adverse-event intake, quality control, and case narratives; designed
+a multi-agent layer behind an API gateway with schema validated outputs reducing human touchpoints by 70%.
+• Built an anonymization pipeline for clinical documents using OCR and NER removing 100% of identifiers while preserving all of
+clinical content thereby eliminating need for manual input.
+• Engineered a HIPAA-oriented de-identification platform reaching 0.97 F1 and 98% anonymization recall on 2,000+ CT images;
+deployed a computer vision classifier autonomously removing out-of-body footage from 33+ hours of surgical video at 98% accuracy.
+• Developed a multi-agent financial QA system in LangGraph with agent loop and tools, reconciling figures across 500 documents and
+cutting review time by 92% through an evidence backed dashboard built with Python, TypeScript and React.
+Micron Technology Hyderabad, India
+Data Science Intern Jan 2024 – Jul 2024
+• Launched and deployed PMON, detecting equipment drift by statistical ML methods, triggering preventive maintenance orders,
+increasing overall fab yield by 0.5% and cutting unplanned downtime by 12 hours per month.
+• Fine-tuned LLaMA on 10K+ internal TypeScript code snippets to generate frontend widget components, reaching 82% compilation
+success; integrated LLM into Omelek, a TypeScript framework that 2 engineering teams adopted.
+• Shipped 3+ full-stack data features for the Manufacturing, Fab, and Planning teams, building React dashboards, Python REST
+APIs, and PostgreSQL data models deployed on Google Cloud Platform (GCP).
+MITACS Edmonton, Canada
+Research Intern May 2023 – Jul 2023
+• Trained XGBoost regression models on 10K+ simulation runs through automated data pipelines, replacing costly parameter sweeps
+with ML-driven analysis and cutting per-design evaluation time from hours to seconds compared with full EM simulation.
+• Translated model insights into design recommendations for the faculty PI and an industry partner, identifying configurations that
+raised cutoff frequency by about 15% and improved MRI signal quality.
+Project Experience
+MichiganSLM: UMich’s first small language model | GitHub
+• Pretrained a 1B-parameter small language model on 170B tokens with distributed training across 8 H100 GPUs, using scaling-law
+experiments from 15M to 300M parameters to pick the most compute-efficient design before committing the GPU budget.
+• Benchmarked and evaluated 6 model variants on coding, reasoning, and tool-calling tasks; the best model beat a Qwen3-style model
+and scored 18% lower bits-per-byte than GPT-2, a model 5 times bigger in size.
+Sama4: AI News Intelligence Platform | Live | GitHub
+• Built Sama4, a live AI news intelligence platform (Python, FastAPI, Next.js, PostgreSQL, Redis) that explains people, organizations
+and concepts in context, via an NLP pipeline ingesting 11 sources every 30 minutes.
+• Engineered a RAG layer combining hybrid NER (spaCy + Claude), Wikidata entity linking and Pinecone vector retrieval; extending
+it with a real-time voice companion and multi-agent news-impact simulations.
+Fast Large Language Model Watermarking | Link
+• Designed an adaptive LLM watermark detection pipeline using sequential hypothesis testing, Monte Carlo methods, and early
+stopping, cutting detection cost by 95% (thousands of permutations to about 50) across 3 watermarking schemes on an LLM.
+• Validated robustness against adversarial token insertions, deletions, and substitutions, holding the false-positive rate at 5% while
+keeping 95% statistical power with 40% of tokens edited.
+Activities
+$8K MITACS Fellow; $5K funding from Lambda; $2K funding from AWS; Tech Consultant at ITS UM; AVP Corporate Relations, IEEE

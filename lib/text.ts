@@ -1,6 +1,7 @@
 // Plain-text views of the site: markdown copies of each page, llms.txt and the search index.
 // Built from the same data as the pages, so they can't drift.
-import { site, projects, work, experience, education, recognition, now, uses, nav, writingOn } from './site';
+import { site, projects, now, uses, nav, writingOn } from './site';
+import { contact, education, skills, jobs, resumeProjects, activities } from './resume';
 import { readPapers } from './papers';
 import { photos } from './photos';
 import { getPosts, formatDate } from './posts';
@@ -16,7 +17,7 @@ export function pageList() {
     { path: '/projects', md: '/projects.md', title: 'Projects', about: 'things I’ve built' },
     ...(writingOn ? [{ path: '/writing', md: '/writing.md', title: 'Writing', about: `${posts.length} posts` }] : []),
     { path: '/stack', md: '/stack.md', title: 'Stack', about: 'papers I’ve read, with notes' },
-    { path: '/resume', md: '/resume.md', title: 'Résumé', about: 'work, education, recognition' },
+    { path: '/resume', md: '/resume.md', title: 'Résumé', about: 'education, skills, work, projects, activities' },
     { path: '/photos', md: '/photos.md', title: 'Photos', about: 'photos I’ve taken' },
     { path: '/now', md: '/now.md', title: 'Now', about: 'what I’m focused on' },
     ...(usesVisible() ? [{ path: '/uses', md: '/uses.md', title: 'Uses', about: 'tools I use' }] : []),
@@ -54,9 +55,13 @@ export function markdownFor(path: string): string | null {
       ['What it does', 'Why it matters', 'How it works', 'Key result'].forEach((q, i) => p.notes[i] && out.push(`  - ${q}: ${p.notes[i]}`));
     });
   } else if (key === 'resume') {
-    out.push(`# ${site.name}: Résumé`, '', `PDF: ${abs(site.resume)}`, '', '## Work', '', `- **${work.org}**, ${work.role} (${work.dates})`, ...work.items.map(i => `  - ${i.name}: ${i.text}`),
-      ...experience.map(r => `- **${r.org}**, ${r.role} (${r.dates}): ${r.text}`), '', '## Education', '', ...education.map(r => `- **${r.org}**, ${r.role} (${r.dates})`),
-      '', '## Recognition', '', ...recognition.map(r => `- **${r.org}**${r.role ? `: ${r.role}` : ''}${r.dates ? ` (${r.dates})` : ''}`));
+    const more = (m?: { lead?: string; points: string[] }) => (m ? [...(m.lead ? [`  - More: ${m.lead}`] : []), ...m.points.map(t => `  - ${t}`)] : []);
+    out.push(`# ${site.name}: Résumé`, '', `PDF: ${abs(site.resume)}`, '', `${contact.email} | [${contact.linkedin.label}](${contact.linkedin.href})`, '',
+      '## Education', '', ...education.flatMap(e => [`- **${e.org}**, ${e.place}: ${e.line} (${e.dates})`, `  - Coursework: ${e.coursework}`]), '',
+      '## Skills', '', ...skills.map(k => `- **${k.label}:** ${k.items}`), '',
+      '## Work Experience', '', ...jobs.flatMap(j => [`- **${j.org}**, ${j.place}: ${j.role} (${j.dates})`, ...j.bullets.map(t => `  - ${t}`), ...more(j.more)]), '',
+      '## Project Experience', '', ...resumeProjects.flatMap(p => [`- **${p.name}** (${p.links.map(l => `[${l.label}](${l.href})`).join(', ')})`, ...p.bullets.map(t => `  - ${t}`), ...more(p.more)]), '',
+      '## Activities', '', activities);
   } else if (key === 'photos') {
     out.push('# Photos', '', ...photos.map(p => `- ${p.caption}: ${p.alt} (${site.url}/assets/img/photos/${p.file})`));
   } else if (key === 'now') {
@@ -103,8 +108,8 @@ export function searchIndex(): SearchEntry[] {
   e.push({ id: 'go-year', type: 'page', title: `${currentYear()}, so far`, meta: 'Page', blurb: 'The year in data.', kw: 'stats data year activity github', href: `/${currentYear()}` });
   if (usesVisible()) e.push({ id: 'go-uses', type: 'page', title: 'Uses', meta: 'Page', blurb: 'Tools I use.', kw: 'tools gear setup', href: '/uses' });
   projects.forEach(p => e.push({ id: p.id, type: 'project', title: p.name, meta: [p.year, p.status].filter(Boolean).join(' · '), blurb: p.summary, kw: [p.area, ...(p.tags ?? [])].join(' '), text: p.notes ? Object.values(p.notes).join(' ') : '', href: `/projects#${p.id}`, img: p.thumb }));
-  e.push({ id: work.id, type: 'role', title: work.org, meta: `${work.dates} · ${work.role}`, blurb: work.items.map(i => i.name).join(', '), kw: 'job work', href: `/resume#${work.id}` });
-  [...experience, ...education, ...recognition].forEach(r => e.push({ id: r.id, type: 'role', title: r.org, meta: [r.role, r.dates].filter(Boolean).join(' · '), blurb: r.text ?? r.role ?? '', kw: 'background', href: `/resume#${r.id}` }));
+  jobs.forEach(j => e.push({ id: j.id, type: 'role', title: j.org, meta: `${j.dates} · ${j.role}`, blurb: j.bullets[0], kw: 'job work experience', text: j.bullets.join(' '), href: `/resume#${j.id}` }));
+  education.forEach(r => e.push({ id: r.id, type: 'role', title: r.org, meta: `${r.line} · ${r.dates}`, blurb: r.coursework, kw: 'education study background', href: `/resume#${r.id}` }));
   getPosts().forEach(p => e.push({ id: `post-${p.slug}`, type: 'post', title: p.title, meta: formatDate(p.date), blurb: p.summary, text: p.body.slice(0, 2000), href: `/writing/${p.slug}` }));
   readPapers().forEach(p => {
     const id = slug(p.title);

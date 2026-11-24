@@ -19,7 +19,8 @@ Several dev servers can run side by side: `NEXT_DIST_DIR=.next-<name> npx next d
 
 ## Where things live
 
-- `lib/site.ts`: profile, projects, work, experience, education, recognition, archive, now, uses, nav (order = Alt+1..7).
+- `lib/site.ts`: profile, projects, work (the home Now card), archive, now, uses, nav (order = Alt+1..7).
+- `lib/resume.ts`: the résumé page in the PDF's order. Its PDF layer is word for word (checked by `tests/resume.test.ts` against `tests/fixtures/resume-pdf.txt`, the PDF's text without the phone number); `more` holds extra detail from the project READMEs. Refresh the fixture whenever the PDF changes.
 - `lib/papers.ts`: papers; only `read: true` ones are shown anywhere.
 - `lib/photos.ts`: photos, in time-of-day order; files in `public/assets/img/photos/` (600px tall, metadata stripped).
 - `content/posts/<slug>.md`: posts, front matter `title`, `date`, `summary`, optional `draft: true`.

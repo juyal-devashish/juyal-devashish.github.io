@@ -3,7 +3,8 @@ import assert from 'node:assert/strict';
 
 const { markdownFor, llmsTxt, searchIndex, slug, pageList } = await import('../lib/text');
 const { papers } = await import('../lib/papers');
-const { projects, work, experience, education, recognition, uses } = await import('../lib/site');
+const { projects, uses } = await import('../lib/site');
+const { jobs, education } = await import('../lib/resume');
 
 const read = papers.filter(p => p.read);
 const unread = papers.filter(p => !p.read);
@@ -72,7 +73,7 @@ test('searchIndex hrefs are site-relative or mailto', () => {
 
 test('searchIndex project and role anchors point at real ids', () => {
   const projectIds = new Set(projects.map(p => p.id));
-  const roleIds = new Set([work.id, ...experience, ...education, ...recognition].map(r => (typeof r === 'string' ? r : r.id)));
+  const roleIds = new Set([...jobs, ...education].map(r => r.id));
   for (const e of searchIndex()) {
     if (e.type === 'project') {
       const [path, anchor] = e.href!.split('#');
