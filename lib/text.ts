@@ -1,13 +1,12 @@
 // Plain-text views of the site: markdown copies of each page, llms.txt and the search index.
 // Built from the same data as the pages, so they can't drift.
 import { site, projects, work, experience, education, recognition, now, uses, nav, writingOn } from './site';
-import { papers } from './papers';
+import { readPapers } from './papers';
 import { photos } from './photos';
 import { getPosts, formatDate } from './posts';
 import { parseYear, yearStatic, currentYear } from './year';
 
 const abs = (p: string) => (p.startsWith('http') || p.startsWith('mailto:') ? p : site.url + p);
-const readPapers = () => papers.filter(p => p.read);
 export const usesVisible = () => uses.length > 0;
 
 export function pageList() {

@@ -1,12 +1,14 @@
+// `citations` is a snapshot (Semantic Scholar/OpenAlex, Nov 2026) used only to order the stack; never shown.
 // Papers. Only read: true ones show on the stack; the rest are the to-read list.
 // Every paper has 4 notes: [what it does, why it matters, how it works, key result]
 // `readOn` is the day it went on the stack ("Jan 15, 2026"), set only when known; year pages use it alone.
 // `date` is what the stack shows; for most papers it is the publication date, not a read date.
-export type Paper = { title: string; authors: string; date: string; readOn?: string; link?: string; takeaway: string; tags: string[]; pinned: boolean; read: boolean; notes: string[] };
+export type Paper = { title: string; authors: string; date: string; readOn?: string; link?: string; takeaway: string; tags: string[]; read: boolean; citations?: number; notes: string[] };
 
 export const papers: Paper[] = [
   {
     "title": "Attention Is All You Need",
+    "citations": 204521,
     "authors": "Vaswani et al., NeurIPS 2017",
     "date": "Jan 15, 2026",
     "readOn": "Jan 15, 2026",
@@ -16,7 +18,6 @@ export const papers: Paper[] = [
       "llm",
       "nlp"
     ],
-    "pinned": true,
     "read": true,
     "notes": [
       "Proposes the Transformer — a sequence-to-sequence architecture built entirely on self-attention, with no RNNs or CNNs. Encoder and decoder stacks of multi-head attention + feedforward layers, connected by residual paths and layer norms.",
@@ -27,6 +28,7 @@ export const papers: Paper[] = [
   },
   {
     "title": "A Watermark for Large Language Models",
+    "citations": 1389,
     "authors": "Kirchenbauer et al., ICML 2023",
     "date": "Jan 22, 2026",
     "readOn": "Jan 22, 2026",
@@ -36,7 +38,6 @@ export const papers: Paper[] = [
       "llm",
       "security"
     ],
-    "pinned": true,
     "read": true,
     "notes": [
       "Introduces a practical watermarking scheme for LLM-generated text. At generation time, the model is biased to favor tokens from a \"green list\" derived by hashing the previous token. A z-test on the green-token fraction detects the watermark.",
@@ -47,6 +48,7 @@ export const papers: Paper[] = [
   },
   {
     "title": "Distilling Step-by-Step!",
+    "citations": 1293,
     "authors": "Hsieh et al., ACL Findings 2023",
     "date": "Feb 3, 2026",
     "readOn": "Feb 3, 2026",
@@ -56,7 +58,6 @@ export const papers: Paper[] = [
       "llm",
       "distillation"
     ],
-    "pinned": false,
     "read": true,
     "notes": [
       "A knowledge distillation framework where a large teacher LLM generates chain-of-thought rationales that then serve as auxiliary supervision for a small student model. The student learns to predict both the label and the reasoning chain.",
@@ -67,6 +68,7 @@ export const papers: Paper[] = [
   },
   {
     "title": "Invariant Risk Minimization",
+    "citations": 3179,
     "authors": "Arjovsky et al., arXiv 2019",
     "date": "Feb 10, 2026",
     "readOn": "Feb 10, 2026",
@@ -76,7 +78,6 @@ export const papers: Paper[] = [
       "ml",
       "theory"
     ],
-    "pinned": false,
     "read": true,
     "notes": [
       "Introduces IRM, a learning paradigm that finds a feature representation Φ such that the optimal classifier on top of Φ is the same across all training environments. This forces the model to rely on causal, not spurious, features.",
@@ -87,6 +88,7 @@ export const papers: Paper[] = [
   },
   {
     "title": "Sequential Change-Point Detection via Online Convex Optimization",
+    "citations": 31,
     "authors": "Hazan et al., 2023",
     "date": "Feb 14, 2026",
     "readOn": "Feb 14, 2026",
@@ -95,7 +97,6 @@ export const papers: Paper[] = [
       "statistics",
       "theory"
     ],
-    "pinned": false,
     "read": true,
     "notes": [
       "Reformulates sequential change-point detection as an instance of online convex optimization (OCO). The CUSUM statistic emerges naturally from an online mirror descent update, allowing regret analysis to bound detection delay.",
@@ -106,6 +107,7 @@ export const papers: Paper[] = [
   },
   {
     "title": "Language Models are Few-Shot Learners",
+    "citations": 66991,
     "authors": "Brown et al., NeurIPS 2020",
     "date": "Feb 17, 2026",
     "readOn": "Feb 17, 2026",
@@ -115,7 +117,6 @@ export const papers: Paper[] = [
       "llm",
       "survey"
     ],
-    "pinned": false,
     "read": true,
     "notes": [
       "Trains GPT-3 (175B parameters) on a massive diverse text corpus and evaluates it in zero-, one-, and few-shot settings — where \"few-shot\" means in-context examples in the prompt, no gradient updates.",
@@ -126,6 +127,7 @@ export const papers: Paper[] = [
   },
   {
     "title": "Small Language Models (SLMs) Can Still Pack a Punch: A Survey",
+    "citations": 2,
     "authors": "Gupta et al., arXiv 2025",
     "date": "Jan 2025",
     "link": "https://arxiv.org/abs/2501.05465",
@@ -134,7 +136,6 @@ export const papers: Paper[] = [
       "llm",
       "survey"
     ],
-    "pinned": false,
     "read": true,
     "notes": [
       "Surveys about 160 papers on small language models of roughly 1–9B parameters, covering general-purpose, task-specific and domain-specific models.",
@@ -145,6 +146,7 @@ export const papers: Paper[] = [
   },
   {
     "title": "Training Compute-Optimal Large Language Models",
+    "citations": 4118,
     "authors": "Hoffmann et al., arXiv 2022",
     "date": "Mar 2022",
     "link": "https://arxiv.org/abs/2203.15556",
@@ -153,7 +155,6 @@ export const papers: Paper[] = [
       "llm",
       "theory"
     ],
-    "pinned": false,
     "read": true,
     "notes": [
       "Asks how to split a fixed compute budget between model size and training tokens.",
@@ -164,6 +165,7 @@ export const papers: Paper[] = [
   },
   {
     "title": "On the Slow Death of Scaling",
+    "citations": 15,
     "authors": "Hooker, SSRN 2025",
     "date": "2025",
     "link": "https://ssrn.com/abstract=5877662",
@@ -173,7 +175,6 @@ export const papers: Paper[] = [
       "theory",
       "survey"
     ],
-    "pinned": false,
     "read": true,
     "notes": [
       "An essay that questions the long-held belief that scaling training compute reliably buys better AI.",
@@ -191,7 +192,6 @@ export const papers: Paper[] = [
     "tags": [
       "llm"
     ],
-    "pinned": false,
     "read": true,
     "notes": [
       "A 321M-parameter small reasoning model trained natively for instruction following with thinking traces.",
@@ -202,6 +202,7 @@ export const papers: Paper[] = [
   },
   {
     "title": "Textbooks Are All You Need",
+    "citations": 702,
     "authors": "Gunasekar et al., arXiv 2023",
     "date": "Jun 2023",
     "link": "https://arxiv.org/abs/2306.11644",
@@ -210,7 +211,6 @@ export const papers: Paper[] = [
       "llm",
       "distillation"
     ],
-    "pinned": false,
     "read": true,
     "notes": [
       "Trains phi-1, a 1.3B-parameter code model, on 'textbook quality' web data plus synthetic textbooks and exercises generated with GPT-3.5.",
@@ -221,6 +221,7 @@ export const papers: Paper[] = [
   },
   {
     "title": "Scaling Laws for Optimal Data Mixtures",
+    "citations": 57,
     "authors": "Shukor et al., arXiv 2025",
     "date": "Jul 2025",
     "link": "https://arxiv.org/abs/2507.09404",
@@ -229,7 +230,6 @@ export const papers: Paper[] = [
       "llm",
       "theory"
     ],
-    "pinned": false,
     "read": true,
     "notes": [
       "Fits scaling laws that predict loss from model size, training tokens and domain mixture weights, then uses them to pick the best mixture for a given compute budget.",
@@ -240,6 +240,7 @@ export const papers: Paper[] = [
   },
   {
     "title": "Topic Over Source: The Key to Effective Data Mixing for Language Models Pre-training",
+    "citations": 8,
     "authors": "Peng et al., arXiv 2025",
     "date": "Feb 2025",
     "link": "https://arxiv.org/abs/2502.16802",
@@ -247,7 +248,6 @@ export const papers: Paper[] = [
     "tags": [
       "llm"
     ],
-    "pinned": false,
     "read": true,
     "notes": [
       "Groups pretraining data by topic instead of by source (web, books, code and so on), then compares how well data-mixing methods work with each grouping.",
@@ -258,6 +258,7 @@ export const papers: Paper[] = [
   },
   {
     "title": "SmolLM2 Technical Report",
+    "citations": 462,
     "authors": "Ben Allal et al., arXiv 2025",
     "date": "Feb 2025",
     "link": "https://arxiv.org/abs/2502.02737",
@@ -265,7 +266,6 @@ export const papers: Paper[] = [
     "tags": [
       "llm"
     ],
-    "pinned": false,
     "read": true,
     "notes": [
       "Describes how Hugging Face trained SmolLM2, a 1.7B-parameter language model, and releases the model along with every dataset built for it.",
@@ -283,7 +283,6 @@ export const papers: Paper[] = [
     "tags": [
       "llm"
     ],
-    "pinned": false,
     "read": true,
     "notes": [
       "A long-form guide from Hugging Face on training SmolLM3, a 3B multilingual reasoning model. It includes the failed runs, infrastructure problems and debugging that papers usually leave out.",
@@ -294,6 +293,7 @@ export const papers: Paper[] = [
   },
   {
     "title": "Hymba: A Hybrid-head Architecture for Small Language Models",
+    "citations": 126,
     "authors": "Dong et al. (NVIDIA), arXiv 2024",
     "date": "Nov 2024",
     "link": "https://arxiv.org/abs/2411.13676",
@@ -301,7 +301,6 @@ export const papers: Paper[] = [
     "tags": [
       "llm"
     ],
-    "pinned": false,
     "read": true,
     "notes": [
       "Introduces Hymba, a family of small language models in which every layer runs attention heads and state-space (Mamba-style) heads side by side.",
@@ -312,6 +311,7 @@ export const papers: Paper[] = [
   },
   {
     "title": "Eagle and Finch: RWKV with Matrix-Valued States and Dynamic Recurrence",
+    "citations": 214,
     "authors": "Peng et al., arXiv 2024",
     "date": "Apr 2024",
     "link": "https://arxiv.org/abs/2404.05892",
@@ -319,7 +319,6 @@ export const papers: Paper[] = [
     "tags": [
       "llm"
     ],
-    "pinned": false,
     "read": true,
     "notes": [
       "Introduces Eagle (RWKV-5) and Finch (RWKV-6), successors to RWKV-4: recurrent language models that aim to match transformers.",
@@ -330,6 +329,7 @@ export const papers: Paper[] = [
   },
   {
     "title": "MobiLlama: Towards Accurate and Lightweight Fully Transparent GPT",
+    "citations": 64,
     "authors": "Thawakar et al., arXiv 2024",
     "date": "Feb 2024",
     "link": "https://arxiv.org/abs/2402.16840",
@@ -337,7 +337,6 @@ export const papers: Paper[] = [
     "tags": [
       "llm"
     ],
-    "pinned": false,
     "read": true,
     "notes": [
       "Releases MobiLlama, a 0.5B open small language model built for on-device use, with data pipeline, training code, weights, 300+ checkpoints and evaluation code.",
@@ -348,6 +347,7 @@ export const papers: Paper[] = [
   },
   {
     "title": "OpenELM: An Efficient Language Model Family",
+    "citations": 107,
     "authors": "Mehta et al., arXiv 2024",
     "date": "Apr 2024",
     "link": "https://arxiv.org/abs/2404.14619",
@@ -355,7 +355,6 @@ export const papers: Paper[] = [
     "tags": [
       "llm"
     ],
-    "pinned": false,
     "read": true,
     "notes": [
       "Apple's open language model family, released with the full training and evaluation framework, logs, checkpoints and configs, not just weights.",
@@ -366,6 +365,7 @@ export const papers: Paper[] = [
   },
   {
     "title": "Conditional Memory via Scalable Lookup: A New Axis of Sparsity for Large Language Models",
+    "citations": 106,
     "authors": "Cheng et al., arXiv 2026",
     "date": "Jan 2026",
     "link": "https://arxiv.org/abs/2601.07372",
@@ -373,7 +373,6 @@ export const papers: Paper[] = [
     "tags": [
       "llm"
     ],
-    "pinned": false,
     "read": true,
     "notes": [
       "Proposes Engram, a conditional-memory module that adds constant-time lookup of modernized N-gram embeddings alongside Mixture-of-Experts computation.",
@@ -384,6 +383,7 @@ export const papers: Paper[] = [
   },
   {
     "title": "FlexOLMo: Open Language Models for Flexible Data Use",
+    "citations": 21,
     "authors": "Shi et al., arXiv 2025",
     "date": "Jul 2025",
     "link": "https://arxiv.org/abs/2507.07024",
@@ -391,7 +391,6 @@ export const papers: Paper[] = [
     "tags": [
       "llm"
     ],
-    "pinned": false,
     "read": true,
     "notes": [
       "Introduces FlexOlmo, a mixture-of-experts model family in which each expert is trained separately on its own dataset and merged later without joint training.",
@@ -402,6 +401,7 @@ export const papers: Paper[] = [
   },
   {
     "title": "Front-Loading Reasoning: The Synergy between Pretraining and Post-Training Data",
+    "citations": 32,
     "authors": "Akter et al. (NVIDIA), arXiv 2025",
     "date": "Oct 2025",
     "link": "https://arxiv.org/abs/2510.03264",
@@ -409,7 +409,6 @@ export const papers: Paper[] = [
     "tags": [
       "llm"
     ],
-    "pinned": false,
     "read": true,
     "notes": [
       "Tests whether reasoning data should go into pretraining or wait until post-training, varying its scale, diversity and quality at each stage.",
@@ -420,6 +419,7 @@ export const papers: Paper[] = [
   },
   {
     "title": "Midtraining Bridges Pretraining and Posttraining Distributions",
+    "citations": 12,
     "authors": "Liu et al., arXiv 2025",
     "date": "Oct 2025",
     "link": "https://arxiv.org/abs/2510.14865",
@@ -427,7 +427,6 @@ export const papers: Paper[] = [
     "tags": [
       "llm"
     ],
-    "pinned": false,
     "read": true,
     "notes": [
       "Studies midtraining, an intermediate phase that mixes specialized data with general pretraining data, and asks why it helps.",
@@ -438,6 +437,7 @@ export const papers: Paper[] = [
   },
   {
     "title": "Balancing the Budget: Understanding Trade-offs Between Supervised and Preference-Based Finetuning",
+    "citations": 7,
     "authors": "Raghavendra et al., ACL 2025",
     "date": "2025",
     "link": "https://aclanthology.org/2025.acl-long.1248.pdf",
@@ -445,7 +445,6 @@ export const papers: Paper[] = [
     "tags": [
       "llm"
     ],
-    "pinned": false,
     "read": true,
     "notes": [
       "Studies how to split a fixed data-annotation budget between supervised finetuning (SFT) and preference finetuning such as DPO.",
@@ -456,6 +455,7 @@ export const papers: Paper[] = [
   },
   {
     "title": "The Llama 3 Herd of Models",
+    "citations": 21307,
     "authors": "Dubey et al., arXiv 2024",
     "date": "Jul 2024",
     "link": "https://arxiv.org/abs/2407.21783",
@@ -464,7 +464,6 @@ export const papers: Paper[] = [
       "llm",
       "survey"
     ],
-    "pinned": false,
     "read": true,
     "notes": [
       "Meta's report on Llama 3, a family of open models with native multilingual, coding, reasoning and tool-use support.",
@@ -475,6 +474,7 @@ export const papers: Paper[] = [
   },
   {
     "title": "DeepSeek-V3 Technical Report",
+    "citations": 4525,
     "authors": "DeepSeek-AI, arXiv 2024",
     "date": "Dec 2024",
     "link": "https://arxiv.org/abs/2412.19437",
@@ -482,7 +482,6 @@ export const papers: Paper[] = [
     "tags": [
       "llm"
     ],
-    "pinned": false,
     "read": true,
     "notes": [
       "Presents DeepSeek-V3, a mixture-of-experts language model with 671B total parameters, of which 37B are active per token.",
@@ -493,6 +492,7 @@ export const papers: Paper[] = [
   },
   {
     "title": "Data Curation via Joint Example Selection Further Accelerates Multimodal Learning (JEST)",
+    "citations": 44,
     "authors": "Evans et al., arXiv 2024",
     "date": "Jun 2024",
     "link": "https://arxiv.org/abs/2406.17711",
@@ -501,7 +501,6 @@ export const papers: Paper[] = [
       "llm",
       "ml"
     ],
-    "pinned": false,
     "read": true,
     "notes": [
       "Picks training data a whole batch at a time, not example by example, for image-text contrastive pretraining.",
@@ -512,6 +511,7 @@ export const papers: Paper[] = [
   },
   {
     "title": "DeepSeek-V3.2-Exp: Boosting Long-Context Efficiency with DeepSeek Sparse Attention",
+    "citations": 100,
     "authors": "DeepSeek-AI, 2025",
     "date": "2025",
     "link": "https://github.com/deepseek-ai/DeepSeek-V3.2-Exp/blob/main/DeepSeek_V3_2.pdf",
@@ -519,7 +519,6 @@ export const papers: Paper[] = [
     "tags": [
       "llm"
     ],
-    "pinned": false,
     "read": true,
     "notes": [
       "Adds DeepSeek Sparse Attention (DSA) to DeepSeek-V3.1-Terminus through continued training; this is the only architecture change.",
@@ -530,6 +529,7 @@ export const papers: Paper[] = [
   },
   {
     "title": "OLMoE: Open Mixture-of-Experts Language Models",
+    "citations": 408,
     "authors": "Muennighoff et al., arXiv 2024",
     "date": "Sep 2024",
     "link": "https://arxiv.org/abs/2409.02060",
@@ -537,7 +537,6 @@ export const papers: Paper[] = [
     "tags": [
       "llm"
     ],
-    "pinned": false,
     "read": true,
     "notes": [
       "Releases OLMoE-1B-7B, a sparse mixture-of-experts language model, fully open: weights, training data, code and logs.",
@@ -556,7 +555,6 @@ export const papers: Paper[] = [
       "llm",
       "theory"
     ],
-    "pinned": false,
     "read": true,
     "notes": [
       "Builds a theory of how context length affects language-model loss, covering both why relevant context helps and why longer context can stop helping.",
@@ -567,6 +565,7 @@ export const papers: Paper[] = [
   },
   {
     "title": "Sample-Efficient Language Modeling with Linear Attention and Lightweight Enhancements",
+    "citations": 8,
     "authors": "Haller et al., arXiv 2025",
     "date": "Nov 2025",
     "link": "https://arxiv.org/abs/2511.05560",
@@ -574,7 +573,6 @@ export const papers: Paper[] = [
     "tags": [
       "llm"
     ],
-    "pinned": false,
     "read": true,
     "notes": [
       "Builds BLaLM, a small language model for the BabyLM 2025 challenge, which caps training data at about 10M or 100M words.",
@@ -585,6 +583,7 @@ export const papers: Paper[] = [
   },
   {
     "title": "LIFT: Improving Long Context Understanding via Long Input Fine-Tuning",
+    "citations": 7,
     "authors": "Wang et al., arXiv 2025",
     "date": "Feb 2025",
     "link": "https://arxiv.org/abs/2502.14644",
@@ -592,7 +591,6 @@ export const papers: Paper[] = [
     "tags": [
       "llm"
     ],
-    "pinned": false,
     "read": true,
     "notes": [
       "Lets a short-context LLM handle long inputs by fine-tuning on each input at test time, so the text is stored in its weights rather than its context window.",
@@ -603,6 +601,7 @@ export const papers: Paper[] = [
   },
   {
     "title": "Phi-4 Technical Report",
+    "citations": 921,
     "authors": "Abdin et al. (Microsoft Research), arXiv 2024",
     "date": "Dec 2024",
     "link": "https://arxiv.org/abs/2412.08905",
@@ -611,7 +610,6 @@ export const papers: Paper[] = [
       "llm",
       "distillation"
     ],
-    "pinned": false,
     "read": true,
     "notes": [
       "Introduces phi-4, a 14B-parameter language model trained with a central focus on data quality and with synthetic data used throughout training.",
@@ -622,6 +620,7 @@ export const papers: Paper[] = [
   },
   {
     "title": "MiniCPM: Unveiling the Potential of Small Language Models",
+    "citations": 878,
     "authors": "Hu et al., arXiv 2024",
     "date": "Apr 2024",
     "link": "https://arxiv.org/abs/2404.06395",
@@ -629,7 +628,6 @@ export const papers: Paper[] = [
     "tags": [
       "llm"
     ],
-    "pinned": false,
     "read": true,
     "notes": [
       "Introduces MiniCPM, small language models with 1.2B and 2.4B non-embedding parameters, plus DPO, MoE and 128K-context variants.",
@@ -640,6 +638,7 @@ export const papers: Paper[] = [
   },
   {
     "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+    "citations": 757,
     "authors": "Hong et al., arXiv 2024",
     "date": "Mar 2024",
     "link": "https://arxiv.org/abs/2403.07691",
@@ -647,7 +646,6 @@ export const papers: Paper[] = [
     "tags": [
       "llm"
     ],
-    "pinned": false,
     "read": true,
     "notes": [
       "Proposes ORPO, which aligns a model to preferences during supervised fine-tuning, with no reference model and no separate alignment stage.",
@@ -658,6 +656,7 @@ export const papers: Paper[] = [
   },
   {
     "title": "Language Modeling Is Compression",
+    "citations": 329,
     "authors": "Delétang et al., arXiv 2023",
     "date": "Sep 2023",
     "link": "https://arxiv.org/abs/2309.10668",
@@ -666,7 +665,6 @@ export const papers: Paper[] = [
       "llm",
       "theory"
     ],
-    "pinned": false,
     "read": true,
     "notes": [
       "Evaluates large language models as lossless compressors, using the known equivalence between good prediction and good compression.",
@@ -676,3 +674,9 @@ export const papers: Paper[] = [
     ]
   }
 ];
+
+/** Read papers, most cited first (unknown counts last; ties keep the order above). Counts are never shown. */
+export const readPapers = (): Paper[] =>
+  papers.filter(p => p.read).map((p, i) => ({ p, i }))
+    .sort((a, b) => (b.p.citations ?? -1) - (a.p.citations ?? -1) || a.i - b.i)
+    .map(x => x.p);

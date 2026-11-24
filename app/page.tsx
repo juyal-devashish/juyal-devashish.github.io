@@ -2,7 +2,7 @@
 // The layout supplies the rail, controls, footer (contact) and <main>.
 import Link from 'next/link';
 import { site, projects, work } from '@/lib/site';
-import { papers } from '@/lib/papers';
+import { readPapers } from '@/lib/papers';
 import { photos } from '@/lib/photos';
 import { getPosts, formatDate } from '@/lib/posts';
 import { getRecentContributions, RECENT_WEEKS, RECENT_LABEL } from '@/lib/github';
@@ -26,11 +26,8 @@ const Arrow = () => <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h1
 export default async function Home() {
   const gh = (await getRecentContributions()) ?? fixtureContributions();
   const posts = getPosts().slice(0, 3);
-  const read = papers.filter(p => p.read);
-  const shelf = [...read.filter(p => p.pinned), ...read.filter(p => !p.pinned).reverse()].slice(0, 4);
-  const tagCount = new Map<string, number>();
-  read.forEach(p => p.tags.forEach(t => tagCount.set(t, (tagCount.get(t) ?? 0) + 1)));
-  const tags = [...tagCount].sort((a, b) => b[1] - a[1]).slice(0, 6).map(([t]) => t);
+  const read = readPapers();
+  const shelf = read.slice(0, 4);
   const featured = projects.find(p => p.featured);
   const cards = projects.filter(p => !p.featured && p.thumb);
   const smaller = projects.filter(p => !p.featured && !p.thumb);
@@ -184,13 +181,12 @@ export default async function Home() {
             <Reveal className={s.count}>
               <b>{read.length}</b>
               <p>papers read, each with notes.</p>
-              {tags.length ? <ul className="chips" aria-label="Top topics">{tags.map(t => <li key={t} className="chip">{t}</li>)}</ul> : null}
               <p><Link className="qlink" href="/stack">Browse the stack</Link></p>
             </Reveal>
             <div className={s.papers}>
               {shelf.map((p, i) => (
                 <Reveal as="article" key={p.title} className={s.paper} delay={i * 60}>
-                  <p className={s.d}><span>{p.date}</span>{p.pinned ? <span className={s.pin}>◉ Pinned</span> : <span>{p.tags.slice(0, 2).join(' · ')}</span>}</p>
+                  <p className={s.d}><span>{p.date}</span><span>{p.tags.slice(0, 2).join(' · ')}</span></p>
                   <h3><Link className="stretch" href={`/stack#${slug(p.title)}`}>{p.title}</Link></h3>
                   <p className={s.ex}>{p.takeaway}</p>
                   <p className={s.au}>{p.authors}</p>

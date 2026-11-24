@@ -3,7 +3,7 @@
 // works everywhere).
 import type { Metadata } from 'next';
 import { pageMeta } from '@/lib/meta';
-import { papers } from '@/lib/papers';
+import { readPapers } from '@/lib/papers';
 import SectionHeader from '@/components/SectionHeader';
 import Shelf from '@/components/shelf/Shelf';
 import { toSheets } from '@/components/shelf/sheets';
@@ -17,7 +17,7 @@ export const metadata: Metadata = pageMeta('/stack', 'Stack', description);
 const words = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve'];
 
 export default function StackPage() {
-  const sheets = toSheets(papers.filter(p => p.read));
+  const sheets = toSheets(readPapers());
   const n = sheets.length;
   const count = words[n] ?? String(n);
   const withNotes = sheets.filter(p => p.hasNotes).length;
@@ -44,7 +44,6 @@ export default function StackPage() {
               <span className={s.no}>[{String(i + 1).padStart(2, '0')}]</span>
               <span>{p.date}</span>
               <span>{p.tags.join(' · ')}</span>
-              {p.pinned ? <span>Pinned</span> : null}
             </p>
             <h3 className={s.ptitle}>{p.title}</h3>
             <p className={s.pauth}>{p.authors}</p>

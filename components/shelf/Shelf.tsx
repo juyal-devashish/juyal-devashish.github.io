@@ -1,7 +1,7 @@
 'use client';
 // The paper stack: each read paper as a small first page. Arrow keys move
 // between sheets (one tab stop), Enter or a click opens the paper in a dialog,
-// #slug deep links open that paper, and the filter row narrows the stack.
+// and #slug deep links open that paper.
 // Hidden without JS; the index list on the page carries the same content for
 // no-JS visitors and search engines.
 import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties, type KeyboardEvent } from 'react';
@@ -10,14 +10,9 @@ import type { Sheet } from './sheets';
 import { NOTE_LABELS } from './labels';
 import s from './shelf.module.css';
 
-type Filter = 'all' | 'notes' | `tag:${string}`;
-
-const words = ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve'];
-const papersWord = (n: number) => `${words[n] ?? n} paper${n === 1 ? '' : 's'}`;
 const no = (i: number) => String(i + 1).padStart(2, '0');
 
 export default function Shelf({ sheets }: { sheets: Sheet[] }) {
-  const [filter, setFilter] = useState<Filter>('all');
   const [focus, setFocus] = useState(0);          // roving tab stop (index into sheets)
   const [at, setAt] = useState(-1);               // paper in the dialog
   const atRef = useRef(-1);
@@ -26,24 +21,7 @@ export default function Shelf({ sheets }: { sheets: Sheet[] }) {
   const list = useRef<HTMLOListElement>(null);
   const btns = useRef<(HTMLButtonElement | null)[]>([]);
 
-  // Tags, most used first; ties alphabetical.
-  const tags = useMemo(() => {
-    const n = new Map<string, number>();
-    sheets.forEach(p => p.tags.forEach(t => n.set(t, (n.get(t) ?? 0) + 1)));
-    return [...n].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
-  }, [sheets]);
-
-  const matches = useCallback((p: Sheet, f: Filter) =>
-    f === 'all' || (f === 'notes' ? p.hasNotes : p.tags.includes(f.slice(4))), []);
-
-  const vis = useMemo(() => sheets.flatMap((p, i) => (matches(p, filter) ? [i] : [])), [sheets, filter, matches]);
-  const visRef = useRef(vis);
-  visRef.current = vis;
-
-  // Keep the tab stop on a visible sheet when the filter changes.
-  useEffect(() => {
-    if (vis.length && !vis.includes(focus)) setFocus(vis[0]);
-  }, [vis, focus]);
+  const vis = useMemo(() => sheets.map((_, i) => i), [sheets]);
 
   const focusSheet = useCallback((i: number) => {
     setFocus(i);
@@ -72,21 +50,17 @@ export default function Shelf({ sheets }: { sheets: Sheet[] }) {
   }, [sheets]);
 
   // Deep links: on load and when the hash changes (the palette sets it on this page).
-  // A paper hidden by the filter brings every paper back first.
   useEffect(() => {
     const check = () => {
       const id = decodeURIComponent(location.hash.slice(1));
       const i = sheets.findIndex(p => p.id === id);
       if (i < 0) return;
-      if (!visRef.current.includes(i)) setFilter('all');
-      else {
-        // The browser jumps to the reference entry with this id; put the page
-        // behind the dialog at the paper's sheet instead (again after load,
-        // in case the browser's own jump lands later).
-        const align = () => { if (atRef.current === i) btns.current[i]?.scrollIntoView({ block: 'center', behavior: 'instant' }); };
-        requestAnimationFrame(align);
-        if (document.readyState !== 'complete') window.addEventListener('load', () => requestAnimationFrame(align), { once: true });
-      }
+      // The browser jumps to the reference entry with this id; put the page
+      // behind the dialog at the paper's sheet instead (again after load,
+      // in case the browser's own jump lands later).
+      const align = () => { if (atRef.current === i) btns.current[i]?.scrollIntoView({ block: 'center', behavior: 'instant' }); };
+      requestAnimationFrame(align);
+      if (document.readyState !== 'complete') window.addEventListener('load', () => requestAnimationFrame(align), { once: true });
       open(i);
     };
     check();
@@ -140,41 +114,13 @@ export default function Shelf({ sheets }: { sheets: Sheet[] }) {
     else if (e.key === 'ArrowLeft' && prev >= 0) { e.preventDefault(); open(prev); }
   }
 
-  function pick(f: Filter) {
-    if (f === filter) return;
-    play('toggle');
-    setFilter(f);
-  }
-
-  const cap = (x: string) => x[0].toUpperCase() + x.slice(1);
-  const status = filter === 'all' ? `All ${papersWord(vis.length)}`
-    : filter === 'notes' ? `${cap(papersWord(vis.length))} with notes`
-    : `${cap(papersWord(vis.length))} tagged ${filter.slice(4)}`;
-
   const p = at >= 0 ? sheets[at] : null;
-  const options: [Filter, string, number][] = [
-    ['all', 'All', sheets.length],
-    ['notes', 'With notes', sheets.filter(x => x.hasNotes).length],
-    ...tags.map(([t, n]) => [`tag:${t}`, t, n] as [Filter, string, number]),
-  ];
 
   return (
     <div className={`${s.wrap} js-only`}>
-      <div className={s.tools}>
-        <div className={s.filters} role="group" aria-label="Filter papers">
-          {options.map(([f, label, n]) => (
-            <button key={f} type="button" className={`${s.filter} ${f.startsWith('tag:') ? s.tagf : ''}`}
-              aria-pressed={filter === f} onClick={() => pick(f)}>
-              {label}<span className={s.fn}>{n}</span>
-            </button>
-          ))}
-        </div>
-        <p className={s.status} role="status">{status}</p>
-      </div>
-
       <ol ref={list} className={s.desk} aria-label="Papers" aria-describedby="shelf-hint" onKeyDown={onDeskKey}>
         {sheets.map((b, i) => (
-          <li key={b.id} className={s.slot} hidden={!vis.includes(i)} style={{ '--tilt': b.tilt, '--lines': b.lines } as CSSProperties}>
+          <li key={b.id} className={s.slot} style={{ '--tilt': b.tilt, '--lines': b.lines } as CSSProperties}>
             <button
               ref={el => { btns.current[i] = el; }}
               type="button"
@@ -186,7 +132,6 @@ export default function Shelf({ sheets }: { sheets: Sheet[] }) {
               onClick={() => open(i)}
               onFocus={() => setFocus(i)}
             >
-              {b.pinned ? <span className={s.clip} aria-hidden="true" /> : null}
               {b.hasNotes ? <span className={s.tab} aria-hidden="true">Notes</span> : null}
               <span className={s.head} aria-hidden="true">
                 <span className={s.where}>{b.where}</span>{b.year ? <span className={s.year}>{b.year}</span> : null}
@@ -197,7 +142,7 @@ export default function Shelf({ sheets }: { sheets: Sheet[] }) {
               <span className={s.abs} aria-hidden="true"><span className={s.absl}>Abstract</span><span className={s.rule} /></span>
               <span className={s.cols} aria-hidden="true"><span /><span /></span>
               <span className={s.tags} aria-hidden="true">{b.tags.map(t => <span key={t}>{t}</span>)}</span>
-              <span className="vh" id={`sh-${b.id}-d`}>by {b.authors}{b.hasNotes ? '. With notes' : ''}{b.pinned ? '. Pinned' : ''}</span>
+              <span className="vh" id={`sh-${b.id}-d`}>by {b.authors}{b.hasNotes ? '. With notes' : ''}</span>
             </button>
           </li>
         ))}
@@ -214,7 +159,6 @@ export default function Shelf({ sheets }: { sheets: Sheet[] }) {
                   <span>{no(pos)} / {String(vis.length).padStart(2, '0')}</span>
                   <span>{p.venue || p.date}</span>
                   {p.tags.map(t => <span key={t} className={s.dtag}>{t}</span>)}
-                  {p.pinned ? <span className={s.dpin}>Pinned</span> : null}
                 </p>
                 <h2 id="pd-title" className={s.dtitle}>
                   {p.link

@@ -18,7 +18,6 @@ export type Sheet = {
   takeaway: string;
   notes: string[];
   hasNotes: boolean;
-  pinned: boolean;
   tilt: string;        // "-1.2deg": a fixed string, so SSR and hydration agree
   lines: number;       // how many abstract lines to draw (3..5), for variety
 };
@@ -50,7 +49,7 @@ export function toSheets(papers: Paper[]): Sheet[] {
     const [byline, venue] = split(p.authors);
     return {
       id: slug(p.title), title: p.title, authors: p.authors, byline, venue, ...venueParts(venue), long: p.title.length > 76, date: p.date, tags: p.tags,
-      link: p.link, takeaway: p.takeaway, notes: p.notes, hasNotes: p.notes.some(Boolean), pinned: p.pinned,
+      link: p.link, takeaway: p.takeaway, notes: p.notes, hasNotes: p.notes.some(Boolean),
       tilt: `${(((h % 33) - 16) / 10).toFixed(1)}deg`,   // -1.6 … 1.6
       lines: 3 + ((h >>> 8) % 3),
     };

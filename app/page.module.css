@@ -149,7 +149,6 @@
 .paper:has(:global(.stretch):focus-visible) { outline: 2px solid var(--accent); outline-offset: 3px; }
 .d { font: 500 .6875rem/1.3 var(--f-mono); color: var(--ink-3); display: flex; justify-content: space-between; gap: 8px; }
 .d span:first-child { white-space: nowrap; }
-.pin { color: var(--accent); }
 .paper h3 { font-size: 1.35rem; line-height: 1.12; letter-spacing: -.01em; }
 .paper h3 a { text-decoration: none; }
 .paper:hover h3 a { color: var(--accent); }
