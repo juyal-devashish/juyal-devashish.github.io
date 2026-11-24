@@ -32,7 +32,7 @@ export default function ResumePage() {
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 20h14" /></svg>
             Download PDF
           </a>
-          <PrintButton />
+          <PrintButton pdf={site.resume} />
         </div>
         <p className={s.contact}>
           <a href={`mailto:${contact.email}`}>{contact.email}</a>
