@@ -30,7 +30,7 @@ export default function StackPage() {
         <figure className={s.photo}>
           <img src="/assets/img/archive/annotated-paper.jpg" width={440} height={782} loading="lazy"
             alt="A printed IEEE journal paper on metamaterial-lined circular waveguides, its abstract and opening paragraphs marked with yellow highlighter and handwritten notes, beside a pen on a wooden desk." />
-          <figcaption>Highlighter in hand.</figcaption>
+          <figcaption>How I like to read papers.</figcaption>
         </figure>
       </div>
 

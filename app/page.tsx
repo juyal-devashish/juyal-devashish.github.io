@@ -20,6 +20,8 @@ import s from './page.module.css';
 export const revalidate = 3600;
 
 const ROMAN = ['i', 'ii', 'iii', 'iv', 'v', 'vi'];
+// The three papers the home page shows, by title (hand-picked; /stack orders by citations).
+const HOME_PAPERS = ['Language Models are Few-Shot Learners', 'The Llama 3 Herd of Models', 'DeepSeek-V3 Technical Report'];
 const TEASER_PHOTOS = ['img_1128', 'img_3684', 'img_5342', 'img_7344', 'img_1364', 'img_8046'];
 const Arrow = () => <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>;
 
@@ -27,7 +29,7 @@ export default async function Home() {
   const gh = (await getRecentContributions()) ?? fixtureContributions();
   const posts = getPosts().slice(0, 3);
   const read = readPapers();
-  const shelf = read.slice(0, 4);
+  const shelf = HOME_PAPERS.map(t => read.find(p => p.title === t)).filter(p => !!p);
   const featured = projects.find(p => p.featured);
   const cards = projects.filter(p => !p.featured && p.thumb);
   const smaller = projects.filter(p => !p.featured && !p.thumb);
@@ -59,7 +61,6 @@ export default async function Home() {
           </div>
         </div>
         <p className={s.credit}>{site.heroCredit}</p>
-        <p className={s.cue} aria-hidden="true">Scroll</p>
       </div>
 
       <div className="wrap">
@@ -181,7 +182,7 @@ export default async function Home() {
             <Reveal className={s.count}>
               <b>{read.length}</b>
               <p>papers read, each with notes.</p>
-              <p><Link className="qlink" href="/stack">Browse the stack</Link></p>
+              <p><Link className="qlink" href="/stack">Browse my notes</Link></p>
             </Reveal>
             <div className={s.papers}>
               {shelf.map((p, i) => (
@@ -213,7 +214,7 @@ export default async function Home() {
               );
             })}
           </ul>
-          <p className={s.more}><Link className="qlink" href="/photos">See all {photos.length} photos</Link></p>
+          <p className={s.more}><Link className="qlink" href="/photos">See more photos</Link></p>
         </section>
       ) : null}
     </>

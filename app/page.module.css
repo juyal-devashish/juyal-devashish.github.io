@@ -27,19 +27,15 @@
 .face { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; outline: 1.5px solid var(--accent); outline-offset: 3px; }
 .actions { margin-top: 30px; }
 .hero .actions :global(.hbtn:not(.primary)) { color: var(--hero-fg); background: rgba(var(--hero-scrim), .45); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
-.cue { position: absolute; right: var(--g); bottom: clamp(48px, 9vh, 110px); font: 500 .6875rem/1 var(--f-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--hero-fg-2); writing-mode: vertical-rl; display: flex; gap: 12px; align-items: center; }
-/* the aurora credit: one small line beside the Pause button, over the dark trees */
-.credit { position: absolute; right: calc(var(--g) + 56px); bottom: calc(clamp(48px, 9vh, 110px) + 150px); max-width: min(40ch, 40vw); min-height: 44px; display: flex; align-items: center; justify-content: flex-end; text-align: right; font: 400 .75rem/1.35 var(--f-mono); color: var(--hero-fg-2); text-shadow: var(--hero-halo); }
-.cue::after { content: ""; width: 1px; height: 70px; background: linear-gradient(var(--accent), transparent); }
+/* the aurora credit: one small line in the hero's bottom-right corner, left of the Pause button */
+.credit { position: absolute; right: calc(var(--g) + 56px); bottom: 20px; max-width: min(40ch, 40vw); min-height: 44px; display: flex; align-items: center; justify-content: flex-end; text-align: right; font: 400 .75rem/1.35 var(--f-mono); color: var(--hero-fg-2); text-shadow: var(--hero-halo); }
 /* tablets: the bottom bar covers the last 64px of the screen, so the hero ends above it */
 @media (max-width: 1099.98px) {
   .heroIn { padding-bottom: calc(clamp(40px, 7vh, 90px) + var(--bar)); }
-  .cue { bottom: calc(clamp(40px, 7vh, 90px) + var(--bar)); }
-  .credit { bottom: calc(clamp(40px, 7vh, 90px) + var(--bar) + 150px); }
+    .credit { bottom: calc(var(--bar) + 16px); }
 }
 @media (max-width: 700px) {
-  .cue { display: none; }
-  .credit { top: calc(max(230px, 32svh) - 116px); bottom: auto; right: var(--g); min-height: 0; max-width: 64vw; font-size: .6875rem; color: var(--hero-fg); }
+    .credit { top: calc(max(230px, 32svh) - 116px); bottom: auto; right: var(--g); min-height: 0; max-width: 64vw; font-size: .6875rem; color: var(--hero-fg); }
   .hero { display: block; min-height: 0; color: var(--ink); }
   .hero::before { display: none; }
   .hero :global(.kicker), .pitch, .heroMeta > span, .heroMeta :global(.clock) { text-shadow: none; }
@@ -141,7 +137,8 @@
 .count > b { display: block; font: 300 clamp(6rem, 18vw, 12rem)/.8 var(--f-serif); letter-spacing: -.05em; color: var(--accent); }
 .count > p { color: var(--ink-2); margin-top: 18px; max-width: 32ch; }
 .count :global(.chips) { margin-top: 18px; }
-.papers { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr)); }
+.papers { display: grid; gap: 14px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 640px) { .papers { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 .paper { position: relative; padding: 22px 22px 20px; border-radius: 16px; background: var(--surface); border: 1px solid var(--hair); display: flex; flex-direction: column; gap: 10px; min-height: 200px; transition: transform .4s var(--ease), border-color .3s; }
 .paper:nth-child(odd) { transform: rotate(-.6deg); }
 .paper:nth-child(even) { transform: rotate(.5deg) translateY(10px); }

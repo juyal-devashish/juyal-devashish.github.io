@@ -36,7 +36,7 @@ export const COMMANDS: { name: string; args?: string; about: string }[] = [
   { name: 'open', args: '<project>', about: 'jump to a project' },
   { name: 'search', args: '<words>', about: 'search the site' },
   { name: 'whoami', about: 'who’s here' },
-  { name: 'date', about: 'time in New York' },
+  { name: 'date', about: 'time in New York City' },
   { name: 'sound', args: '[on|off]', about: 'interface clicks' },
   { name: 'history', about: 'past commands' },
   { name: 'echo', args: '<text>', about: 'say it back' },
@@ -168,7 +168,7 @@ function orbit(d: TermData, now: Date): Line[] {
   grid[py][px] = 'o';
   const hh = String(h).padStart(2, '0'), mm = String(m).padStart(2, '0');
   return [
-    { kind: 'art', label: `A ring clock: the planet sits at ${hh}:${mm}, New York time.`, segs: [grid.map(r => r.join('')).join('\n')] },
+    { kind: 'art', label: `A ring clock: the planet sits at ${hh}:${mm}, New York City time.`, segs: [grid.map(r => r.join('')).join('\n')] },
     t(`o = ${hh}:${mm} in ${d.city}`, 'dim'),
   ];
 }

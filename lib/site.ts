@@ -4,8 +4,8 @@ export const site = {
   name: 'Devashish Juyal',
   url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://juyal-devashish.vercel.app',
   role: 'AI engineer',
-  pitch: 'I turn rough ideas into AI products people can trust.',
-  city: 'New York',
+  pitch: 'I build end-to-end AI products.',
+  city: 'New York City',
   // The home hero's aurora timelapse (tools/hero-video.mjs).
   heroCredit: 'Aurora, recorded on my GoPro in my Ann Arbor backyard, November 2024.',
   timeZone: 'America/New_York',
@@ -16,10 +16,11 @@ export const site = {
     linkedin: 'https://www.linkedin.com/in/devashish-juyal',
   },
   glance: [
-    { label: 'Now', value: 'Data Scientist, Tech Observer' },
-    { label: 'Studied', value: 'MS ECE (ML), University of Michigan' },
+    { label: 'Now', value: 'AI Engineer, Tech Observer' },
+    { label: 'Grad', value: 'MS ECE, University of Michigan' },
+    { label: 'Undergrad', value: 'B.Tech ECE, MNIT Jaipur' },
     { label: 'Before', value: 'Micron, MITACS, ISRO' },
-    { label: 'Off hours', value: 'Photography, trails, tennis' },
+    { label: 'Off hours', value: 'Photography, trails, movies' },
   ],
 };
 
@@ -106,11 +107,11 @@ export const projects: Project[] = [
 ];
 
 export const work = {
-  id: 'tech-observer', org: 'Tech Observer', role: 'Data Scientist', dates: '2024–now',
+  id: 'tech-observer', org: 'Tech Observer', role: 'AI Engineer', dates: '2024–now',
   items: [
-    { name: 'Financial question answering', text: 'Agents that answer questions about financial data.' },
-    { name: 'Medical image privacy', text: 'Strips patient details from scans.' },
-    { name: 'Surgical video review', text: 'Masks sensitive footage; a person signs off every case.' },
+    { name: 'Multi-agent workflows', text: 'Agents that plan, call tools and check their own work, so people step in less.' },
+    { name: 'Document automation', text: 'Pipelines that read, extract and act on messy documents end to end.' },
+    { name: 'Agent evaluation', text: 'Tests and gates that decide when an agent is ready to ship.' },
   ],
 };
 
@@ -139,7 +140,7 @@ export const archive = [
 // /now — edit freely; `updated` shows on the page.
 export const now = {
   updated: '2026-11-17',
-  focus: 'Data Scientist at Tech Observer: agents for financial data and privacy tools for medical imaging.',
+  focus: 'AI Engineer at Tech Observer, building agentic AI systems: multi-agent workflows that cut human touchpoints, tool-using pipelines, and the checks that keep them reliable.',
   building: projects.filter(p => p.status.startsWith('Live')).map(p => p.name),
 };
 
