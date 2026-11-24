@@ -5,11 +5,15 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
-const { education, skills, jobs, resumeProjects, activities, contact } = await import('../lib/resume');
+const { education, skills, jobs, resumeProjects, activities, contact, pdfCorrections } = await import('../lib/resume');
 
 // The PDF wraps lines and sets bullets as "•"; compare on single-spaced text.
 const norm = (s: string) => s.replace(/•/g, ' ').replace(/\s+/g, ' ').trim();
-const pdf = norm(readFileSync(new URL('./fixtures/resume-pdf.txt', import.meta.url), 'utf8'));
+// Listed corrections are applied to the PDF text first; each must match exactly once.
+const pdf = pdfCorrections.reduce((t, c) => {
+  assert.equal(t.split(c.pdf).length - 1, 1, `correction not found once in the PDF: ${c.pdf}`);
+  return t.replace(c.pdf, c.page);
+}, norm(readFileSync(new URL('./fixtures/resume-pdf.txt', import.meta.url), 'utf8')));
 const has = (s: string) => assert.ok(pdf.includes(norm(s)), `not in the PDF: ${s.slice(0, 80)}`);
 
 test('education, skills and activities are in the PDF verbatim', () => {
@@ -18,8 +22,11 @@ test('education, skills and activities are in the PDF verbatim', () => {
   has(activities);
 });
 
-test('jobs are in the PDF verbatim', () => {
-  for (const j of jobs) [j.org, j.place, j.role, j.dates, ...j.bullets].forEach(has);
+test('PDF jobs are in the PDF verbatim, and nothing else claims to be', () => {
+  const fromPdf = jobs.filter(j => j.fromPdf);
+  assert.equal(fromPdf.length, 3);
+  for (const j of fromPdf) [j.org, j.place, j.role, j.dates, ...j.bullets].forEach(has);
+  for (const j of jobs.filter(j => !j.fromPdf)) assert.ok(!pdf.includes(norm(j.bullets[0])));
 });
 
 test('PDF projects are in the PDF verbatim, and nothing else claims to be', () => {

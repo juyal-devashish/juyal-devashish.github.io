@@ -10,11 +10,16 @@
 // Entries not on the PDF (`fromPdf: false`) are described in full or left off.
 // No phone number anywhere on the page.
 
+/** Where the page deliberately differs from the PDF's text (the PDF is out of date there). */
+export const pdfCorrections: { pdf: string; page: string }[] = [
+  { pdf: '11 sources every 30 minutes', page: '11 sources nightly' }, // Sama4 ingests nightly (confirmed 2026-11-24)
+];
+
 export type Link = { label: string; href: string };
 export type More = { lead?: string; points: string[] };
 
 export type School = { id: string; org: string; place: string; line: string; dates: string; coursework: string };
-export type Job = { id: string; org: string; place: string; role: string; dates: string; bullets: string[]; more?: More };
+export type Job = { id: string; org: string; place: string; role: string; dates: string; fromPdf: boolean; bullets: string[]; more?: More };
 export type ResumeProject = {
   id: string; name: string; fromPdf: boolean; links: Link[];
   /** /projects anchor, when the project is on that page too */
@@ -53,7 +58,7 @@ export const skills: { label: string; items: string }[] = [
 
 export const jobs: Job[] = [
   {
-    id: 'tech-observer', org: 'Tech Observer', place: 'Jersey City, NJ', role: 'Data Scientist', dates: 'Aug 2024 – Present',
+    id: 'tech-observer', org: 'Tech Observer', place: 'Jersey City, NJ', role: 'Data Scientist', dates: 'Aug 2024 – Present', fromPdf: true,
     bullets: [
       'Architected an agentic clinical adjudication platform automating adverse-event intake, quality control, and case narratives; designed a multi-agent layer behind an API gateway with schema validated outputs reducing human touchpoints by 70%.',
       'Built an anonymization pipeline for clinical documents using OCR and NER removing 100% of identifiers while preserving all of clinical content thereby eliminating need for manual input.',
@@ -62,7 +67,15 @@ export const jobs: Job[] = [
     ],
   },
   {
-    id: 'micron', org: 'Micron Technology', place: 'Hyderabad, India', role: 'Data Science Intern', dates: 'Jan 2024 – Jul 2024',
+    id: 'um-research', org: 'University of Michigan', place: 'Ann Arbor, MI', role: 'Research Assistant, Machine Learning Lab', dates: 'Aug 2024 – May 2026', fromPdf: false,
+    bullets: [
+      'Researched faster LLM watermark detection: replaced a fixed-size permutation test with sequential Monte Carlo testing and anytime-valid inference, so detection stops as soon as the evidence is clear. Results are under Fast Large Language Model Watermarking below.',
+      'Developed an ML-driven sequential change detection framework that replaces the oracle likelihood ratios in CUSUM with density-ratio estimates learned directly from historical pre- and post-change data.',
+      'Built and evaluated likelihood-ratio estimators using SVR, neural networks and Transformer-based models, and designed a classifier-based e-process alternative using sequential testing by betting for robust multi-class change detection.',
+    ],
+  },
+  {
+    id: 'micron', org: 'Micron Technology', place: 'Hyderabad, India', role: 'Data Science Intern', dates: 'Jan 2024 – Jul 2024', fromPdf: true,
     bullets: [
       'Launched and deployed PMON, detecting equipment drift by statistical ML methods, triggering preventive maintenance orders, increasing overall fab yield by 0.5% and cutting unplanned downtime by 12 hours per month.',
       'Fine-tuned LLaMA on 10K+ internal TypeScript code snippets to generate frontend widget components, reaching 82% compilation success; integrated LLM into Omelek, a TypeScript framework that 2 engineering teams adopted.',
@@ -78,10 +91,18 @@ export const jobs: Job[] = [
     },
   },
   {
-    id: 'mitacs', org: 'MITACS', place: 'Edmonton, Canada', role: 'Research Intern', dates: 'May 2023 – Jul 2023',
+    id: 'mitacs', org: 'MITACS', place: 'Edmonton, Canada', role: 'Research Intern', dates: 'May 2023 – Jul 2023', fromPdf: true,
     bullets: [
       'Trained XGBoost regression models on 10K+ simulation runs through automated data pipelines, replacing costly parameter sweeps with ML-driven analysis and cutting per-design evaluation time from hours to seconds compared with full EM simulation.',
       'Translated model insights into design recommendations for the faculty PI and an industry partner, identifying configurations that raised cutoff frequency by about 15% and improved MRI signal quality.',
+    ],
+  },
+  {
+    id: 'isro', org: 'Indian Space Research Organisation (ISRO)', place: 'Ahmedabad, India', role: 'Research Intern', dates: 'May 2022 – Sep 2022', fromPdf: false,
+    bullets: [
+      'Developed CNN-LSTM models in TensorFlow for radar signal and imagery analysis at the Space Applications Centre, learning spatial and temporal patterns across azimuth, range and electromagnetic distortion data.',
+      'Built MATLAB-based preprocessing and feature-analysis pipelines for time- and frequency-domain radar signals, supporting quantitative evaluation of phased-array antenna and radar cross-section behavior.',
+      'Analyzed simulation outputs to support phased-array beam-steering design decisions, contributing to a hybrid electronic and mechanical steering approach that increased field of view by about 50%.',
     ],
   },
 ];
@@ -110,7 +131,7 @@ export const resumeProjects: ResumeProject[] = [
     id: 'sama4', name: 'Sama4: AI News Intelligence Platform', fromPdf: true, project: 'sama4',
     links: [{ label: 'Live', href: 'https://www.sama4.online' }, { label: 'GitHub', href: 'https://github.com/juyal-devashish/Sama4' }],
     bullets: [
-      'Built Sama4, a live AI news intelligence platform (Python, FastAPI, Next.js, PostgreSQL, Redis) that explains people, organizations and concepts in context, via an NLP pipeline ingesting 11 sources every 30 minutes.',
+      'Built Sama4, a live AI news intelligence platform (Python, FastAPI, Next.js, PostgreSQL, Redis) that explains people, organizations and concepts in context, via an NLP pipeline ingesting 11 sources nightly.',
       'Engineered a RAG layer combining hybrid NER (spaCy + Claude), Wikidata entity linking and Pinecone vector retrieval; extending it with a real-time voice companion and multi-agent news-impact simulations.',
     ],
     more: {
